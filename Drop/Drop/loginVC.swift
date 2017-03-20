@@ -11,8 +11,15 @@ import UIKit
 
 
 class loginVC: UIViewController{
+    let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
+        let user = defaults.value(forKey: "userName") as? String ?? String()
+        
+        if (!user.isEmpty) {
+            ToMenu()
+        }
+        
         
     }
     
@@ -21,14 +28,10 @@ class loginVC: UIViewController{
     
     
     @IBAction func login(_ sender: UIButton) {
-        let defaults = UserDefaults.standard
+        
     
         if verifyUsername(self.userName.text!) {
-    
             defaults.set(self.userName.text!, forKey: "userName")
-            print(defaults.value(forKey: "userName") as? String ?? String())
-            
- 
             ToMenu()
         }
         else{}
