@@ -8,28 +8,37 @@
 
 import Foundation
 import UIKit
-class multiplayerMenuVC: UIViewController{
-    let colorService = ColorServiceManager()
+import MultipeerConnectivity
+
+class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
+    var id : String = "MULTIPLAYER_MENU_VC"
+    let multiplayerService : MultiplayerServiceManager = MultiplayerServiceManager.instance
+    
+    var players: Set<MCPeerID> = []
+    
+    @IBOutlet weak var stateLabel: UILabel!
+    @IBOutlet weak var numPeersLabel: UILabel!
+    
+    @IBAction func onTouchStartBrowsing(_ sender: Any) {
+        multiplayerService.startBrowsing()
+    }
+    
+    @IBAction func onTouchStopBrowsing(_ sender: Any) {
+        multiplayerService.stopBrowsing()
+    }
+    
+    @IBAction func onTouchLeaveSession(_ sender: Any) {
+        multiplayerService.leaveSession()
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        colorService.delegate = self
+        multiplayerService.registerObserver(observer: self)
     }
     
-    @IBOutlet weak var connectionsLabel: UILabel!
-    
-    @IBAction func back(_ sender: UIButton) {
-        backToMenu()
-    }
-    
-    @IBAction func redTapped() {
-        self.change(color: .red)
-        colorService.send(colorName: "red")
-    }
-    
-    @IBAction func yellowTapped() {
-        self.change(color: .yellow)
-        colorService.send(colorName: "yellow")
+    override func viewWillDisappear(_ animated: Bool) {
+        multiplayerService.unregisterObserver(observer: self)
     }
     
     func backToMenu(){
@@ -37,30 +46,40 @@ class multiplayerMenuVC: UIViewController{
         self.navigationController?.pushViewController(menuVC, animated: true)
     }
     
-    func change(color: UIColor) {
-        UIView.animate(withDuration: 0.2) {
-            self.view.backgroundColor = color
+    func onMultiplayerRecvMessage(message: String) {
+        
+    }
+    
+    func onMultiplayerStateChange(state: MultiplayerServiceState) {
+        var stateString = ""
+        switch state {
+        case .DISCONNECTED:
+            stateString = "Disconnected"
+        case .BROWSING:
+            stateString = "Browsing"
+        case .CONNECTED:
+            stateString = "Connected"
+        }
+        
+        OperationQueue.main.addOperation {
+            self.stateLabel.text = "State: \(stateString)"
+        }
+    }
+    
+    func onMultiplayerPeerLeft(peerID: MCPeerID) {
+        players.remove(peerID)
+        
+        OperationQueue.main.addOperation {
+            self.numPeersLabel.text = "Num of peers: \(self.players.count)"
+        }
+    }
+    
+    func onMultiplayerPeerJoined(peerID: MCPeerID) {
+        players.insert(peerID)
+        
+        OperationQueue.main.addOperation {
+            self.numPeersLabel.text = "Num of peers: \(self.players.count)"
         }
     }
 }
 
-extension multiplayerMenuVC : ColorServiceManagerDelegate {
-    func connectedDevicesChanged(manager: ColorServiceManager, connectedDevices: [String]) {
-        OperationQueue.main.addOperation {
-            self.connectionsLabel.text = "Connections: \(connectedDevices)"
-        }
-    }
-    
-    func colorChanged(manager: ColorServiceManager, colorString: String) {
-        OperationQueue.main.addOperation {
-            switch colorString {
-            case "red":
-                self.change(color: .red)
-            case "yellow":
-                self.change(color: .yellow)
-            default:
-                NSLog("%@", "Unknown color value received: \(colorString)")
-            }
-        }
-    }
-}
