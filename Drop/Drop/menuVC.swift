@@ -9,11 +9,8 @@
 import Foundation
 import UIKit
 class menuVC: UIViewController{
-    let player = soundManager.sharedInstance
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        player.playFx(fileName: "Kebob", fileType: "m4a")
     }
 
     @IBAction func pushToOptions(_ sender: UIButton) {
