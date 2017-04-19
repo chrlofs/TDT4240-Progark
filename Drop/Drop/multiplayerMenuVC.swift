@@ -18,6 +18,11 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
     
     @IBOutlet weak var stateLabel: UILabel!
     @IBOutlet weak var numPeersLabel: UILabel!
+    @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var lastMessageReceived: UILabel!
+    
+    @IBOutlet weak var sendMessageButton: UIButton!
+    @IBOutlet weak var messageInput: UITextField!
     
     @IBAction func onTouchStartBrowsing(_ sender: Any) {
         multiplayerService.startBrowsing()
@@ -31,6 +36,13 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
         multiplayerService.leaveSession()
     }
     
+    @IBAction func onTouchSendMessage(_ sender: Any) {
+        print("Send message")
+        let message = messageInput.text!
+        print(message)
+        multiplayerService.send(message: message)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +51,7 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
     
     override func viewWillDisappear(_ animated: Bool) {
         multiplayerService.unregisterObserver(observer: self)
+        multiplayerService.leaveSession()
     }
     
     func backToMenu(){
@@ -47,7 +60,9 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
     }
     
     func onMultiplayerRecvMessage(message: String) {
-        
+        OperationQueue.main.addOperation {
+            self.lastMessageReceived.text = message
+        }
     }
     
     func onMultiplayerStateChange(state: MultiplayerServiceState) {
@@ -59,10 +74,12 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
             stateString = "Browsing"
         case .CONNECTED:
             stateString = "Connected"
+            
         }
         
         OperationQueue.main.addOperation {
             self.stateLabel.text = "State: \(stateString)"
+            self.toggleMessageInput(toggleOn: state == .CONNECTED)
         }
     }
     
@@ -80,6 +97,11 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
         OperationQueue.main.addOperation {
             self.numPeersLabel.text = "Num of peers: \(self.players.count)"
         }
+    }
+    
+    func toggleMessageInput(toggleOn : Bool) {
+        sendMessageButton.isHidden = !toggleOn
+        messageInput.isHidden = !toggleOn
     }
 }
 

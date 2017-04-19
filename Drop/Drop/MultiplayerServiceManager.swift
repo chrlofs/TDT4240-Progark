@@ -44,6 +44,7 @@ class MultiplayerServiceManager: NSObject {
     }
     
     func receiveMessage(message: String) {
+        print("Receive message \(message)")
         for observer in observers {
             observer.onMultiplayerRecvMessage(message: message)
         }
@@ -87,10 +88,6 @@ class MultiplayerServiceManager: NSObject {
         
         self.serviceAdvertiser.delegate = self
         self.serviceBrowser.delegate = self
-    }
-    
-    deinit {
-        leaveSession()
     }
     
     // PUBLICLY EXPOSED METHODS
@@ -192,9 +189,9 @@ extension MultiplayerServiceManager : MCSessionDelegate {
     
     // RECEIVE DATA
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        NSLog("%@", "didReceiveData: \(data)")
-        let message = String(data: data, encoding: .utf8)!
-        self.receiveMessage(message: message)
+        if let message = String(data: data, encoding: .utf8) {
+            self.receiveMessage(message: message)
+        }
     }
     
     
