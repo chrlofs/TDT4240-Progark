@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0883BE581E8CF48600945A6A /* ColorServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0883BE571E8CF48600945A6A /* ColorServiceManager.swift */; };
 		1BD728421E76DE5100CE0B2A /* menuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD728411E76DE5100CE0B2A /* menuVC.swift */; };
 		1BD728481E76EF6D00CE0B2A /* multiplayerMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD728471E76EF6D00CE0B2A /* multiplayerMenuVC.swift */; };
 		1BD7284A1E76EF9500CE0B2A /* singleplayerMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD728491E76EF9500CE0B2A /* singleplayerMenuVC.swift */; };
@@ -47,7 +46,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0883BE571E8CF48600945A6A /* ColorServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorServiceManager.swift; sourceTree = "<group>"; };
 		1BD728411E76DE5100CE0B2A /* menuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = menuVC.swift; sourceTree = "<group>"; };
 		1BD728471E76EF6D00CE0B2A /* multiplayerMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = multiplayerMenuVC.swift; sourceTree = "<group>"; };
 		1BD728491E76EF9500CE0B2A /* singleplayerMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = singleplayerMenuVC.swift; sourceTree = "<group>"; };
@@ -173,7 +171,6 @@
 				1BD728491E76EF9500CE0B2A /* singleplayerMenuVC.swift */,
 				1BD7284F1E78017900CE0B2A /* optionsVC.swift */,
 				1BFE0D301E800A56007E45F0 /* loginVC.swift */,
-				0883BE571E8CF48600945A6A /* ColorServiceManager.swift */,
 			);
 			path = Drop;
 			sourceTree = "<group>";
@@ -353,7 +350,6 @@
 				9565C3B11E76F6C400C5BF83 /* Player.swift in Sources */,
 				95D2557E1E7ABC6300DA813A /* ItemController.swift in Sources */,
 				9565C3AE1E76D76F00C5BF83 /* GameplaySceneClass.swift in Sources */,
-				0883BE581E8CF48600945A6A /* ColorServiceManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
