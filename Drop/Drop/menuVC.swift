@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 class menuVC: UIViewController{
     override func viewDidLoad() {
-        
+        super.viewDidLoad()
     }
 
     @IBAction func pushToOptions(_ sender: UIButton) {
