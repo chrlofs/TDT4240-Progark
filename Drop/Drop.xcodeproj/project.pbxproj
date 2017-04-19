@@ -269,7 +269,7 @@
 				TargetAttributes = {
 					9582DB0D1E71A0A500335B2F = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = VM6L44T499;
+						DevelopmentTeam = ZLYR8KH355;
 						ProvisioningStyle = Automatic;
 					};
 					9582DB271E71A0A600335B2F = {
@@ -501,10 +501,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = VM6L44T499;
+				DEVELOPMENT_TEAM = ZLYR8KH355;
 				INFOPLIST_FILE = Drop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tdt4240team15.Drop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.team15.Drop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -514,10 +514,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = VM6L44T499;
+				DEVELOPMENT_TEAM = ZLYR8KH355;
 				INFOPLIST_FILE = Drop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tdt4240team15.Drop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.team15.Drop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

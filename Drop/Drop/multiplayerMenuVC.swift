@@ -11,9 +11,11 @@ import UIKit
 class multiplayerMenuVC: UIViewController{
     override func viewDidLoad() {
     }
+
     @IBAction func back(_ sender: UIButton) {
         backToMenu()
     }
+
     func backToMenu(){
         let menuVC = self.storyboard?.instantiateViewController(withIdentifier: "menuVC") as! menuVC
         self.navigationController?.pushViewController(menuVC, animated: true)
