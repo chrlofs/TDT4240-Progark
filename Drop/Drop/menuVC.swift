@@ -12,6 +12,7 @@ class menuVC: UIViewController{
     let fxPlayer = soundManager.sharedInstance
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = true
         fxPlayer.playFx(fileName: "GameMusic", fileType: "mp3")
        
     }
