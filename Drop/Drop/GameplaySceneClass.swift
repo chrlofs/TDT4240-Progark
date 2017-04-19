@@ -22,6 +22,8 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     
     private var score = 0;
     
+    private var storedTouches = [UITouch: String]();
+    
     override func didMove(to view: SKView) {
         initializeGame();
     }
@@ -36,9 +38,11 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
             
             if location.x > center{
                 moveLeft = false;
+                storedTouches[touch] = "right";
             }
             else{
                 moveLeft = true;
+                storedTouches[touch] = "left";
             }
         }
         
@@ -46,7 +50,14 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        canMove = false;
+        
+        for touch in touches{
+            storedTouches[touch] = nil;
+        }
+        
+        if storedTouches.isEmpty{
+            canMove = false;
+        }
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -105,6 +116,7 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     //Adding a child (falling objects) to the scene
     func spawnItems(){
         self.scene?.addChild(itemController.spawnItems());
+        
     }
     
     func restartGame(){
