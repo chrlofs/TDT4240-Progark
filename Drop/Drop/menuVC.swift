@@ -9,10 +9,10 @@
 import Foundation
 import UIKit
 class menuVC: UIViewController{
-    
-    
+    let fxPlayer = soundManager.sharedInstance
     override func viewDidLoad() {
         super.viewDidLoad()
+        fxPlayer.playFx(fileName: "GameMusic", fileType: "mp3")
        
     }
 

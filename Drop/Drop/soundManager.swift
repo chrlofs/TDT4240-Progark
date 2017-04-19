@@ -6,7 +6,6 @@
 //  Copyright © 2017 Team15. All rights reserved.
 //
 
-
 import Foundation
 import AVFoundation
 
@@ -26,8 +25,8 @@ class soundManager {
         } catch  {
             // couldn't load file :(
         }
- 
-    } 
+        
+    }
     func playMusic(fileName: String, fileType: String){
         let url = Bundle.main.url(forResource: fileName, withExtension: fileType)!
         do {

@@ -24,7 +24,7 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     
     private var storedTouches = [UITouch: String]();
     
-    let fxPlayer = soundManager.sharedInstance
+    
     
     override func didMove(to view: SKView) {
         initializeGame();     }
@@ -107,7 +107,6 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
         // Check every 7 seconds if there are items "out of bounds" and remove them.
         Timer.scheduledTimer(timeInterval: TimeInterval(7), target: self, selector: #selector(GameplaySceneClass.removeItems), userInfo: nil, repeats: true);
         
-        fxPlayer.playFx(fileName: "GameMusic", fileType: "mp3")
         
     }
     
