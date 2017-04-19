@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0883BE581E8CF48600945A6A /* MultiplayerServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0883BE571E8CF48600945A6A /* MultiplayerServiceManager.swift */; };
+		1BA6AEF61EA773F800BCCA0A /* GameMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1BA6AEF51EA773F800BCCA0A /* GameMusic.mp3 */; };
+		1BA6AEF81EA7783400BCCA0A /* soundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA6AEF71EA7783400BCCA0A /* soundManager.swift */; };
 		1BD728421E76DE5100CE0B2A /* menuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD728411E76DE5100CE0B2A /* menuVC.swift */; };
 		1BD728481E76EF6D00CE0B2A /* multiplayerMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD728471E76EF6D00CE0B2A /* multiplayerMenuVC.swift */; };
 		1BD7284A1E76EF9500CE0B2A /* singleplayerMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD728491E76EF9500CE0B2A /* singleplayerMenuVC.swift */; };
@@ -48,6 +50,8 @@
 
 /* Begin PBXFileReference section */
 		0883BE571E8CF48600945A6A /* MultiplayerServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplayerServiceManager.swift; sourceTree = "<group>"; };
+		1BA6AEF51EA773F800BCCA0A /* GameMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = GameMusic.mp3; sourceTree = "<group>"; };
+		1BA6AEF71EA7783400BCCA0A /* soundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = soundManager.swift; sourceTree = "<group>"; };
 		1BD728411E76DE5100CE0B2A /* menuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = menuVC.swift; sourceTree = "<group>"; };
 		1BD728471E76EF6D00CE0B2A /* multiplayerMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = multiplayerMenuVC.swift; sourceTree = "<group>"; };
 		1BD728491E76EF9500CE0B2A /* singleplayerMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = singleplayerMenuVC.swift; sourceTree = "<group>"; };
@@ -100,6 +104,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1BCF1A371EA76C40006F81F2 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				1BA6AEF51EA773F800BCCA0A /* GameMusic.mp3 */,
+			);
+			name = Sounds;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		9565C3A41E76D4F400C5BF83 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,7 +172,7 @@
 		9582DB101E71A0A600335B2F /* Drop */ = {
 			isa = PBXGroup;
 			children = (
-				1B2CDC161E893581004AD78F /* Sounds */,
+				1BCF1A371EA76C40006F81F2 /* Sounds */,
 				9565C3A51E76D50000C5BF83 /* Scenes */,
 				9565C3A41E76D4F400C5BF83 /* Classes */,
 				9582DB111E71A0A600335B2F /* AppDelegate.swift */,
@@ -175,6 +188,7 @@
 				1BD7284F1E78017900CE0B2A /* optionsVC.swift */,
 				1BFE0D301E800A56007E45F0 /* loginVC.swift */,
 				0883BE571E8CF48600945A6A /* MultiplayerServiceManager.swift */,
+				1BA6AEF71EA7783400BCCA0A /* soundManager.swift */,
 			);
 			path = Drop;
 			sourceTree = "<group>";
@@ -273,7 +287,7 @@
 				TargetAttributes = {
 					9582DB0D1E71A0A500335B2F = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = ZLYR8KH355;
+						DevelopmentTeam = W2TFBN93LT;
 						ProvisioningStyle = Automatic;
 					};
 					9582DB271E71A0A600335B2F = {
@@ -318,8 +332,8 @@
 				9582DB221E71A0A600335B2F /* LaunchScreen.storyboard in Resources */,
 				9565C3A91E76D5A700C5BF83 /* MainMenu.sks in Resources */,
 				9565C3AC1E76D75900C5BF83 /* GameplayScene.sks in Resources */,
+				1BA6AEF61EA773F800BCCA0A /* GameMusic.mp3 in Resources */,
 				9582DB161E71A0A600335B2F /* Actions.sks in Resources */,
-				1B2CDC171E893581004AD78F /* Sounds in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,8 +363,8 @@
 				1BFE0D311E800A56007E45F0 /* loginVC.swift in Sources */,
 				1BD7284A1E76EF9500CE0B2A /* singleplayerMenuVC.swift in Sources */,
 				1BD728421E76DE5100CE0B2A /* menuVC.swift in Sources */,
-				1B2CDC191E8936E2004AD78F /* soundManager.swift in Sources */,
 				1BD728481E76EF6D00CE0B2A /* multiplayerMenuVC.swift in Sources */,
+				1BA6AEF81EA7783400BCCA0A /* soundManager.swift in Sources */,
 				9582DB1A1E71A0A600335B2F /* GameViewController.swift in Sources */,
 				9582DB121E71A0A600335B2F /* AppDelegate.swift in Sources */,
 				9565C3B11E76F6C400C5BF83 /* Player.swift in Sources */,
@@ -508,10 +522,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = ZLYR8KH355;
+				DEVELOPMENT_TEAM = W2TFBN93LT;
 				INFOPLIST_FILE = Drop/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.team15.Drop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tfis.Drop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -521,10 +536,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = ZLYR8KH355;
+				DEVELOPMENT_TEAM = W2TFBN93LT;
 				INFOPLIST_FILE = Drop/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.team15.Drop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tfis.Drop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
