@@ -10,43 +10,48 @@ import Foundation
 import UIKit
 import MultipeerConnectivity
 
+class PlayerPeer {
+    let id: MCPeerID
+    var name = ""
+    var skin = UIImage(named: "unknown_player")
+    
+    init(id: MCPeerID) {
+        self.id = id
+    }
+}
+
 class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
+    // ID must be unique among MultiplayerServiceObservers
     var id : String = "MULTIPLAYER_MENU_VC"
     let multiplayerService : MultiplayerServiceManager = MultiplayerServiceManager.instance
     
-    var players: Set<MCPeerID> = []
+    let defaults = UserDefaults.standard
+    
+    var players = [PlayerPeer]()
+    var userName = "No userName"
+    var userSkin = UIImage(named: "skin1")
     
     @IBOutlet weak var stateLabel: UILabel!
-    @IBOutlet weak var numPeersLabel: UILabel!
-    @IBOutlet weak var messageLabel: UILabel!
-    @IBOutlet weak var lastMessageReceived: UILabel!
+    @IBOutlet weak var playerSelfLabel: UILabel!
+    @IBOutlet weak var playerPeer1Label: UILabel!
+    @IBOutlet weak var playerPeer2Label: UILabel!
     
-    @IBOutlet weak var sendMessageButton: UIButton!
-    @IBOutlet weak var messageInput: UITextField!
-    
-    @IBAction func onTouchStartBrowsing(_ sender: Any) {
-        multiplayerService.startBrowsing()
-    }
-    
-    @IBAction func onTouchStopBrowsing(_ sender: Any) {
-        multiplayerService.stopBrowsing()
-    }
-    
-    @IBAction func onTouchLeaveSession(_ sender: Any) {
-        multiplayerService.leaveSession()
-    }
-    
-    @IBAction func onTouchSendMessage(_ sender: Any) {
-        print("Send message")
-        let message = messageInput.text!
-        print(message)
-        multiplayerService.send(message: message)
-    }
-    
-    
+    @IBOutlet weak var playerSelfSkin: UIImageView!
+    @IBOutlet weak var playerPeer1Skin: UIImageView!
+    @IBOutlet weak var playerPeer2Skin: UIImageView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         multiplayerService.registerObserver(observer: self)
+        
+        // Set own userName in playerSelfLabel text
+        userName = defaults.value(forKey: "userName") as? String ?? userName
+        OperationQueue.main.addOperation {
+            self.playerSelfLabel.text = self.userName
+            self.playerSelfSkin.image = self.userSkin
+        }
+        
+        multiplayerService.startBrowsing()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -59,49 +64,56 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
         self.navigationController?.pushViewController(menuVC, animated: true)
     }
     
-    func onMultiplayerRecvMessage(message: String) {
-        OperationQueue.main.addOperation {
-            self.lastMessageReceived.text = message
+    func onMultiplayerRecvMessage(fromPeer peerID: MCPeerID, message: String) {
+        if let player = (players.first { $0.id == peerID }) {
+            player.name = message
+            player.skin = UIImage(named: "skin2")
+            updatePlayers()
         }
     }
     
     func onMultiplayerStateChange(state: MultiplayerServiceState) {
-        var stateString = ""
-        switch state {
-        case .DISCONNECTED:
-            stateString = "Disconnected"
-        case .BROWSING:
-            stateString = "Browsing"
-        case .CONNECTED:
-            stateString = "Connected"
-            
+        if (state == .CONNECTED) {
+            // Broadcast name
+            multiplayerService.send(message: userName)
         }
         
+        var stateText = "?"
+        switch state {
+        case .DISCONNECTED:
+            stateText = "Disconnected"
+        case .BROWSING:
+            stateText = "Browsing"
+        case .CONNECTED:
+            stateText = "Connected"
+        }
         OperationQueue.main.addOperation {
-            self.stateLabel.text = "State: \(stateString)"
-            self.toggleMessageInput(toggleOn: state == .CONNECTED)
+            self.stateLabel.text = stateText
         }
     }
     
     func onMultiplayerPeerLeft(peerID: MCPeerID) {
-        players.remove(peerID)
-        
-        OperationQueue.main.addOperation {
-            self.numPeersLabel.text = "Num of peers: \(self.players.count)"
-        }
+        players = players.filter { $0.id != peerID }
+        updatePlayers()
     }
     
     func onMultiplayerPeerJoined(peerID: MCPeerID) {
-        players.insert(peerID)
-        
-        OperationQueue.main.addOperation {
-            self.numPeersLabel.text = "Num of peers: \(self.players.count)"
-        }
+        let newPlayer = PlayerPeer(id: peerID)
+        players.append(newPlayer)
+        updatePlayers()
     }
     
-    func toggleMessageInput(toggleOn : Bool) {
-        sendMessageButton.isHidden = !toggleOn
-        messageInput.isHidden = !toggleOn
+    func updatePlayers() {
+        OperationQueue.main.addOperation {
+            if (self.players.count > 0) {
+                self.playerPeer1Label.text = self.players[0].name
+                self.playerPeer1Skin.image = self.players[0].skin
+            }
+            if (self.players.count > 1) {
+                self.playerPeer2Label.text = self.players[1].name
+                self.playerPeer2Skin.image = self.players[1].skin
+            }
+        }
     }
 }
 

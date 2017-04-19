@@ -18,7 +18,7 @@ enum MultiplayerServiceState {
 protocol MultiplayerServiceObserver {
     var id : String { get }
     func onMultiplayerStateChange(state: MultiplayerServiceState)
-    func onMultiplayerRecvMessage(message: String)
+    func onMultiplayerRecvMessage(fromPeer peerID: MCPeerID, message: String)
     func onMultiplayerPeerJoined(peerID: MCPeerID)
     func onMultiplayerPeerLeft(peerID: MCPeerID)
 }
@@ -43,10 +43,10 @@ class MultiplayerServiceManager: NSObject {
         observers = observers.filter { $0.id != observer.id }
     }
     
-    func receiveMessage(message: String) {
+    func receiveMessage(fromPeer peerID: MCPeerID, message: String) {
         print("Receive message \(message)")
         for observer in observers {
-            observer.onMultiplayerRecvMessage(message: message)
+            observer.onMultiplayerRecvMessage(fromPeer: peerID, message: message)
         }
     }
     
@@ -190,7 +190,7 @@ extension MultiplayerServiceManager : MCSessionDelegate {
     // RECEIVE DATA
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         if let message = String(data: data, encoding: .utf8) {
-            self.receiveMessage(message: message)
+            self.receiveMessage(fromPeer: peerID, message: message)
         }
     }
     
