@@ -13,7 +13,7 @@ class menuVC: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        player.playFx(fileName: "Kebob", fileType: "m4a")
+        player.playFx(fileName: "adhku", fileType: "mp3")
     }
 
     @IBAction func pushToOptions(_ sender: UIButton) {
