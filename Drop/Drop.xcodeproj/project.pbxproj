@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1B2CDC191E8936E2004AD78F /* soundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2CDC181E8936E2004AD78F /* soundManager.swift */; };
-		1BCF1A3E1EA76D50006F81F2 /* adhku.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1BCF1A3D1EA76D50006F81F2 /* adhku.mp3 */; };
+		1BA6AEF61EA773F800BCCA0A /* GameMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1BA6AEF51EA773F800BCCA0A /* GameMusic.mp3 */; };
 		1BD728421E76DE5100CE0B2A /* menuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD728411E76DE5100CE0B2A /* menuVC.swift */; };
 		1BD728481E76EF6D00CE0B2A /* multiplayerMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD728471E76EF6D00CE0B2A /* multiplayerMenuVC.swift */; };
 		1BD7284A1E76EF9500CE0B2A /* singleplayerMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD728491E76EF9500CE0B2A /* singleplayerMenuVC.swift */; };
@@ -49,7 +49,7 @@
 
 /* Begin PBXFileReference section */
 		1B2CDC181E8936E2004AD78F /* soundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = soundManager.swift; sourceTree = "<group>"; };
-		1BCF1A3D1EA76D50006F81F2 /* adhku.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = adhku.mp3; sourceTree = "<group>"; };
+		1BA6AEF51EA773F800BCCA0A /* GameMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = GameMusic.mp3; sourceTree = "<group>"; };
 		1BD728411E76DE5100CE0B2A /* menuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = menuVC.swift; sourceTree = "<group>"; };
 		1BD728471E76EF6D00CE0B2A /* multiplayerMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = multiplayerMenuVC.swift; sourceTree = "<group>"; };
 		1BD728491E76EF9500CE0B2A /* singleplayerMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = singleplayerMenuVC.swift; sourceTree = "<group>"; };
@@ -105,7 +105,7 @@
 		1BCF1A371EA76C40006F81F2 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
-				1BCF1A3D1EA76D50006F81F2 /* adhku.mp3 */,
+				1BA6AEF51EA773F800BCCA0A /* GameMusic.mp3 */,
 			);
 			name = Sounds;
 			path = ..;
@@ -329,7 +329,7 @@
 				9582DB221E71A0A600335B2F /* LaunchScreen.storyboard in Resources */,
 				9565C3A91E76D5A700C5BF83 /* MainMenu.sks in Resources */,
 				9565C3AC1E76D75900C5BF83 /* GameplayScene.sks in Resources */,
-				1BCF1A3E1EA76D50006F81F2 /* adhku.mp3 in Resources */,
+				1BA6AEF61EA773F800BCCA0A /* GameMusic.mp3 in Resources */,
 				9582DB161E71A0A600335B2F /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

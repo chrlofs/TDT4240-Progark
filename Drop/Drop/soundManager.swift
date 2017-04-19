@@ -13,46 +13,29 @@ import AVFoundation
 class soundManager {
     static let sharedInstance = soundManager()
     var fxPlayer = AVAudioPlayer()
-    var player: AVAudioPlayer?
-    
     var musicPlayer = AVAudioPlayer()
     func playSound() {
         
     }
     func playFx(fileName: String, fileType: String){
-        /*
-        let path = Bundle.main.path(forResource: fileName, ofType: fileType, inDirectory: "Sounds")!
-        let url = URL(fileURLWithPath: path)
+        let url = Bundle.main.url(forResource: fileName, withExtension: fileType)!
         do {
-            let fxPlayer = try AVAudioPlayer(contentsOf: url)
-            fxPlayer.volume=1.0
+            fxPlayer = try AVAudioPlayer(contentsOf: url)
             fxPlayer.prepareToPlay()
             fxPlayer.play()
-        } catch {
-            print("Error playing")
+        } catch  {
             // couldn't load file :(
         }
-        */
-        let url = Bundle.main.url(forResource: "adhku", withExtension: "mp3")!
-        
-        do {
-            player = try AVAudioPlayer(contentsOf: url)
-            guard let player = player else { return }
-            
-            player.prepareToPlay()
-            player.play()
-        } catch let error {
-            print(error.localizedDescription)
-        }
-    }
+ 
+    } 
     func playMusic(fileName: String, fileType: String){
-        let path = Bundle.main.path(forResource: fileName, ofType: fileType, inDirectory: "Sounds")!
-        let url = URL(fileURLWithPath: path)
+        let url = Bundle.main.url(forResource: fileName, withExtension: fileType)!
         do {
-            let musicPlayer = try AVAudioPlayer(contentsOf: url)
+            musicPlayer = try AVAudioPlayer(contentsOf: url)
             musicPlayer.prepareToPlay()
             musicPlayer.play()
-        } catch {
+            musicPlayer.numberOfLoops = -1
+        } catch  {
             // couldn't load file :(
         }
         

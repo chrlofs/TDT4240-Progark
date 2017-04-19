@@ -9,11 +9,11 @@
 import Foundation
 import UIKit
 class menuVC: UIViewController{
-    let player = soundManager.sharedInstance
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        player.playFx(fileName: "adhku", fileType: "mp3")
+       
     }
 
     @IBAction func pushToOptions(_ sender: UIButton) {
