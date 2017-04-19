@@ -116,6 +116,7 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     //Adding a child (falling objects) to the scene
     func spawnItems(){
         self.scene?.addChild(itemController.spawnItems());
+        
     }
     
     func restartGame(){
