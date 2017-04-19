@@ -14,6 +14,7 @@ class loginVC: UIViewController{
     let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
+        self.navigationController?.isNavigationBarHidden = true
         let user = defaults.value(forKey: "userName") as? String ?? String()
         
         if (!user.isEmpty) {

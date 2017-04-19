@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 class singleplayerMenuVC: UIViewController{
     override func viewDidLoad() {
+    self.navigationController?.isNavigationBarHidden = true
        
     }
     
