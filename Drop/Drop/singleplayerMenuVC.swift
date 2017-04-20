@@ -9,9 +9,15 @@
 import Foundation
 import UIKit
 class singleplayerMenuVC: UIViewController{
+    let defaults = UserDefaults.standard
+    
+    @IBOutlet weak var skinImage: UIImageView!
     override func viewDidLoad() {
-    self.navigationController?.isNavigationBarHidden = true
-        print("test");
+        self.navigationController?.isNavigationBarHidden = true
+        let skins = defaults.stringArray(forKey: "skinList") ?? [String]()
+        let currentSkinIndex = defaults.integer(forKey: "userSkin")
+        
+        skinImage.image = UIImage(named: skins[currentSkinIndex])
     }
     
     @IBAction func back(_ sender: UIButton) {
