@@ -93,8 +93,17 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
             // ScheduledTimer to restart game after x seconds.
             Timer.scheduledTimer(timeInterval: TimeInterval(0), target: self, selector: #selector(GameplaySceneClass.restartGame), userInfo: nil, repeats: false);
         }
+        if((contact.bodyA.node?.name?.range(of: "Obstacle")) != nil) {
+            
+        }
+        if((contact.bodyA.node?.name?.range(of: "Player")) != nil) {
+            
+        }
+        
+        
         
     }
+    
     
     private func initializeGame(){
         
