@@ -37,7 +37,7 @@ class loginVC: UIViewController{
     
         if verifyUsername(self.userName.text!) {
             defaults.set(self.userName.text!, forKey: "userName")
-            defaults.set(0, forKey: "skinInde")
+            defaults.set(0, forKey: "skinIndex")
             ToMenu()
         }
         else{}

@@ -16,23 +16,23 @@ class selectSkinVC: UIViewController{
     
     @IBAction func skinLeft(_ sender: Any) {
         let skins = defaults.stringArray(forKey: "skinList") ?? [String]()
-        let currentSkinIndex = defaults.integer(forKey: "skin")
+        let currentSkinIndex = defaults.integer(forKey: "skinIndex")
         var newSkinIndex = (currentSkinIndex - 1) % skins.count
         if (newSkinIndex < 0) {
             newSkinIndex = newSkinIndex + skins.count
         }
         
         skinImage.image = UIImage(named: skins[newSkinIndex])
-        defaults.set(newSkinIndex, forKey: "skin")
+        defaults.set(newSkinIndex, forKey: "skinIndex")
         
     }
     @IBAction func skinRight(_ sender: Any) {
         let skins = defaults.stringArray(forKey: "skinList") ?? [String]()
-        let currentSkinIndex = defaults.integer(forKey: "skin")
+        let currentSkinIndex = defaults.integer(forKey: "skinIndex")
         let newSkinIndex = (currentSkinIndex + 1) % skins.count
         
         skinImage.image = UIImage(named: skins[newSkinIndex])
-        defaults.set(newSkinIndex, forKey: "skin")
+        defaults.set(newSkinIndex, forKey: "skinIndex")
         
         
     }
@@ -41,7 +41,7 @@ class selectSkinVC: UIViewController{
         self.navigationController?.isNavigationBarHidden = true
 
         let skins = defaults.stringArray(forKey: "skinList") ?? [String]()
-        let currentSkinIndex = defaults.integer(forKey: "skin")
+        let currentSkinIndex = defaults.integer(forKey: "skinIndex")
         print(skins)
         print(currentSkinIndex)
         skinImage.image = UIImage(named: skins[currentSkinIndex])
