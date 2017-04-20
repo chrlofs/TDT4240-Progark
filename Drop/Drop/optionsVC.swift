@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 class optionsVC: UIViewController{
     override func viewDidLoad() {
+    self.navigationController?.isNavigationBarHidden = true
     }
     
     @IBAction func back(_ sender: UIButton) {

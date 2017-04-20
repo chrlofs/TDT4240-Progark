@@ -24,9 +24,10 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     
     private var storedTouches = [UITouch: String]();
     
+    
+    
     override func didMove(to view: SKView) {
-        initializeGame();
-    }
+        initializeGame();     }
     
     override func update(_ currentTime: TimeInterval) {
         managePlayer();
@@ -105,6 +106,8 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
         
         // Check every 7 seconds if there are items "out of bounds" and remove them.
         Timer.scheduledTimer(timeInterval: TimeInterval(7), target: self, selector: #selector(GameplaySceneClass.removeItems), userInfo: nil, repeats: true);
+        
+        
     }
     
     private func managePlayer(){

@@ -47,6 +47,7 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = true
         multiplayerService.registerObserver(observer: self)
         
         // Set own userName in playerSelfLabel text
