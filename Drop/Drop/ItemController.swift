@@ -11,6 +11,7 @@ import SpriteKit
 struct ColliderType {
     static let PLAYER: UInt32 = 0;
     static let FRUIT_AND_BOMB: UInt32 = 1;
+    static let OBSTACLE: UInt32 = 2;
 }
 
 class ItemController {
@@ -42,6 +43,9 @@ class ItemController {
         
         // Sets the collision bitmask to FRUIT_AND_BOMB (1)
         item!.physicsBody?.categoryBitMask = ColliderType.FRUIT_AND_BOMB;
+        item!.physicsBody?.restitution = 1;
+        item!.physicsBody?.mass = 1;
+        item!.physicsBody?.collisionBitMask = ColliderType.OBSTACLE;
         
         item!.zPosition = 3;
         item!.anchorPoint = CGPoint(x: 0.5, y: 0.5);

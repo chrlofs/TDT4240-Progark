@@ -11,7 +11,7 @@ import UIKit
 class singleplayerMenuVC: UIViewController{
     override func viewDidLoad() {
     self.navigationController?.isNavigationBarHidden = true
-       
+        print("test");
     }
     
     @IBAction func back(_ sender: UIButton) {
@@ -23,6 +23,7 @@ class singleplayerMenuVC: UIViewController{
     }
     
     func backToMenu(){
+        print("back from singleplayer")
         let menuVC = self.storyboard?.instantiateViewController(withIdentifier: "menuVC") as! menuVC
         self.navigationController?.pushViewController(menuVC, animated: true)
     }
