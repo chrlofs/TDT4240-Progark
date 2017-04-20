@@ -29,6 +29,7 @@
 		9582DB2D1E71A0A600335B2F /* DropTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9582DB2C1E71A0A600335B2F /* DropTests.swift */; };
 		9582DB381E71A0A600335B2F /* DropUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9582DB371E71A0A600335B2F /* DropUITests.swift */; };
 		95D2557E1E7ABC6300DA813A /* ItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D2557D1E7ABC6300DA813A /* ItemController.swift */; };
+		F4469F711EA7BA170027C76D /* selectSkinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F701EA7BA170027C76D /* selectSkinVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		9582DB371E71A0A600335B2F /* DropUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropUITests.swift; sourceTree = "<group>"; };
 		9582DB391E71A0A600335B2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95D2557D1E7ABC6300DA813A /* ItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemController.swift; sourceTree = "<group>"; };
+		F4469F701EA7BA170027C76D /* selectSkinVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = selectSkinVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +187,7 @@
 				1BD728411E76DE5100CE0B2A /* menuVC.swift */,
 				1BD728471E76EF6D00CE0B2A /* multiplayerMenuVC.swift */,
 				1BD728491E76EF9500CE0B2A /* singleplayerMenuVC.swift */,
+				F4469F701EA7BA170027C76D /* selectSkinVC.swift */,
 				1BD7284F1E78017900CE0B2A /* optionsVC.swift */,
 				1BFE0D301E800A56007E45F0 /* loginVC.swift */,
 				0883BE571E8CF48600945A6A /* MultiplayerServiceManager.swift */,
@@ -359,6 +362,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9565C3A71E76D53300C5BF83 /* MainMenuScene.swift in Sources */,
+				F4469F711EA7BA170027C76D /* selectSkinVC.swift in Sources */,
 				1BD728501E78017900CE0B2A /* optionsVC.swift in Sources */,
 				1BFE0D311E800A56007E45F0 /* loginVC.swift in Sources */,
 				1BD7284A1E76EF9500CE0B2A /* singleplayerMenuVC.swift in Sources */,

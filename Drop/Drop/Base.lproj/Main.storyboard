@@ -65,6 +65,14 @@
                                     <action selector="pushToOptions:" destination="e1F-Ln-BDf" eventType="touchUpInside" id="3fh-Iz-BVd"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGF-7l-JGa">
+                                <rect key="frame" x="44" y="231" width="287" height="53"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="button_select_skin"/>
+                                <connections>
+                                    <segue destination="oh0-Oe-dCj" kind="show" id="0qK-Lq-LDW"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -73,6 +81,62 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xtx-yr-OPa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-698.39999999999998" y="-288.30584707646182"/>
+        </scene>
+        <!--Select SkinVC-->
+        <scene sceneID="IRH-iS-I1X">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hp6-4a-8Zk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="oh0-Oe-dCj" customClass="selectSkinVC" customModule="Drop" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rTn-SZ-PXE"/>
+                        <viewControllerLayoutGuide type="bottom" id="xDo-Y0-Ue3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DQb-JY-5l3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background_standing3" translatesAutoresizingMaskIntoConstraints="NO" id="woO-dx-3K1">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nZl-Fi-i4d">
+                                <rect key="frame" x="10" y="25" width="50" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="button_back"/>
+                                <connections>
+                                    <action selector="back:" destination="Vgx-yZ-rss" eventType="touchUpInside" id="bB4-xe-830"/>
+                                    <segue destination="e1F-Ln-BDf" kind="show" id="Re2-Bs-n9Q"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iw9-Qu-5FN">
+                                <rect key="frame" x="107" y="390" width="63" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="button_left"/>
+                                <connections>
+                                    <action selector="skinLeft:" destination="oh0-Oe-dCj" eventType="touchUpInside" id="J60-EN-bbC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YWc-cc-5Ug">
+                                <rect key="frame" x="204" y="390" width="63" height="41"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="button_right"/>
+                                <connections>
+                                    <action selector="skinRight:" destination="oh0-Oe-dCj" eventType="touchUpInside" id="g1Q-Ye-DCL"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="skin2" translatesAutoresizingMaskIntoConstraints="NO" id="rAq-sH-Gka">
+                                <rect key="frame" x="87" y="89" width="200" height="200"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="skinImage" destination="rAq-sH-Gka" id="vGO-PN-1mz"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="80.799999999999997" y="-1051.1244377811095"/>
         </scene>
         <!--OptionsVC-->
         <scene sceneID="ycI-uy-VG5">
@@ -104,7 +168,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6qi-2R-OVb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-15.199999999999999" y="-288.30584707646182"/>
+            <point key="canvasLocation" x="82" y="-288"/>
         </scene>
         <!--LoginVC-->
         <scene sceneID="YBY-Qw-8Py">
@@ -305,11 +369,15 @@
     <resources>
         <image name="background_standing3" width="1081" height="1538"/>
         <image name="button_back" width="81" height="81"/>
+        <image name="button_left" width="135" height="81"/>
         <image name="button_login" width="327" height="80"/>
         <image name="button_multiplayer" width="918" height="141"/>
+        <image name="button_right" width="135" height="81"/>
+        <image name="button_select_skin" width="577" height="90"/>
         <image name="button_settings" width="132" height="132"/>
         <image name="button_singleplayer" width="853" height="131"/>
         <image name="button_start_game" width="261" height="81"/>
+        <image name="skin2" width="800" height="801"/>
         <image name="white_field" width="1609" height="364"/>
     </resources>
 </document>
