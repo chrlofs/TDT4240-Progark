@@ -77,16 +77,12 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
             secondBody = contact.bodyA;
         }
         
-        if firstBody.node?.name == "Player" && secondBody.node?.name == "Fruit" {
-            secondBody.node?.removeFromParent();
-        }
-        
         if firstBody.node?.name == "Player" && secondBody.node?.name == "Bomb" {
             firstBody.node?.removeFromParent();
             secondBody.node?.removeFromParent();
             
             // ScheduledTimer to restart game after x seconds.
-            Timer.scheduledTimer(timeInterval: TimeInterval(2), target: self, selector: #selector(GameplaySceneClass.restartGame), userInfo: nil, repeats: false);
+            Timer.scheduledTimer(timeInterval: TimeInterval(0), target: self, selector: #selector(GameplaySceneClass.restartGame), userInfo: nil, repeats: false);
         }
         
     }
@@ -144,7 +140,7 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     func restartGame(){
         if let scene = GameplaySceneClass(fileNamed: "GameplayScene"){
             scene.scaleMode = .aspectFill
-            view?.presentScene(scene, transition: SKTransition.doorsOpenHorizontal(withDuration: TimeInterval(2)));
+            view?.presentScene(scene);
         }
     }
     
