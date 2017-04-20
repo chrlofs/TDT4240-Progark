@@ -12,7 +12,7 @@ import MultipeerConnectivity
 
 class PlayerPeer {
     let id: MCPeerID
-    var name = ""
+    var name = "Unknown"
     var masterScore = -1
     var skinImage = UIImage(named: "unknown_player")
     
@@ -45,6 +45,13 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
     @IBOutlet weak var playerPeer1Skin: UIImageView!
     @IBOutlet weak var playerPeer2Skin: UIImageView!
 
+    @IBAction func back(_ sender: UIButton) {
+        multiplayerService.leaveSession()
+        
+        let menuVC = self.storyboard?.instantiateViewController(withIdentifier: "menuVC") as! menuVC
+        self.navigationController?.pushViewController(menuVC, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
@@ -70,11 +77,6 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
     override func viewWillDisappear(_ animated: Bool) {
         multiplayerService.unregisterObserver(observer: self)
         multiplayerService.leaveSession()
-    }
-    
-    func backToMenu(){
-        let menuVC = self.storyboard?.instantiateViewController(withIdentifier: "menuVC") as! menuVC
-        self.navigationController?.pushViewController(menuVC, animated: true)
     }
     
     func onMultiplayerRecvMessage(fromPeer peerID: MCPeerID, message: [String: Any]) {
@@ -147,10 +149,16 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
             if (self.players.count > 0) {
                 self.playerPeer1Label.text = self.players[0].name
                 self.playerPeer1Skin.image = self.players[0].skinImage
+            } else {
+                self.playerPeer1Label.text = "Player 2"
+                self.playerPeer1Skin.image = UIImage(named: "unknown_player")
             }
             if (self.players.count > 1) {
                 self.playerPeer2Label.text = self.players[1].name
                 self.playerPeer2Skin.image = self.players[1].skinImage
+            } else {
+                self.playerPeer2Label.text = "Player 3"
+                self.playerPeer2Skin.image = UIImage(named: "unknown_player")
             }
         }
     }
