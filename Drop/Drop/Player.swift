@@ -9,24 +9,20 @@
 import SpriteKit
 
 class Player: SKSpriteNode {
-    
-    let defaults = UserDefaults.standard
     private var minX = CGFloat(-190), maxX = CGFloat(190);
     
+    init(skinImageName: String) {
+        let texture = SKTexture(imageNamed: skinImageName)
+        super.init(texture: texture, color: UIColor.clear, size: texture.size())
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     // Initializing a Player object
     func InitializePlayer() {
         name = "Player";
-        
-        let skin = defaults.integer(forKey: "userSkin")
-        let skins = defaults.stringArray(forKey: "skinList") ?? [String]()
-        
-        if skins.count > skin {
-            print("Changing skin??")
-            self.texture = SKTexture(imageNamed: skins[skin])
-        } else {
-            print("Not changing the skin :(")
-        }
-        
         
         physicsBody = SKPhysicsBody(circleOfRadius: size.height / 2);
         physicsBody?.affectedByGravity = false;
@@ -51,6 +47,10 @@ class Player: SKSpriteNode {
                 position.x = maxX;
             }
         }
+    }
+    
+    func setSkin(skinImageName: String) {
+        self.texture = SKTexture(imageNamed: skinImageName)
     }
     
 }

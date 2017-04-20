@@ -79,6 +79,12 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
         multiplayerService.leaveSession()
     }
     
+    func goToGame() {
+        let MultiplayerGameViewController = self.storyboard?.instantiateViewController(withIdentifier: "MultiplayerGameViewController") as! MultiplayerGameViewController
+        
+        self.navigationController?.pushViewController(MultiplayerGameViewController, animated: true)
+    }
+    
     func onMultiplayerRecvMessage(fromPeer peerID: MCPeerID, message: [String: Any]) {
         if
             let player = (players.first { $0.id == peerID }),
@@ -95,6 +101,7 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
                 player.skinImage = UIImage(named: skins[skin])
             }
             updatePlayers()
+            goToGame()
         }
     }
     

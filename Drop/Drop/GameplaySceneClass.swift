@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
+class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
     
     private var player: Player?;
     

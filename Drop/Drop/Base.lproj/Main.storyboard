@@ -86,7 +86,6 @@
         <scene sceneID="IRH-iS-I1X">
             <objects>
                 <viewController storyboardIdentifier="selectSkinVC" id="oh0-Oe-dCj" customClass="selectSkinVC" customModule="Drop" sceneMemberID="viewController">
-
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rTn-SZ-PXE"/>
                         <viewControllerLayoutGuide type="bottom" id="xDo-Y0-Ue3"/>
@@ -320,7 +319,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O4z-vv-0lr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-698.39999999999998" y="394.45277361319341"/>
+            <point key="canvasLocation" x="-698" y="381"/>
         </scene>
         <!--Singleplayer MenuVC-->
         <scene sceneID="atc-ai-c3Q">
@@ -360,7 +359,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2xO-sz-qvE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-26.399999999999999" y="393.55322338830587"/>
+            <point key="canvasLocation" x="81" y="381"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
@@ -378,21 +377,37 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="756" y="-51"/>
+            <point key="canvasLocation" x="81" y="1072"/>
+        </scene>
+        <!--Multiplayer Game View Controller-->
+        <scene sceneID="Hot-eK-PSN">
+            <objects>
+                <viewController storyboardIdentifier="MultiplayerGameViewController" id="u3z-0Z-fij" customClass="MultiplayerGameViewController" customModule="Drop" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="l42-3E-Y7T"/>
+                        <viewControllerLayoutGuide type="bottom" id="b52-nI-6Z3"/>
+                    </layoutGuides>
+                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="ORP-5s-h3J" customClass="SKView">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kOM-Mu-Zyh" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-698" y="1072"/>
         </scene>
     </scenes>
     <resources>
         <image name="background_standing3" width="1081" height="1538"/>
         <image name="button_back" width="81" height="81"/>
-
         <image name="button_fx" width="108" height="108"/>
-        <image name="button_music" width="237" height="239"/>
         <image name="button_left" width="135" height="81"/>
         <image name="button_login" width="327" height="80"/>
         <image name="button_multiplayer" width="918" height="141"/>
+        <image name="button_music" width="237" height="239"/>
         <image name="button_right" width="135" height="81"/>
         <image name="button_select_skin" width="577" height="90"/>
-
         <image name="button_settings" width="132" height="132"/>
         <image name="button_singleplayer" width="853" height="131"/>
         <image name="button_start_game" width="261" height="81"/>
