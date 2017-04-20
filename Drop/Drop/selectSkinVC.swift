@@ -39,11 +39,9 @@ class selectSkinVC: UIViewController{
     
     override func viewDidLoad() {
         self.navigationController?.isNavigationBarHidden = true
-
         let skins = defaults.stringArray(forKey: "skinList") ?? [String]()
         let currentSkinIndex = defaults.integer(forKey: "skinIndex")
-        print(skins)
-        print(currentSkinIndex)
+        
         skinImage.image = UIImage(named: skins[currentSkinIndex])
 
     }
