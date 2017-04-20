@@ -10,11 +10,20 @@ import SpriteKit
 
 class Player: SKSpriteNode {
     
+    let defaults = UserDefaults.standard
     private var minX = CGFloat(-190), maxX = CGFloat(190);
     
     // Initializing a Player object
-    func InitializePlayer(){
+    func InitializePlayer() {
         name = "Player";
+        
+        let skin = defaults.integer(forKey: "userSkin")
+        let skins = defaults.stringArray(forKey: "skins") ?? [String]()
+        
+        if skins.count > skin {
+            self.texture = SKTexture(imageNamed: skins[skin])
+        }
+        
         
         physicsBody = SKPhysicsBody(circleOfRadius: size.height / 2);
         physicsBody?.affectedByGravity = false;
