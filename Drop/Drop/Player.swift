@@ -11,13 +11,14 @@ import SpriteKit
 class Player: SKSpriteNode {
     
     let defaults = UserDefaults.standard
+    let gameSettings = GameSettings.getInstance()
     private var minX = CGFloat(-190), maxX = CGFloat(190);
     
     // Initializing a Player object
     func InitializePlayer() {
         name = "Player";
         
-        let skin = defaults.integer(forKey: "userSkin")
+        let skin = gameSettings.getUserSkin()
         let skins = defaults.stringArray(forKey: "skinList") ?? [String]()
         
         if skins.count > skin {

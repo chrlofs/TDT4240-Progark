@@ -10,21 +10,19 @@ import Foundation
 import UIKit
 
 class firstView: UIViewController{
+    let gameSettings = GameSettings.getInstance()
     
     override func viewDidLoad() {
         self.navigationController?.isNavigationBarHidden = true
         
         let defaults = UserDefaults.standard
-        self.navigationController?.isNavigationBarHidden = true
-        let user = defaults.value(forKey: "userName") as? String ?? String()
+
         let skinList: [String] = ["skin1", "skin2", "skin3", "kim", "trump", "putin"]
         defaults.set(skinList, forKey: "skinList")
-        if (!user.isEmpty) {
-            ToMenu()
         
-    
-        }
-        else{
+        if gameSettings.isLoggedIn() {
+            ToMenu()
+        } else {
             ToLogin()
         }
         

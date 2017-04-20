@@ -9,10 +9,13 @@
 import Foundation
 import UIKit
 class singleplayerMenuVC: UIViewController{
+    let gameSettings = GameSettings.getInstance()
+    
     let defaults = UserDefaults.standard
     var userName = "No username"
     var userSkin = 0
     var userSkinImage = UIImage(named: "skin1")
+
     
     @IBOutlet weak var playerSelfSkin: UIImageView!
     @IBOutlet weak var playerSelfLabel: UILabel!
@@ -20,8 +23,8 @@ class singleplayerMenuVC: UIViewController{
     override func viewDidLoad() {
         self.navigationController?.isNavigationBarHidden = true
         
-        userName = defaults.value(forKey: "userName") as? String ?? userName
-        userSkin = defaults.value(forKey: "userSkin") as? Int ?? 0
+        userName = gameSettings.getUserName()
+        userSkin = gameSettings.getUserSkin()
         
         let skins = defaults.stringArray(forKey: "skinList") ?? [String]()
         
