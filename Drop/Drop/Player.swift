@@ -18,10 +18,13 @@ class Player: SKSpriteNode {
         name = "Player";
         
         let skin = defaults.integer(forKey: "userSkin")
-        let skins = defaults.stringArray(forKey: "skins") ?? [String]()
+        let skins = defaults.stringArray(forKey: "skinList") ?? [String]()
         
         if skins.count > skin {
+            print("Changing skin??")
             self.texture = SKTexture(imageNamed: skins[skin])
+        } else {
+            print("Not changing the skin :(")
         }
         
         
