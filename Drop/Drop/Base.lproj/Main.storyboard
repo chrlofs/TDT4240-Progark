@@ -9,6 +9,35 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--First View-->
+        <scene sceneID="xBA-KD-K0O">
+            <objects>
+                <viewController storyboardIdentifier="firstView" id="jqm-Uk-NJS" customClass="firstView" customModule="Drop" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DzE-cb-Vgl"/>
+                        <viewControllerLayoutGuide type="bottom" id="oed-qP-P5c"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XtZ-bN-1wN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="background_standing3" translatesAutoresizingMaskIntoConstraints="NO" id="Nl6-YL-fYZ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="drop_logo" translatesAutoresizingMaskIntoConstraints="NO" id="CvL-X5-4eH">
+                                <rect key="frame" x="50" y="67" width="275" height="275"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="C5S-7M-kcR"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5bJ-NN-uDi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1679" y="-288"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Z1Y-mU-nDw">
             <objects>
@@ -18,12 +47,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="2rQ-TM-CNp" kind="relationship" relationship="rootViewController" id="PDt-zw-PIT"/>
+                        <segue destination="jqm-Uk-NJS" kind="relationship" relationship="rootViewController" id="2BP-KI-ePv"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3MA-9g-sPH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2194" y="-288"/>
+            <point key="canvasLocation" x="-2495" y="-288"/>
         </scene>
         <!--MenuVC-->
         <scene sceneID="imv-Y6-78f">
@@ -227,7 +256,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dH1-8b-1QH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1391.2" y="-288.30584707646182"/>
+            <point key="canvasLocation" x="-1703" y="-986"/>
         </scene>
         <!--Multiplayer MenuVC-->
         <scene sceneID="7ZU-bK-MAA">
@@ -393,6 +422,7 @@
         <image name="button_settings" width="132" height="132"/>
         <image name="button_singleplayer" width="853" height="131"/>
         <image name="button_start_game" width="261" height="81"/>
+        <image name="drop_logo" width="1024" height="1034"/>
         <image name="skin2" width="800" height="801"/>
         <image name="unknown_player" width="643" height="625"/>
         <image name="white_field" width="1609" height="364"/>

@@ -15,17 +15,7 @@ class loginVC: UIViewController{
     
     override func viewDidLoad() {
         self.navigationController?.isNavigationBarHidden = true
-        let user = defaults.value(forKey: "userName") as? String ?? String()
-        
-        let skinList: [String] = ["skin1", "skin2", "skin3", "kim", "trump", "putin"]
-        
-        defaults.set(skinList, forKey: "skinList")
-        
-        if (!user.isEmpty) {
-            ToMenu()
-        }
-        
-        
+ 
     }
     
     @IBOutlet weak var userName: UITextField!
