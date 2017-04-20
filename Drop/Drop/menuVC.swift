@@ -9,11 +9,11 @@
 import Foundation
 import UIKit
 class menuVC: UIViewController{
-    let fxPlayer = soundManager.sharedInstance
+    let musicPlayer = soundManager.sharedInstance
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
-        fxPlayer.playFx(fileName: "GameMusic", fileType: "mp3")
+        musicPlayer.playMusic(fileName: "GameMusic", fileType: "mp3")
        
     }
 

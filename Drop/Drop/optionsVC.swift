@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 class optionsVC: UIViewController{
+    let audioManager = soundManager.sharedInstance
+    
     override func viewDidLoad() {
     self.navigationController?.isNavigationBarHidden = true
     }
@@ -16,8 +18,31 @@ class optionsVC: UIViewController{
     @IBAction func back(_ sender: UIButton) {
         backToMenu()
     }
+    
+    @IBAction func toggleFx(_ sender: UIButton) {
+        let state = audioManager.fxMuted
+        if state{
+            audioManager.unmuteFX()
+        }
+        else{
+            audioManager.muteFX()
+        }
+        
+    }
+ 
+    @IBAction func toggleMusic(_ sender: UIButton) {
+        let state = audioManager.musicMuted
+        if state{
+            audioManager.unmuteMusic()
+        }
+        else{
+            audioManager.muteMusic()
+        }
+    }
+
     func backToMenu(){
         let menuVC = self.storyboard?.instantiateViewController(withIdentifier: "menuVC") as! menuVC
         self.navigationController?.pushViewController(menuVC, animated: true)
     }
+    
 }

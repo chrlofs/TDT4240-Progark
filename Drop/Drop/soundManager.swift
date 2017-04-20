@@ -14,9 +14,14 @@ class soundManager {
     var musicPlayer: AVAudioPlayer = AVAudioPlayer()
     var fxPlaying = false
     var musicPlaying = false
+    var musicMuted = false
+    var fxMuted = false
+    
     static let sharedInstance = soundManager()
     
+    
     func playFx(fileName: String, fileType: String){
+        if !fxMuted{
         let url = Bundle.main.url(forResource: fileName, withExtension: fileType)!
         do {
             if !fxPlaying{
@@ -30,9 +35,11 @@ class soundManager {
         } catch  {
             // couldn't load file :(
         }
-    
+        }
     }
+        
     func playMusic(fileName: String, fileType: String){
+        if !musicMuted {
         let url = Bundle.main.url(forResource: fileName, withExtension: fileType)!
         do {
             if !musicPlaying{
@@ -46,17 +53,43 @@ class soundManager {
             }
         } catch  {
             // couldn't load file :(
+            }
         }
         
     }
-    func muteFx(){
+    func stopFx(){
         fxPlaying = false
         fxPlayer.stop()
     }
-    func muteMusic(){
+    func stopMusic(){
         musicPlaying = false
         musicPlayer.stop()
     }
+    func muteMusic(){
+        if musicPlaying{
+        musicPlayer.volume = 0
+        musicMuted = true
+        }
+    }
+    func muteFX(){
+        if fxPlaying{
+        fxPlayer.volume = 0
+        fxMuted = true
+        }
+    }
+    func unmuteMusic(){
+        if musicPlaying{
+        musicPlayer.volume = 1
+        musicMuted = false
+        }
+    }
+    func unmuteFX(){
+        if musicPlaying{
+        fxPlayer.volume = 1
+        fxMuted = false
+        }}
+    
+    
     
     
 }
