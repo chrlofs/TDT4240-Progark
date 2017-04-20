@@ -18,7 +18,7 @@ enum MultiplayerServiceState {
 protocol MultiplayerServiceObserver {
     var id : String { get }
     func onMultiplayerStateChange(state: MultiplayerServiceState)
-    func onMultiplayerRecvMessage(message: String)
+    func onMultiplayerRecvMessage(fromPeer peerID: MCPeerID, message: [String: Any])
     func onMultiplayerPeerJoined(peerID: MCPeerID)
     func onMultiplayerPeerLeft(peerID: MCPeerID)
 }
@@ -43,10 +43,10 @@ class MultiplayerServiceManager: NSObject {
         observers = observers.filter { $0.id != observer.id }
     }
     
-    func receiveMessage(message: String) {
+    func receiveMessage(fromPeer peerID: MCPeerID, message: [String: Any]) {
         print("Receive message \(message)")
         for observer in observers {
-            observer.onMultiplayerRecvMessage(message: message)
+            observer.onMultiplayerRecvMessage(fromPeer: peerID, message: message)
         }
     }
     
@@ -91,10 +91,11 @@ class MultiplayerServiceManager: NSObject {
     }
     
     // PUBLICLY EXPOSED METHODS
-    func send(message: String) {
+    func send(message: [String: Any]) {
         if session.connectedPeers.count > 0 {
             do {
-                try self.session.send(message.data(using: .utf8)!, toPeers: session.connectedPeers, with: .reliable)
+                let data = try JSONSerialization.data(withJSONObject: message, options: [])
+                try self.session.send(data, toPeers: session.connectedPeers, with: .reliable)
             }
             catch let error {
                 NSLog("%@", "Error sending: \(error)")
@@ -189,8 +190,8 @@ extension MultiplayerServiceManager : MCSessionDelegate {
     
     // RECEIVE DATA
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        if let message = String(data: data, encoding: .utf8) {
-            self.receiveMessage(message: message)
+        if let json = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String: Any] {
+            self.receiveMessage(fromPeer: peerID, message: json)
         }
     }
     
