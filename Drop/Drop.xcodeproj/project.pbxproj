@@ -28,6 +28,7 @@
 		9582DB2D1E71A0A600335B2F /* DropTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9582DB2C1E71A0A600335B2F /* DropTests.swift */; };
 		9582DB381E71A0A600335B2F /* DropUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9582DB371E71A0A600335B2F /* DropUITests.swift */; };
 		95D2557E1E7ABC6300DA813A /* ItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D2557D1E7ABC6300DA813A /* ItemController.swift */; };
+		CFDF11871EA8E4D9008890BF /* gameOverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDF11861EA8E4D9008890BF /* gameOverVC.swift */; };
 		F4469F711EA7BA170027C76D /* selectSkinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F701EA7BA170027C76D /* selectSkinVC.swift */; };
 		F4469F741EA8AD8B0027C76D /* ObstacleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F731EA8AD8B0027C76D /* ObstacleController.swift */; };
 		F4469F761EA8C3360027C76D /* GameplayScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F4469F751EA8C3360027C76D /* GameplayScene.sks */; };
@@ -78,6 +79,7 @@
 		9582DB371E71A0A600335B2F /* DropUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropUITests.swift; sourceTree = "<group>"; };
 		9582DB391E71A0A600335B2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95D2557D1E7ABC6300DA813A /* ItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemController.swift; sourceTree = "<group>"; };
+		CFDF11861EA8E4D9008890BF /* gameOverVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gameOverVC.swift; sourceTree = "<group>"; };
 		F4469F701EA7BA170027C76D /* selectSkinVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = selectSkinVC.swift; sourceTree = "<group>"; };
 		F4469F731EA8AD8B0027C76D /* ObstacleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObstacleController.swift; sourceTree = "<group>"; };
 		F4469F751EA8C3360027C76D /* GameplayScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameplayScene.sks; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				9582DB151E71A0A600335B2F /* Actions.sks */,
 				9582DB191E71A0A600335B2F /* GameViewController.swift */,
 				9582DB1B1E71A0A600335B2F /* Main.storyboard */,
+				CFDF11861EA8E4D9008890BF /* gameOverVC.swift */,
 				9582DB1E1E71A0A600335B2F /* Assets.xcassets */,
 				9582DB201E71A0A600335B2F /* LaunchScreen.storyboard */,
 				9582DB231E71A0A600335B2F /* Info.plist */,
@@ -382,6 +385,7 @@
 				1BD728481E76EF6D00CE0B2A /* multiplayerMenuVC.swift in Sources */,
 				1BA6AEF81EA7783400BCCA0A /* soundManager.swift in Sources */,
 				9582DB1A1E71A0A600335B2F /* GameViewController.swift in Sources */,
+				CFDF11871EA8E4D9008890BF /* gameOverVC.swift in Sources */,
 				9582DB121E71A0A600335B2F /* AppDelegate.swift in Sources */,
 				9565C3B11E76F6C400C5BF83 /* Player.swift in Sources */,
 				95D2557E1E7ABC6300DA813A /* ItemController.swift in Sources */,

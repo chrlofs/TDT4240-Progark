@@ -10,6 +10,8 @@ import SpriteKit
 
 class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     
+    let defaults = UserDefaults.standard;
+    
     private var player: Player?;
     
     private var center = CGFloat();
@@ -82,6 +84,10 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
             secondBody.node?.removeFromParent();
             
             // ScheduledTimer to restart game after x seconds.
+            
+            if (score > defaults.integer(forKey: "bestScore")) {
+                defaults.set(score, forKey: "bestScore"); 
+            }
             Timer.scheduledTimer(timeInterval: TimeInterval(0), target: self, selector: #selector(GameplaySceneClass.restartGame), userInfo: nil, repeats: false);
         }
         
