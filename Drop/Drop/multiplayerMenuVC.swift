@@ -14,7 +14,7 @@ class PlayerPeer {
     let id: MCPeerID
     var name = ""
     var masterScore = -1
-    var skin = UIImage(named: "unknown_player")
+    var skinImage = UIImage(named: "unknown_player")
     
     init(id: MCPeerID) {
         self.id = id
@@ -29,8 +29,9 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
     let defaults = UserDefaults.standard
     
     var players = [PlayerPeer]()
-    var userName = "No userName"
-    var userSkin = UIImage(named: "skin1")
+    var userName = "No username"
+    var userSkin = 0
+    var userSkinImage = UIImage(named: "skin1")
     let userMasterScore = Int(arc4random_uniform(1000000))
     
     @IBOutlet weak var stateLabel: UILabel!
@@ -44,7 +45,6 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
     @IBOutlet weak var playerPeer1Skin: UIImageView!
     @IBOutlet weak var playerPeer2Skin: UIImageView!
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
@@ -52,9 +52,16 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
         
         // Set own userName in playerSelfLabel text
         userName = defaults.value(forKey: "userName") as? String ?? userName
+        userSkin = defaults.value(forKey: "userSkin") as? Int ?? 0
+        let skins = defaults.stringArray(forKey: "skinList") ?? [String]()
+        
+        if skins.count > userSkin {
+            userSkinImage = UIImage(named: skins[userSkin])
+        }
+        
         OperationQueue.main.addOperation {
             self.playerSelfLabel.text = self.userName
-            self.playerSelfSkin.image = self.userSkin
+            self.playerSelfSkin.image = self.userSkinImage
         }
         
         multiplayerService.startBrowsing()
@@ -77,8 +84,14 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
             topic == "GREETING"
         {
             player.name = (message["userName"] as? String)!
+            
             player.masterScore = (message["userMasterScore"] as? Int)!
-            player.skin = UIImage(named: "skin2")
+            
+            let skins = defaults.stringArray(forKey: "skinList") ?? [String]()
+            let skin = (message["userSkin"] as? Int)!
+            if skins.count > skin {
+                player.skinImage = UIImage(named: skins[skin])
+            }
             updatePlayers()
         }
     }
@@ -89,6 +102,7 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
             let message = [
                 "topic": "GREETING",
                 "userName": userName,
+                "userSkin": userSkin,
                 "userMasterScore": userMasterScore
             ] as [String : Any]
 
@@ -132,11 +146,11 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
             
             if (self.players.count > 0) {
                 self.playerPeer1Label.text = self.players[0].name
-                self.playerPeer1Skin.image = self.players[0].skin
+                self.playerPeer1Skin.image = self.players[0].skinImage
             }
             if (self.players.count > 1) {
                 self.playerPeer2Label.text = self.players[1].name
-                self.playerPeer2Skin.image = self.players[1].skin
+                self.playerPeer2Skin.image = self.players[1].skinImage
             }
         }
     }
