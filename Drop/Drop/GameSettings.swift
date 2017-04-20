@@ -54,7 +54,7 @@ class GameSettings {
     }
     
     public func isLoggedIn() -> Bool{
-        return loggedIn
+        return self.loggedIn
     }
     
     
