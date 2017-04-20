@@ -13,6 +13,9 @@ class selectSkinVC: UIViewController{
     
 
     @IBOutlet weak var skinImage: UIImageView!
+    @IBAction func back(_ sender: UIButton) {
+        _ = navigationController?.popViewController(animated: true)
+    }
     
     @IBAction func skinLeft(_ sender: Any) {
         let skins = defaults.stringArray(forKey: "skinList") ?? [String]()
@@ -45,4 +48,5 @@ class selectSkinVC: UIViewController{
         skinImage.image = UIImage(named: skins[currentSkinIndex])
 
     }
+    
 }
