@@ -13,6 +13,7 @@ import MultipeerConnectivity
 class PlayerPeer {
     let id: MCPeerID
     var name = ""
+    var masterScore = -1
     var skin = UIImage(named: "unknown_player")
     
     init(id: MCPeerID) {
@@ -30,8 +31,11 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
     var players = [PlayerPeer]()
     var userName = "No userName"
     var userSkin = UIImage(named: "skin1")
+    let userMasterScore = Int(arc4random_uniform(1000000))
     
     @IBOutlet weak var stateLabel: UILabel!
+    @IBOutlet weak var roleLabel: UILabel!
+    
     @IBOutlet weak var playerSelfLabel: UILabel!
     @IBOutlet weak var playerPeer1Label: UILabel!
     @IBOutlet weak var playerPeer2Label: UILabel!
@@ -39,6 +43,7 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
     @IBOutlet weak var playerSelfSkin: UIImageView!
     @IBOutlet weak var playerPeer1Skin: UIImageView!
     @IBOutlet weak var playerPeer2Skin: UIImageView!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,9 +69,14 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
         self.navigationController?.pushViewController(menuVC, animated: true)
     }
     
-    func onMultiplayerRecvMessage(fromPeer peerID: MCPeerID, message: String) {
-        if let player = (players.first { $0.id == peerID }) {
-            player.name = message
+    func onMultiplayerRecvMessage(fromPeer peerID: MCPeerID, message: [String: Any]) {
+        if
+            let player = (players.first { $0.id == peerID }),
+            let topic = message["topic"] as? String,
+            topic == "GREETING"
+        {
+            player.name = (message["userName"] as? String)!
+            player.masterScore = (message["userMasterScore"] as? Int)!
             player.skin = UIImage(named: "skin2")
             updatePlayers()
         }
@@ -75,7 +85,13 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
     func onMultiplayerStateChange(state: MultiplayerServiceState) {
         if (state == .CONNECTED) {
             // Broadcast name
-            multiplayerService.send(message: userName)
+            let message = [
+                "topic": "GREETING",
+                "userName": userName,
+                "userMasterScore": userMasterScore
+            ] as [String : Any]
+
+            multiplayerService.send(message: message)
         }
         
         var stateText = "?"
@@ -105,6 +121,14 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
     
     func updatePlayers() {
         OperationQueue.main.addOperation {
+            if (self.players.filter { $0.masterScore > self.userMasterScore }).count == 0 {
+                // Leader
+                self.roleLabel.text = "Role: Leader"
+            } else {
+                // Peer
+                self.roleLabel.text = "Role: Peer"
+            }
+            
             if (self.players.count > 0) {
                 self.playerPeer1Label.text = self.players[0].name
                 self.playerPeer1Skin.image = self.players[0].skin
