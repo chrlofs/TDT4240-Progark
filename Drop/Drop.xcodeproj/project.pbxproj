@@ -17,7 +17,6 @@
 		1BFE0D311E800A56007E45F0 /* loginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BFE0D301E800A56007E45F0 /* loginVC.swift */; };
 		9565C3A71E76D53300C5BF83 /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9565C3A61E76D53300C5BF83 /* MainMenuScene.swift */; };
 		9565C3A91E76D5A700C5BF83 /* MainMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9565C3A81E76D5A700C5BF83 /* MainMenu.sks */; };
-		9565C3AC1E76D75900C5BF83 /* GameplayScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9565C3AB1E76D75900C5BF83 /* GameplayScene.sks */; };
 		9565C3AE1E76D76F00C5BF83 /* GameplaySceneClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9565C3AD1E76D76F00C5BF83 /* GameplaySceneClass.swift */; };
 		9565C3B11E76F6C400C5BF83 /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9565C3B01E76F6C400C5BF83 /* Player.swift */; };
 		9582DB121E71A0A600335B2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9582DB111E71A0A600335B2F /* AppDelegate.swift */; };
@@ -29,6 +28,9 @@
 		9582DB2D1E71A0A600335B2F /* DropTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9582DB2C1E71A0A600335B2F /* DropTests.swift */; };
 		9582DB381E71A0A600335B2F /* DropUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9582DB371E71A0A600335B2F /* DropUITests.swift */; };
 		95D2557E1E7ABC6300DA813A /* ItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D2557D1E7ABC6300DA813A /* ItemController.swift */; };
+		F4469F711EA7BA170027C76D /* selectSkinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F701EA7BA170027C76D /* selectSkinVC.swift */; };
+		F4469F741EA8AD8B0027C76D /* ObstacleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F731EA8AD8B0027C76D /* ObstacleController.swift */; };
+		F4469F761EA8C3360027C76D /* GameplayScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F4469F751EA8C3360027C76D /* GameplayScene.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,7 +61,6 @@
 		1BFE0D301E800A56007E45F0 /* loginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginVC.swift; sourceTree = "<group>"; };
 		9565C3A61E76D53300C5BF83 /* MainMenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
 		9565C3A81E76D5A700C5BF83 /* MainMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenu.sks; sourceTree = "<group>"; };
-		9565C3AB1E76D75900C5BF83 /* GameplayScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameplayScene.sks; sourceTree = "<group>"; };
 		9565C3AD1E76D76F00C5BF83 /* GameplaySceneClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameplaySceneClass.swift; sourceTree = "<group>"; };
 		9565C3B01E76F6C400C5BF83 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		9582DB0E1E71A0A600335B2F /* Drop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drop.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,6 +78,9 @@
 		9582DB371E71A0A600335B2F /* DropUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropUITests.swift; sourceTree = "<group>"; };
 		9582DB391E71A0A600335B2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95D2557D1E7ABC6300DA813A /* ItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemController.swift; sourceTree = "<group>"; };
+		F4469F701EA7BA170027C76D /* selectSkinVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = selectSkinVC.swift; sourceTree = "<group>"; };
+		F4469F731EA8AD8B0027C76D /* ObstacleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObstacleController.swift; sourceTree = "<group>"; };
+		F4469F751EA8C3360027C76D /* GameplayScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameplayScene.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +120,7 @@
 		9565C3A41E76D4F400C5BF83 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				F4469F721EA8AD7C0027C76D /* Obstacle Class */,
 				95D2557C1E7ABC4E00DA813A /* Items Controller Classes */,
 				9565C3AF1E76F6B500C5BF83 /* Player Class */,
 				9565C3AA1E76D60D00C5BF83 /* Scene Classes */,
@@ -127,7 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				9565C3A81E76D5A700C5BF83 /* MainMenu.sks */,
-				9565C3AB1E76D75900C5BF83 /* GameplayScene.sks */,
+				F4469F751EA8C3360027C76D /* GameplayScene.sks */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -185,6 +190,7 @@
 				1BD728411E76DE5100CE0B2A /* menuVC.swift */,
 				1BD728471E76EF6D00CE0B2A /* multiplayerMenuVC.swift */,
 				1BD728491E76EF9500CE0B2A /* singleplayerMenuVC.swift */,
+				F4469F701EA7BA170027C76D /* selectSkinVC.swift */,
 				1BD7284F1E78017900CE0B2A /* optionsVC.swift */,
 				1BFE0D301E800A56007E45F0 /* loginVC.swift */,
 				0883BE571E8CF48600945A6A /* MultiplayerServiceManager.swift */,
@@ -217,6 +223,14 @@
 				95D2557D1E7ABC6300DA813A /* ItemController.swift */,
 			);
 			name = "Items Controller Classes";
+			sourceTree = "<group>";
+		};
+		F4469F721EA8AD7C0027C76D /* Obstacle Class */ = {
+			isa = PBXGroup;
+			children = (
+				F4469F731EA8AD8B0027C76D /* ObstacleController.swift */,
+			);
+			name = "Obstacle Class";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,7 +301,7 @@
 				TargetAttributes = {
 					9582DB0D1E71A0A500335B2F = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = W2TFBN93LT;
+						DevelopmentTeam = ZLYR8KH355;
 						ProvisioningStyle = Automatic;
 					};
 					9582DB271E71A0A600335B2F = {
@@ -331,7 +345,7 @@
 				9582DB1F1E71A0A600335B2F /* Assets.xcassets in Resources */,
 				9582DB221E71A0A600335B2F /* LaunchScreen.storyboard in Resources */,
 				9565C3A91E76D5A700C5BF83 /* MainMenu.sks in Resources */,
-				9565C3AC1E76D75900C5BF83 /* GameplayScene.sks in Resources */,
+				F4469F761EA8C3360027C76D /* GameplayScene.sks in Resources */,
 				1BA6AEF61EA773F800BCCA0A /* GameMusic.mp3 in Resources */,
 				9582DB161E71A0A600335B2F /* Actions.sks in Resources */,
 			);
@@ -359,6 +373,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9565C3A71E76D53300C5BF83 /* MainMenuScene.swift in Sources */,
+				F4469F711EA7BA170027C76D /* selectSkinVC.swift in Sources */,
+				F4469F741EA8AD8B0027C76D /* ObstacleController.swift in Sources */,
 				1BD728501E78017900CE0B2A /* optionsVC.swift in Sources */,
 				1BFE0D311E800A56007E45F0 /* loginVC.swift in Sources */,
 				1BD7284A1E76EF9500CE0B2A /* singleplayerMenuVC.swift in Sources */,
@@ -522,7 +538,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = W2TFBN93LT;
+				DEVELOPMENT_TEAM = ZLYR8KH355;
 				INFOPLIST_FILE = Drop/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -536,7 +552,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = W2TFBN93LT;
+				DEVELOPMENT_TEAM = ZLYR8KH355;
 				INFOPLIST_FILE = Drop/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

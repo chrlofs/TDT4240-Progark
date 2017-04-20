@@ -11,6 +11,7 @@ import SpriteKit
 struct ColliderType {
     static let PLAYER: UInt32 = 0;
     static let FRUIT_AND_BOMB: UInt32 = 1;
+    static let OBSTACLE: UInt32 = 2;
 }
 
 class ItemController {
@@ -21,27 +22,19 @@ class ItemController {
     func spawnItems() -> SKSpriteNode {
         
         let item: SKSpriteNode?;
+
+        item = SKSpriteNode(imageNamed: "Bomb");
+        item!.name = "Bomb";
+        item!.setScale(0.6);
+        item!.physicsBody = SKPhysicsBody(circleOfRadius: item!.size.height / 2);
+            
         
-        // Spawn a bomb if the random number is between 3-10
-        if Int(randomBetweenNumbers(firstNum: 0, secondNum: 10)) >= 3 {
-            item = SKSpriteNode(imageNamed: "Bomb");
-            item!.name = "Bomb";
-            item!.setScale(0.6);
-            item!.physicsBody = SKPhysicsBody(circleOfRadius: item!.size.height / 2);
-            
-        }
-        // Spawn a fruit if the random number is between 1-2
-        else{
-            let num = Int(randomBetweenNumbers(firstNum: 1, secondNum: 5));
-            
-            item = SKSpriteNode(imageNamed: "Fruit \(num)");
-            item!.name = "Fruit";
-            item!.setScale(0.7);
-            item!.physicsBody = SKPhysicsBody(circleOfRadius: item!.size.height / 2);
-        }
         
         // Sets the collision bitmask to FRUIT_AND_BOMB (1)
         item!.physicsBody?.categoryBitMask = ColliderType.FRUIT_AND_BOMB;
+        item!.physicsBody?.restitution = 1;
+        item!.physicsBody?.mass = 1;
+        item!.physicsBody?.collisionBitMask = ColliderType.OBSTACLE;
         
         item!.zPosition = 3;
         item!.anchorPoint = CGPoint(x: 0.5, y: 0.5);

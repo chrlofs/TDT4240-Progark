@@ -23,7 +23,8 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     private var score = 0;
     
     private var storedTouches = [UITouch: String]();
-    
+
+    private var obstacleController = ObstacleController();
     
     
     override func didMove(to view: SKView) {
@@ -31,6 +32,8 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     
     override func update(_ currentTime: TimeInterval) {
         managePlayer();
+        score += 1;
+        scoreLabel?.text = String(score);
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -74,18 +77,12 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
             secondBody = contact.bodyA;
         }
         
-        if firstBody.node?.name == "Player" && secondBody.node?.name == "Fruit" {
-            score += 1;
-            scoreLabel?.text = String(score);
-            secondBody.node?.removeFromParent();
-        }
-        
         if firstBody.node?.name == "Player" && secondBody.node?.name == "Bomb" {
             firstBody.node?.removeFromParent();
             secondBody.node?.removeFromParent();
             
             // ScheduledTimer to restart game after x seconds.
-            Timer.scheduledTimer(timeInterval: TimeInterval(2), target: self, selector: #selector(GameplaySceneClass.restartGame), userInfo: nil, repeats: false);
+            Timer.scheduledTimer(timeInterval: TimeInterval(0), target: self, selector: #selector(GameplaySceneClass.restartGame), userInfo: nil, repeats: false);
         }
         
     }
@@ -100,6 +97,9 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
         scoreLabel = childNode(withName: "ScoreLabel") as? SKLabelNode!;
         scoreLabel?.text = "0";
         
+
+        createObstacles()
+        
         center = self.frame.size.width / self.frame.size.height;
         
         Timer.scheduledTimer(timeInterval: TimeInterval(itemController.randomBetweenNumbers(firstNum: 1, secondNum: 2)), target: self, selector: #selector(GameplaySceneClass.spawnItems), userInfo: nil, repeats: true);
@@ -108,6 +108,21 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
         Timer.scheduledTimer(timeInterval: TimeInterval(7), target: self, selector: #selector(GameplaySceneClass.removeItems), userInfo: nil, repeats: true);
         
         
+    }
+    
+    func createObstacles(){
+        
+        // obstacleController.createAllObstacles(self);
+        let positions = [
+            [-144, 200], [0, 200], [144, 200],
+            [-72, 90], [72, 90],
+            [-144, -20], [0, -20], [144, -20],
+            [-144, -200], [144, -200]
+        ];
+        for position in positions {
+            self.scene?.addChild(obstacleController.createObstacle(x: position[0], y: position[1]));
+        }
+      
     }
     
     private func managePlayer(){
@@ -125,7 +140,7 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     func restartGame(){
         if let scene = GameplaySceneClass(fileNamed: "GameplayScene"){
             scene.scaleMode = .aspectFill
-            view?.presentScene(scene, transition: SKTransition.doorsOpenHorizontal(withDuration: TimeInterval(2)));
+            view?.presentScene(scene);
         }
     }
     

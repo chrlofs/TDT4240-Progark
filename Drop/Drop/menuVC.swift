@@ -23,23 +23,31 @@ class menuVC: UIViewController{
     @IBAction func pushToSingleplayer(_ sender: UIButton) {
         moveToSingleplayer()
     }
-    
+
     @IBAction func pushToMultiplayer(_ sender: UIButton) {
         moveToMultiplayer()
     }
+    @IBAction func pushToSelectSkin(_ sender: UIButton) {
+        moveToSelectSkin()
+    }
     
     func moveToSingleplayer() {
+        print("moveToSinglePlayer")
         let singleplayerMenuVC = self.storyboard?.instantiateViewController(withIdentifier: "singleplayerMenuVC") as! singleplayerMenuVC
         self.navigationController?.pushViewController(singleplayerMenuVC, animated: true)
     }
     
     func moveToOptions() {
+        print("MoveToOptions")
         let optionsVC = self.storyboard?.instantiateViewController(withIdentifier: "optionsVC") as! optionsVC
         self.navigationController?.pushViewController(optionsVC, animated: true)
     }
-    
     func moveToMultiplayer() {
         let multiplayerMenuVC = self.storyboard?.instantiateViewController(withIdentifier: "multiplayerMenuVC") as! multiplayerMenuVC
         self.navigationController?.pushViewController(multiplayerMenuVC, animated: true)
+    }
+    func moveToSelectSkin() {
+        let selectSkinVC = self.storyboard?.instantiateViewController(withIdentifier: "selectSkinVC") as! selectSkinVC
+        self.navigationController?.pushViewController(selectSkinVC, animated: true)
     }
 }
