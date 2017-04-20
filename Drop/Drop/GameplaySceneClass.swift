@@ -32,6 +32,8 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     
     override func update(_ currentTime: TimeInterval) {
         managePlayer();
+        score += 1;
+        scoreLabel?.text = String(score);
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -76,8 +78,6 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
         }
         
         if firstBody.node?.name == "Player" && secondBody.node?.name == "Fruit" {
-            score += 1;
-            scoreLabel?.text = String(score);
             secondBody.node?.removeFromParent();
         }
         
