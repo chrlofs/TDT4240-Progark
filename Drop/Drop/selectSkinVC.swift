@@ -9,9 +9,8 @@
 import Foundation
 import UIKit
 class selectSkinVC: UIViewController{
-    let defaults = UserDefaults.standard
     let gameSettings = GameSettings.getInstance()
-    
+    let gameConstants = GameConstants.getInstance()
 
     @IBOutlet weak var skinImage: UIImageView!
     
@@ -20,7 +19,7 @@ class selectSkinVC: UIViewController{
     }
     
     @IBAction func skinLeft(_ sender: Any) {
-        let skins = defaults.stringArray(forKey: "skinList") ?? [String]()
+        let skins = gameConstants.getSkinList()
         
         var newSkinIndex = (gameSettings.getUserSkin() - 1) % skins.count
         if (newSkinIndex < 0) {
@@ -32,7 +31,7 @@ class selectSkinVC: UIViewController{
         
     }
     @IBAction func skinRight(_ sender: Any) {
-        let skins = defaults.stringArray(forKey: "skinList") ?? [String]()
+        let skins = gameConstants.getSkinList()
         
         let newSkinIndex = (gameSettings.getUserSkin() + 1) % skins.count
         
@@ -44,7 +43,7 @@ class selectSkinVC: UIViewController{
     
     override func viewDidLoad() {
         self.navigationController?.isNavigationBarHidden = true
-        let skins = defaults.stringArray(forKey: "skinList") ?? [String]()
+        let skins = gameConstants.getSkinList()
         
         skinImage.image = UIImage(named: skins[gameSettings.getUserSkin()])
 
