@@ -24,8 +24,7 @@ class singleplayerMenuVC: UIViewController{
     
     func backToMenu(){
         print("back from singleplayer")
-        let menuVC = self.storyboard?.instantiateViewController(withIdentifier: "menuVC") as! menuVC
-        self.navigationController?.pushViewController(menuVC, animated: true)
+        _ = navigationController?.popViewController(animated: true)
     }
     func startgame(){
         let GameViewController = self.storyboard?.instantiateViewController(withIdentifier: "GameViewController") as! GameViewController

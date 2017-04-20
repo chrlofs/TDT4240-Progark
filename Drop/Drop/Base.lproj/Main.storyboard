@@ -86,7 +86,6 @@
         <scene sceneID="IRH-iS-I1X">
             <objects>
                 <viewController storyboardIdentifier="selectSkinVC" id="oh0-Oe-dCj" customClass="selectSkinVC" customModule="Drop" sceneMemberID="viewController">
-
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rTn-SZ-PXE"/>
                         <viewControllerLayoutGuide type="bottom" id="xDo-Y0-Ue3"/>
@@ -104,8 +103,8 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="button_back"/>
                                 <connections>
+                                    <action selector="back:" destination="oh0-Oe-dCj" eventType="touchUpInside" id="1ih-Ga-H0K"/>
                                     <action selector="back:" destination="Vgx-yZ-rss" eventType="touchUpInside" id="bB4-xe-830"/>
-                                    <segue destination="e1F-Ln-BDf" kind="show" id="Re2-Bs-n9Q"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iw9-Qu-5FN">
@@ -384,15 +383,13 @@
     <resources>
         <image name="background_standing3" width="1081" height="1538"/>
         <image name="button_back" width="81" height="81"/>
-
         <image name="button_fx" width="108" height="108"/>
-        <image name="button_music" width="237" height="239"/>
         <image name="button_left" width="135" height="81"/>
         <image name="button_login" width="327" height="80"/>
         <image name="button_multiplayer" width="918" height="141"/>
+        <image name="button_music" width="237" height="239"/>
         <image name="button_right" width="135" height="81"/>
         <image name="button_select_skin" width="577" height="90"/>
-
         <image name="button_settings" width="132" height="132"/>
         <image name="button_singleplayer" width="853" height="131"/>
         <image name="button_start_game" width="261" height="81"/>
