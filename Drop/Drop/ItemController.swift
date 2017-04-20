@@ -12,6 +12,7 @@ struct ColliderType {
     static let PLAYER: UInt32 = 0;
     static let FRUIT_AND_BOMB: UInt32 = 1;
     static let OBSTACLE: UInt32 = 2;
+    static let WALL: UInt32 = 3;
 }
 
 class ItemController {
@@ -45,7 +46,7 @@ class ItemController {
         item!.physicsBody?.categoryBitMask = ColliderType.FRUIT_AND_BOMB;
         item!.physicsBody?.restitution = 1;
         item!.physicsBody?.mass = 1;
-        item!.physicsBody?.collisionBitMask = ColliderType.OBSTACLE;
+        item!.physicsBody?.collisionBitMask = ColliderType.OBSTACLE | ColliderType.FRUIT_AND_BOMB | ColliderType.WALL;
         
         item!.zPosition = 3;
         item!.anchorPoint = CGPoint(x: 0.5, y: 0.5);
