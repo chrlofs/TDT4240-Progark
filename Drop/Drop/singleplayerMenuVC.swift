@@ -10,14 +10,30 @@ import Foundation
 import UIKit
 class singleplayerMenuVC: UIViewController{
     let defaults = UserDefaults.standard
+    var userName = "No username"
+    var userSkin = 0
+    var userSkinImage = UIImage(named: "skin1")
     
-    @IBOutlet weak var skinImage: UIImageView!
+    @IBOutlet weak var playerSelfSkin: UIImageView!
+    @IBOutlet weak var playerSelfLabel: UILabel!
+    
     override func viewDidLoad() {
         self.navigationController?.isNavigationBarHidden = true
-        let skins = defaults.stringArray(forKey: "skinList") ?? [String]()
-        let currentSkinIndex = defaults.integer(forKey: "userSkin")
         
-        skinImage.image = UIImage(named: skins[currentSkinIndex])
+        userName = defaults.value(forKey: "userName") as? String ?? userName
+        userSkin = defaults.value(forKey: "userSkin") as? Int ?? 0
+        
+        let skins = defaults.stringArray(forKey: "skinList") ?? [String]()
+        
+        if skins.count > userSkin {
+            userSkinImage = UIImage(named: skins[userSkin])
+        }
+        
+        OperationQueue.main.addOperation {
+            self.playerSelfSkin.image = self.userSkinImage
+            self.playerSelfLabel.text = self.userName
+
+        }
     }
     
     @IBAction func back(_ sender: UIButton) {
