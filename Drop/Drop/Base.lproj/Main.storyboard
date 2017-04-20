@@ -54,7 +54,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="button_singleplayer"/>
                                 <connections>
-                                    <action selector="pushToOptions:" destination="e1F-Ln-BDf" eventType="touchUpInside" id="fjE-Le-qnn"/>
+                                    <action selector="pushToSingleplayer:" destination="e1F-Ln-BDf" eventType="touchUpInside" id="egV-Lu-tXT"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xwb-7a-ns3">
@@ -65,12 +65,12 @@
                                     <action selector="pushToOptions:" destination="e1F-Ln-BDf" eventType="touchUpInside" id="3fh-Iz-BVd"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGF-7l-JGa">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGF-7l-JGa">
                                 <rect key="frame" x="44" y="231" width="287" height="53"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="button_select_skin"/>
                                 <connections>
-                                    <segue destination="oh0-Oe-dCj" kind="show" id="0qK-Lq-LDW"/>
+                                    <action selector="pushToSelectSkin:" destination="e1F-Ln-BDf" eventType="touchUpInside" id="mgR-DF-XN2"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -85,8 +85,7 @@
         <!--Select SkinVC-->
         <scene sceneID="IRH-iS-I1X">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hp6-4a-8Zk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="oh0-Oe-dCj" customClass="selectSkinVC" customModule="Drop" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="selectSkinVC" id="oh0-Oe-dCj" customClass="selectSkinVC" customModule="Drop" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rTn-SZ-PXE"/>
                         <viewControllerLayoutGuide type="bottom" id="xDo-Y0-Ue3"/>
@@ -135,6 +134,7 @@
                         <outlet property="skinImage" destination="rAq-sH-Gka" id="vGO-PN-1mz"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hp6-4a-8Zk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="80.799999999999997" y="-1051.1244377811095"/>
         </scene>
