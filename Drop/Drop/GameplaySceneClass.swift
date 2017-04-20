@@ -34,6 +34,14 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
         managePlayer();
         score += 1;
         scoreLabel?.text = String(score);
+        
+        let randomSample: Int = Int(arc4random_uniform(UInt32(25)))
+        if randomSample < 5 {
+            let randomInt: Int = Int(arc4random_uniform(UInt32(obstacleController.numberOfObstacles)))
+            obstacleController.animateObstacle(obstacleId: randomInt);
+        }
+        
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -63,6 +71,7 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
             canMove = false;
         }
     }
+    
     
     func didBegin(_ contact: SKPhysicsContact) {
         var firstBody = SKPhysicsBody();
@@ -139,7 +148,7 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
             [-144, -200], [144, -200]
         ];
         for position in positions {
-            self.scene?.addChild(obstacleController.createObstacle(x: position[0], y: position[1]));
+            self.scene?.addChild(obstacleController.createObstacle(x: position[0], y: position[1]))
         }
     }
     
