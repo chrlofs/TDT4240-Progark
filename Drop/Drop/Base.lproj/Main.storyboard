@@ -163,6 +163,22 @@
                                     <action selector="back:" destination="Vgx-yZ-rss" eventType="touchUpInside" id="NCo-rR-QPt"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fdp-oe-RzP">
+                                <rect key="frame" x="167" y="147" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="button_fx"/>
+                                <connections>
+                                    <action selector="toggleFx:" destination="Vgx-yZ-rss" eventType="touchUpInside" id="a3T-pV-Y7Y"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="diF-sf-Zzx">
+                                <rect key="frame" x="167" y="226" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="button_music"/>
+                                <connections>
+                                    <action selector="toggleMusic:" destination="Vgx-yZ-rss" eventType="touchUpInside" id="bQC-YA-zDL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -368,11 +384,15 @@
     <resources>
         <image name="background_standing3" width="1081" height="1538"/>
         <image name="button_back" width="81" height="81"/>
+
+        <image name="button_fx" width="108" height="108"/>
+        <image name="button_music" width="237" height="239"/>
         <image name="button_left" width="135" height="81"/>
         <image name="button_login" width="327" height="80"/>
         <image name="button_multiplayer" width="918" height="141"/>
         <image name="button_right" width="135" height="81"/>
         <image name="button_select_skin" width="577" height="90"/>
+
         <image name="button_settings" width="132" height="132"/>
         <image name="button_singleplayer" width="853" height="131"/>
         <image name="button_start_game" width="261" height="81"/>

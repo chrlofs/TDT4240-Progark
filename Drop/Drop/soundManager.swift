@@ -10,41 +10,86 @@ import Foundation
 import AVFoundation
 
 class soundManager {
+    var fxPlayer: AVAudioPlayer = AVAudioPlayer()
+    var musicPlayer: AVAudioPlayer = AVAudioPlayer()
+    var fxPlaying = false
+    var musicPlaying = false
+    var musicMuted = false
+    var fxMuted = false
+    
     static let sharedInstance = soundManager()
-    var fxPlayer = AVAudioPlayer()
-    var musicPlayer = AVAudioPlayer()
-    func playSound() {
-        
-    }
+    
+    
     func playFx(fileName: String, fileType: String){
+        if !fxMuted{
         let url = Bundle.main.url(forResource: fileName, withExtension: fileType)!
         do {
+            if !fxPlaying{
             fxPlayer = try AVAudioPlayer(contentsOf: url)
             fxPlayer.prepareToPlay()
             fxPlayer.play()
+                if fxPlayer.isPlaying{
+                    fxPlaying = true
+                }
+            }
         } catch  {
             // couldn't load file :(
         }
-        
+        }
     }
+        
     func playMusic(fileName: String, fileType: String){
+        if !musicMuted {
         let url = Bundle.main.url(forResource: fileName, withExtension: fileType)!
         do {
+            if !musicPlaying{
             musicPlayer = try AVAudioPlayer(contentsOf: url)
+            musicPlayer.numberOfLoops = -1
             musicPlayer.prepareToPlay()
             musicPlayer.play()
-            musicPlayer.numberOfLoops = -1
+            if musicPlayer.isPlaying{
+                    musicPlaying = true
+                }
+            }
         } catch  {
             // couldn't load file :(
+            }
         }
         
     }
-    func muteFx(){
+    func stopFx(){
+        fxPlaying = false
         fxPlayer.stop()
     }
-    func muteMusic(){
+    func stopMusic(){
+        musicPlaying = false
         musicPlayer.stop()
     }
+    func muteMusic(){
+        if musicPlaying{
+        musicPlayer.volume = 0
+        musicMuted = true
+        }
+    }
+    func muteFX(){
+        if fxPlaying{
+        fxPlayer.volume = 0
+        fxMuted = true
+        }
+    }
+    func unmuteMusic(){
+        if musicPlaying{
+        musicPlayer.volume = 1
+        musicMuted = false
+        }
+    }
+    func unmuteFX(){
+        if musicPlaying{
+        fxPlayer.volume = 1
+        fxMuted = false
+        }}
+    
+    
     
     
 }
