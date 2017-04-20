@@ -27,6 +27,7 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
     let multiplayerService : MultiplayerServiceManager = MultiplayerServiceManager.instance
     
     let defaults = UserDefaults.standard
+    let gameSettings = GameSettings.getInstance()
     
     var players = [PlayerPeer]()
     var userName = "No username"
@@ -57,8 +58,8 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
         multiplayerService.registerObserver(observer: self)
         
         // Set own userName in playerSelfLabel text
-        userName = defaults.value(forKey: "userName") as? String ?? userName
-        userSkin = defaults.value(forKey: "userSkin") as? Int ?? 0
+        userName = gameSettings.getUserName()
+        userSkin = gameSettings.getUserSkin()
         let skins = defaults.stringArray(forKey: "skinList") ?? [String]()
         
         if skins.count > userSkin {

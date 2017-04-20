@@ -32,6 +32,7 @@
 		F4469F711EA7BA170027C76D /* selectSkinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F701EA7BA170027C76D /* selectSkinVC.swift */; };
 		F4469F741EA8AD8B0027C76D /* ObstacleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F731EA8AD8B0027C76D /* ObstacleController.swift */; };
 		F4469F761EA8C3360027C76D /* GameplayScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F4469F751EA8C3360027C76D /* GameplayScene.sks */; };
+		F4469F7B1EA92D710027C76D /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F7A1EA92D710027C76D /* GameSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		F4469F701EA7BA170027C76D /* selectSkinVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = selectSkinVC.swift; sourceTree = "<group>"; };
 		F4469F731EA8AD8B0027C76D /* ObstacleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObstacleController.swift; sourceTree = "<group>"; };
 		F4469F751EA8C3360027C76D /* GameplayScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameplayScene.sks; sourceTree = "<group>"; };
+		F4469F7A1EA92D710027C76D /* GameSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSettings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +185,7 @@
 				9565C3A51E76D50000C5BF83 /* Scenes */,
 				9565C3A41E76D4F400C5BF83 /* Classes */,
 				9582DB111E71A0A600335B2F /* AppDelegate.swift */,
+				F4469F791EA92D560027C76D /* Singletons */,
 				9582DB151E71A0A600335B2F /* Actions.sks */,
 				9582DB191E71A0A600335B2F /* GameViewController.swift */,
 				9582DB1B1E71A0A600335B2F /* Main.storyboard */,
@@ -234,6 +237,14 @@
 				F4469F731EA8AD8B0027C76D /* ObstacleController.swift */,
 			);
 			name = "Obstacle Class";
+			sourceTree = "<group>";
+		};
+		F4469F791EA92D560027C76D /* Singletons */ = {
+			isa = PBXGroup;
+			children = (
+				F4469F7A1EA92D710027C76D /* GameSettings.swift */,
+			);
+			name = Singletons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -385,6 +396,7 @@
 				1BD728481E76EF6D00CE0B2A /* multiplayerMenuVC.swift in Sources */,
 				1BA6AEF81EA7783400BCCA0A /* soundManager.swift in Sources */,
 				9582DB1A1E71A0A600335B2F /* GameViewController.swift in Sources */,
+				F4469F7B1EA92D710027C76D /* GameSettings.swift in Sources */,
 				9582DB121E71A0A600335B2F /* AppDelegate.swift in Sources */,
 				9565C3B11E76F6C400C5BF83 /* Player.swift in Sources */,
 				95D2557E1E7ABC6300DA813A /* ItemController.swift in Sources */,

@@ -11,23 +11,17 @@ import UIKit
 
 
 class loginVC: UIViewController{
-    let defaults = UserDefaults.standard
+    let gameSettings = GameSettings.getInstance()
     
     override func viewDidLoad() {
         self.navigationController?.isNavigationBarHidden = true
- 
     }
     
     @IBOutlet weak var userName: UITextField!
-
-    
     
     @IBAction func login(_ sender: UIButton) {
-        
-    
         if verifyUsername(self.userName.text!) {
-            defaults.set(self.userName.text!, forKey: "userName")
-            defaults.set(0, forKey: "userSkin")
+            gameSettings.setUserName(userName: self.userName.text!)
             ToMenu()
         }
         else{}
