@@ -9,31 +9,22 @@
 import SpriteKit
 
 class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
-    
-    let defaults = UserDefaults.standard;
+    let gameConstants = GameConstants.getInstance()
+    let audioPlayer = soundManager.sharedInstance
+    var gameManager: GameManager?
     
     private var player: Player?;
-
     private var center = CGFloat();
-    
     private var canMove = false, moveLeft = false;
-    
     private var itemController = ItemController();
-    
     private var scoreLabel: SKLabelNode?;
-    
     private var score = 0;
-    
     private var storedTouches = [UITouch: String]();
-
     private var obstacleController = ObstacleController();
-    let audioPlayer = soundManager.sharedInstance
-    
-    let gameConstants = GameConstants.getInstance()
-    
     
     override func didMove(to view: SKView) {
-        initializeGame();     }
+        initializeGame()
+    }
     
     override func update(_ currentTime: TimeInterval) {
         managePlayer();
@@ -45,8 +36,6 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
             let randomInt: Int = Int(arc4random_uniform(UInt32(obstacleController.numberOfObstacles)))
             obstacleController.animateObstacle(obstacleId: randomInt);
         }
-        
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -62,21 +51,17 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
                 storedTouches[touch] = "left";
             }
         }
-        
         canMove = true;
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        
         for touch in touches{
             storedTouches[touch] = nil;
         }
-        
         if storedTouches.isEmpty{
             canMove = false;
         }
     }
-    
     
     func didBegin(_ contact: SKPhysicsContact) {
         var firstBody = SKPhysicsBody();
@@ -92,45 +77,28 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
         }
         
         if firstBody.node?.name == "Player" && secondBody.node?.name == "Bomb" {
-            firstBody.node?.removeFromParent();
-            secondBody.node?.removeFromParent();
-            
-            // ScheduledTimer to restart game after x seconds.
-            
-            if (score > defaults.integer(forKey: "bestScore")) {
-                defaults.set(score, forKey: "bestScore"); 
-            }
-            Timer.scheduledTimer(timeInterval: TimeInterval(0), target: self, selector: #selector(GameplaySceneClass.restartGame), userInfo: nil, repeats: false);
+            gameOver()
         }
         
        
-        
         if ((contact.bodyA.node?.name?.range(of: "Obstacle")) != nil) {
             audioPlayer.playFx(fileName: "bow", fileType: "mp3")
-        }
-        
-        if((contact.bodyB.node?.name?.range(of: "Obstacle")) != nil) {
+        } else if((contact.bodyB.node?.name?.range(of: "Obstacle")) != nil) {
             audioPlayer.playFx(fileName: "bow", fileType: "mp3")
-            
         }
         if((contact.bodyA.node?.name?.range(of: "Player")) != nil) {
             audioPlayer.playFx(fileName: "ploop", fileType: "mp3")
-            
-        }
-        if((contact.bodyB.node?.name?.range(of: "Player")) != nil) {
+        } else if((contact.bodyB.node?.name?.range(of: "Player")) != nil) {
             audioPlayer.playFx(fileName: "ploop", fileType: "mp3")
-            
         }
-        
-        
-        
-        
+    }
+    
+    private func gameOver() {
+        gameManager?.gameOver(score: self.score)
     }
     
     
     private func initializeGame(){
-        
-        
         physicsWorld.contactDelegate = self;
         
         player = childNode(withName: "Player") as? Player!;
@@ -150,8 +118,6 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
         
         // Check every 7 seconds if there are items "out of bounds" and remove them.
         Timer.scheduledTimer(timeInterval: TimeInterval(7), target: self, selector: #selector(GameplaySceneClass.removeItems), userInfo: nil, repeats: true);
-        
-        
     }
     
     func createEdgeFrame() {
@@ -190,7 +156,6 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     //Adding a child (falling objects) to the scene
     func spawnItems(){
         self.scene?.addChild(itemController.spawnItems());
-        
     }
     
     func restartGame(){

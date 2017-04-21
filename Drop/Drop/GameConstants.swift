@@ -11,8 +11,6 @@ import Foundation
 class GameConstants {
     private static let sharedInstance = GameConstants()
     
-    let defaults = UserDefaults.standard
-    
     private let skinList: [String] = ["skin1", "skin2", "skin3", "kim", "trump", "putin"]
     
     private let mapList: [Map] = [

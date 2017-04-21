@@ -37,9 +37,9 @@
 		F4469F711EA7BA170027C76D /* selectSkinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F701EA7BA170027C76D /* selectSkinVC.swift */; };
 		F4469F741EA8AD8B0027C76D /* ObstacleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F731EA8AD8B0027C76D /* ObstacleController.swift */; };
 		F4469F761EA8C3360027C76D /* GameplayScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F4469F751EA8C3360027C76D /* GameplayScene.sks */; };
-		F4469F7B1EA92D710027C76D /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F7A1EA92D710027C76D /* GameSettings.swift */; };
 		F4469F7D1EA940970027C76D /* GameConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F7C1EA940970027C76D /* GameConstants.swift */; };
 		F4469F821EA9FDD70027C76D /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F811EA9FDD70027C76D /* Map.swift */; };
+		F4FA9FF81EAA36560088640F /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F7A1EA92D710027C76D /* GameSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -419,6 +419,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4FA9FF81EAA36560088640F /* GameSettings.swift in Sources */,
 				9565C3A71E76D53300C5BF83 /* MainMenuScene.swift in Sources */,
 				F4469F711EA7BA170027C76D /* selectSkinVC.swift in Sources */,
 				F4469F741EA8AD8B0027C76D /* ObstacleController.swift in Sources */,

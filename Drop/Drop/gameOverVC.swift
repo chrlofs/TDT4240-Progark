@@ -11,6 +11,7 @@ import UIKit
 
 class gameOverVC: UIViewController {
     let defaults = UserDefaults.standard;
+    var userScore = Int()
     
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var highscoreLabel: UILabel!
@@ -20,13 +21,26 @@ class gameOverVC: UIViewController {
     }
     
     func gotoMain() {
-        let menuVC = self.storyboard?.instantiateViewController(withIdentifier: "menuVC") as! menuVC
-        self.navigationController?.pushViewController(menuVC, animated: true)
+        
+        let controllers = self.navigationController?.viewControllers
+        for vc in controllers! {
+            if vc is singleplayerMenuVC {
+                _ = self.navigationController?.popToViewController(vc as! singleplayerMenuVC, animated: true)
+            }
+        }
+    }
+    
+    override func viewDidLoad() {
+        self.navigationController?.isNavigationBarHidden = true
+
+        OperationQueue.main.addOperation {
+            self.setScore()
+        }
     }
     
     func setScore() {
-        scoreLabel = score;
-        highscoreLabel = defaults.integer(forKey: "bestScore");
+        self.scoreLabel.text = String(self.userScore)
+        //highscoreLabel = defaults.integer(forKey: "bestScore");
     }
     
 }
