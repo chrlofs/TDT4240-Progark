@@ -18,8 +18,6 @@ class GameSettings {
     private var userSkin: Int
     private var loggedIn: Bool
     
-    
-    
     private init(){
         if let userName = defaults.string(forKey: "userName") {
             self.userName = userName
