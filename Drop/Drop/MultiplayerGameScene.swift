@@ -35,7 +35,6 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
     
     func setupGame() {
         // GAME LOGIC
-        
         let opponentPeers = multiplayerManager.players.filter { $0.id != selfPlayer.peer.id }
         for opponentPeer in opponentPeers {
             let opponentSkinImage = constants.getSkinImage(skinIndex: opponentPeer.skin)
@@ -79,6 +78,7 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
                 selfPlayer.dx = -1
                 storedTouches[touch] = "left";
             }
+            sendGamePlayerUpdate()
         }
     }
     
@@ -87,13 +87,13 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
             storedTouches[touch] = nil;
         }
         
-        if storedTouches.isEmpty{
+        if storedTouches.isEmpty {
             selfPlayer.dx = 0
+            sendGamePlayerUpdate()
         }
     }
     
     var lastUpdate: CFTimeInterval = 0
-    var lastUpdateSent: CFTimeInterval = 0
     override func update(_ currentTime: TimeInterval) {
         let deltaSeconds = currentTime - lastUpdate
         
@@ -102,12 +102,6 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
             opponent.update(delta: deltaSeconds)
         }
         lastUpdate = currentTime
-        
-        let timeSinceLastUpdateSent = currentTime - lastUpdateSent
-        if timeSinceLastUpdateSent > 0.05 {
-            sendGamePlayerUpdate()
-            lastUpdateSent = currentTime
-        }
     }
     
     // MARK: - OBSERVER LOGIC
