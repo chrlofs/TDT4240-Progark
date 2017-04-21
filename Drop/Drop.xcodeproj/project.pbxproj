@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		0883BE581E8CF48600945A6A /* MultiplayerServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0883BE571E8CF48600945A6A /* MultiplayerServiceManager.swift */; };
 		1B4EC5161EA9040C00A85328 /* firstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4EC5151EA9040C00A85328 /* firstView.swift */; };
+		1B4EC5181EA9243700A85328 /* POP.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1B4EC5171EA9243700A85328 /* POP.mp3 */; };
+		1B4EC51A1EA92CC600A85328 /* ingame.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1B4EC5191EA92CC600A85328 /* ingame.mp3 */; };
+		1B4EC51D1EAA1A4800A85328 /* ploop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1B4EC51B1EAA1A4800A85328 /* ploop.mp3 */; };
+		1B4EC51E1EAA1A4800A85328 /* bow.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1B4EC51C1EAA1A4800A85328 /* bow.mp3 */; };
 		1BA6AEF61EA773F800BCCA0A /* GameMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1BA6AEF51EA773F800BCCA0A /* GameMusic.mp3 */; };
 		1BA6AEF81EA7783400BCCA0A /* soundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA6AEF71EA7783400BCCA0A /* soundManager.swift */; };
 		1BD728421E76DE5100CE0B2A /* menuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD728411E76DE5100CE0B2A /* menuVC.swift */; };
@@ -56,6 +60,10 @@
 /* Begin PBXFileReference section */
 		0883BE571E8CF48600945A6A /* MultiplayerServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplayerServiceManager.swift; sourceTree = "<group>"; };
 		1B4EC5151EA9040C00A85328 /* firstView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = firstView.swift; path = ../firstView.swift; sourceTree = "<group>"; };
+		1B4EC5171EA9243700A85328 /* POP.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = POP.mp3; sourceTree = "<group>"; };
+		1B4EC5191EA92CC600A85328 /* ingame.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ingame.mp3; sourceTree = "<group>"; };
+		1B4EC51B1EAA1A4800A85328 /* ploop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ploop.mp3; sourceTree = "<group>"; };
+		1B4EC51C1EAA1A4800A85328 /* bow.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bow.mp3; sourceTree = "<group>"; };
 		1BA6AEF51EA773F800BCCA0A /* GameMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = GameMusic.mp3; sourceTree = "<group>"; };
 		1BA6AEF71EA7783400BCCA0A /* soundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = soundManager.swift; sourceTree = "<group>"; };
 		1BD728411E76DE5100CE0B2A /* menuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = menuVC.swift; sourceTree = "<group>"; };
@@ -117,6 +125,10 @@
 		1BCF1A371EA76C40006F81F2 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				1B4EC51B1EAA1A4800A85328 /* ploop.mp3 */,
+				1B4EC51C1EAA1A4800A85328 /* bow.mp3 */,
+				1B4EC5191EA92CC600A85328 /* ingame.mp3 */,
+				1B4EC5171EA9243700A85328 /* POP.mp3 */,
 				1BA6AEF51EA773F800BCCA0A /* GameMusic.mp3 */,
 			);
 			name = Sounds;
@@ -358,10 +370,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B4EC51E1EAA1A4800A85328 /* bow.mp3 in Resources */,
+				1B4EC51A1EA92CC600A85328 /* ingame.mp3 in Resources */,
 				9582DB1D1E71A0A600335B2F /* Main.storyboard in Resources */,
 				9582DB1F1E71A0A600335B2F /* Assets.xcassets in Resources */,
 				9582DB221E71A0A600335B2F /* LaunchScreen.storyboard in Resources */,
 				9565C3A91E76D5A700C5BF83 /* MainMenu.sks in Resources */,
+				1B4EC51D1EAA1A4800A85328 /* ploop.mp3 in Resources */,
+				1B4EC5181EA9243700A85328 /* POP.mp3 in Resources */,
 				F4469F761EA8C3360027C76D /* GameplayScene.sks in Resources */,
 				1BA6AEF61EA773F800BCCA0A /* GameMusic.mp3 in Resources */,
 				9582DB161E71A0A600335B2F /* Actions.sks in Resources */,

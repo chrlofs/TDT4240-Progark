@@ -25,6 +25,7 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     private var storedTouches = [UITouch: String]();
 
     private var obstacleController = ObstacleController();
+    let audioPlayer = soundManager.sharedInstance
     
     let gameConstants = GameConstants.getInstance()
     
@@ -96,9 +97,33 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
             Timer.scheduledTimer(timeInterval: TimeInterval(0), target: self, selector: #selector(GameplaySceneClass.restartGame), userInfo: nil, repeats: false);
         }
         
+       
+        
+        if ((contact.bodyA.node?.name?.range(of: "Obstacle")) != nil) {
+            audioPlayer.playFx(fileName: "bow", fileType: "mp3")
+        }
+        
+        if((contact.bodyB.node?.name?.range(of: "Obstacle")) != nil) {
+            audioPlayer.playFx(fileName: "bow", fileType: "mp3")
+            
+        }
+        if((contact.bodyA.node?.name?.range(of: "Player")) != nil) {
+            audioPlayer.playFx(fileName: "ploop", fileType: "mp3")
+            
+        }
+        if((contact.bodyB.node?.name?.range(of: "Player")) != nil) {
+            audioPlayer.playFx(fileName: "ploop", fileType: "mp3")
+            
+        }
+        
+        
+        
+        
     }
     
+    
     private func initializeGame(){
+        
         
         physicsWorld.contactDelegate = self;
         
@@ -112,6 +137,8 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
         createObstacles()
         
         center = self.frame.size.width / self.frame.size.height;
+        audioPlayer.stopMusic()
+        audioPlayer.playMusic(fileName: "ingame", fileType: "mp3")
         
         Timer.scheduledTimer(timeInterval: TimeInterval(itemController.randomBetweenNumbers(firstNum: 1, secondNum: 2)), target: self, selector: #selector(GameplaySceneClass.spawnItems), userInfo: nil, repeats: true);
         
