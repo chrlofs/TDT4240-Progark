@@ -14,19 +14,21 @@ class GameConstants {
     let defaults = UserDefaults.standard
     
     private let skinList: [String] = ["skin1", "skin2", "skin3", "kim", "trump", "putin"]
-    private let mapList: [String: [[Int]]] = [
-        "Map1": [
+    
+    private let mapList: [Map] = [
+        Map(id: 1, peg_points: [
             [-144, 200], [0, 200], [144, 200],
             [-72, 90], [72, 90],
             [-144, -20], [0, -20], [144, -20],
             [-144, -200], [144, -200]
-        ],
-        "Map2": [
+            ], background: "background_standing3"),
+        Map(id: 2, peg_points: [
             [-144, 200], [0, 200], [144, 200],
             [-72, 90], [72, 90],
             [-144, -20], [0, -20], [144, -20],
-        ]
+            ], background: "background_standing3")
     ]
+    
     private init() {
     }
     
@@ -46,7 +48,16 @@ class GameConstants {
         }
     }
     
-    public func getMapList() -> [String: [[Int]]] {
+    public func getMapList() -> [Map] {
         return self.mapList
+    }
+    
+    public func getMapById(id: Int) -> Map {
+        for map in self.mapList {
+            if (map.id == id) {
+                return map
+            }
+        }
+        return Map(id: 0, peg_points: [[-72, 90], [72, 90]], background: "background_standing3")
     }
 }

@@ -23,6 +23,7 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
     private var storedTouches = [UITouch: String]();
 
     private var obstacleController = ObstacleController();
+    let audioPlayer = soundManager.sharedInstance
     
     let gameConstants = GameConstants.getInstance()
     let gameSettings = GameSettings.getInstance()
@@ -101,9 +102,33 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
             Timer.scheduledTimer(timeInterval: TimeInterval(0), target: self, selector: #selector(GameplaySceneClass.restartGame), userInfo: nil, repeats: false);
         }
         
+       
+        
+        if ((contact.bodyA.node?.name?.range(of: "Obstacle")) != nil) {
+            audioPlayer.playFx(fileName: "bow", fileType: "mp3")
+        }
+        
+        if((contact.bodyB.node?.name?.range(of: "Obstacle")) != nil) {
+            audioPlayer.playFx(fileName: "bow", fileType: "mp3")
+            
+        }
+        if((contact.bodyA.node?.name?.range(of: "Player")) != nil) {
+            audioPlayer.playFx(fileName: "ploop", fileType: "mp3")
+            
+        }
+        if((contact.bodyB.node?.name?.range(of: "Player")) != nil) {
+            audioPlayer.playFx(fileName: "ploop", fileType: "mp3")
+            
+        }
+        
+        
+        
+        
     }
     
+    
     private func initializeGame(){
+        
         
         physicsWorld.contactDelegate = self;
         addChild(player)
@@ -117,6 +142,8 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
         createObstacles()
         
         center = self.frame.size.width / self.frame.size.height;
+        audioPlayer.stopMusic()
+        audioPlayer.playMusic(fileName: "ingame", fileType: "mp3")
         
         Timer.scheduledTimer(timeInterval: TimeInterval(itemController.randomBetweenNumbers(firstNum: 1, secondNum: 2)), target: self, selector: #selector(GameplaySceneClass.spawnItems), userInfo: nil, repeats: true);
         
@@ -147,11 +174,9 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
     }
     
     func createObstacles(){
-        // obstacleController.createAllObstacles(self);
-
-        let map = gameConstants.getMapList()["Map1"]
-        for position in map! {
-            self.scene?.addChild(obstacleController.createObstacle(x: position[0], y: position[1]))
+        let map = gameConstants.getMapById(id: 1)
+        for peg in map.peg_points {
+            self.scene?.addChild(obstacleController.createObstacle(x: peg[0], y: peg[1]))
         }
     }
     

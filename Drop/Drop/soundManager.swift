@@ -24,18 +24,16 @@ class soundManager {
         if !fxMuted{
         let url = Bundle.main.url(forResource: fileName, withExtension: fileType)!
         do {
-            if !fxPlaying{
             fxPlayer = try AVAudioPlayer(contentsOf: url)
             fxPlayer.prepareToPlay()
             fxPlayer.play()
-                if fxPlayer.isPlaying{
-                    fxPlaying = true
-                }
             }
-        } catch  {
+        
+        catch  {
+            
             // couldn't load file :(
         }
-        }
+    }
     }
         
     func playMusic(fileName: String, fileType: String){
