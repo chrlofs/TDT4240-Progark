@@ -11,7 +11,7 @@ import SpriteKit
 class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
     
     private var player: Player?;
-    
+
     private var center = CGFloat();
     
     private var canMove = false, moveLeft = false;
@@ -26,6 +26,8 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
 
     private var obstacleController = ObstacleController();
     
+    let gameConstants = GameConstants.getInstance()
+    
     
     override func didMove(to view: SKView) {
         initializeGame();     }
@@ -34,6 +36,14 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
         managePlayer();
         score += 1;
         scoreLabel?.text = String(score);
+        
+        let randomSample: Int = Int(arc4random_uniform(UInt32(25)))
+        if randomSample < 5 {
+            let randomInt: Int = Int(arc4random_uniform(UInt32(obstacleController.numberOfObstacles)))
+            obstacleController.animateObstacle(obstacleId: randomInt);
+        }
+        
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -63,6 +73,7 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
             canMove = false;
         }
     }
+    
     
     func didBegin(_ contact: SKPhysicsContact) {
         var firstBody = SKPhysicsBody();
@@ -96,7 +107,7 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
         
         scoreLabel = childNode(withName: "ScoreLabel") as? SKLabelNode!;
         scoreLabel?.text = "0";
-        
+        createEdgeFrame()
 
         createObstacles()
         
@@ -110,19 +121,33 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
         
     }
     
-    func createObstacles(){
+    func createEdgeFrame() {
+        var splinePointsLeft = [CGPoint(x:-225, y: 400), CGPoint(x:-225, y: -400)]
+        let leftEdge = SKShapeNode(splinePoints: &splinePointsLeft, count: splinePointsLeft.count)
+        leftEdge.lineWidth = 0
+        leftEdge.physicsBody = SKPhysicsBody(edgeChainFrom: leftEdge.path!)
+        leftEdge.physicsBody?.restitution = 0.75
+        leftEdge.physicsBody?.isDynamic = false;
         
+        var splinePointsRight = [CGPoint(x:225, y: 400), CGPoint(x:225, y: -400)]
+        let rightEdge = SKShapeNode(splinePoints: &splinePointsRight, count: splinePointsRight.count)
+        rightEdge.lineWidth = 0
+        rightEdge.physicsBody = SKPhysicsBody(edgeChainFrom: rightEdge.path!)
+        rightEdge.physicsBody?.restitution = 0.75
+        rightEdge.physicsBody?.isDynamic = false;
+        
+        self.scene?.addChild(leftEdge)
+        self.scene?.addChild(rightEdge)
+        
+    }
+    
+    func createObstacles(){
         // obstacleController.createAllObstacles(self);
-        let positions = [
-            [-144, 200], [0, 200], [144, 200],
-            [-72, 90], [72, 90],
-            [-144, -20], [0, -20], [144, -20],
-            [-144, -200], [144, -200]
-        ];
-        for position in positions {
-            self.scene?.addChild(obstacleController.createObstacle(x: position[0], y: position[1]));
+
+        let map = gameConstants.getMapList()["Map1"]
+        for position in map! {
+            self.scene?.addChild(obstacleController.createObstacle(x: position[0], y: position[1]))
         }
-      
     }
     
     private func managePlayer(){

@@ -23,8 +23,7 @@ class multiplayerMenuVC : UIViewController, UITableViewDataSource, UITableViewDe
         multiplayerManager.leaveSession()
         multiplayerManager.unregisterObserver(observer: self)
         
-        let menuVC = self.storyboard?.instantiateViewController(withIdentifier: "menuVC") as! menuVC
-        self.navigationController?.pushViewController(menuVC, animated: true)
+        _ = navigationController?.popViewController(animated: true)
     }
     
     override func viewDidLoad() {

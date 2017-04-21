@@ -9,40 +9,44 @@
 import Foundation
 import UIKit
 class selectSkinVC: UIViewController{
-    let defaults = UserDefaults.standard
-    
+    let gameSettings = GameSettings.getInstance()
+    let gameConstants = GameConstants.getInstance()
 
     @IBOutlet weak var skinImage: UIImageView!
     
+    @IBAction func back(_ sender: UIButton) {
+        _ = navigationController?.popViewController(animated: true)
+    }
+    
     @IBAction func skinLeft(_ sender: Any) {
-        let skins = defaults.stringArray(forKey: "skinList") ?? [String]()
-        let currentSkinIndex = defaults.integer(forKey: "userSkin")
-        var newSkinIndex = (currentSkinIndex - 1) % skins.count
+        let skins = gameConstants.getSkinList()
+        
+        var newSkinIndex = (gameSettings.getUserSkin() - 1) % skins.count
         if (newSkinIndex < 0) {
             newSkinIndex = newSkinIndex + skins.count
         }
         
         skinImage.image = UIImage(named: skins[newSkinIndex])
-        defaults.set(newSkinIndex, forKey: "userSkin")
+        gameSettings.setUserSkin(userSkin: newSkinIndex)
         
     }
     @IBAction func skinRight(_ sender: Any) {
-        let skins = defaults.stringArray(forKey: "skinList") ?? [String]()
-        let currentSkinIndex = defaults.integer(forKey: "userSkin")
-        let newSkinIndex = (currentSkinIndex + 1) % skins.count
+        let skins = gameConstants.getSkinList()
+        
+        let newSkinIndex = (gameSettings.getUserSkin() + 1) % skins.count
         
         skinImage.image = UIImage(named: skins[newSkinIndex])
-        defaults.set(newSkinIndex, forKey: "userSkin")
+        gameSettings.setUserSkin(userSkin: newSkinIndex)
         
         
     }
     
     override func viewDidLoad() {
         self.navigationController?.isNavigationBarHidden = true
-        let skins = defaults.stringArray(forKey: "skinList") ?? [String]()
-        let currentSkinIndex = defaults.integer(forKey: "userSkin")
+        let skins = gameConstants.getSkinList()
         
-        skinImage.image = UIImage(named: skins[currentSkinIndex])
+        skinImage.image = UIImage(named: skins[gameSettings.getUserSkin()])
 
     }
+    
 }
