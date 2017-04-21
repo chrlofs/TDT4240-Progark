@@ -9,9 +9,9 @@
 import SpriteKit
 
 class Player: SKSpriteNode {
-    
-    let defaults = UserDefaults.standard
     let gameSettings = GameSettings.getInstance()
+    let gameConstants = GameConstants.getInstance()
+    
     private var minX = CGFloat(-190), maxX = CGFloat(190);
     
     // Initializing a Player object
@@ -19,7 +19,7 @@ class Player: SKSpriteNode {
         name = "Player";
         
         let skin = gameSettings.getUserSkin()
-        let skins = defaults.stringArray(forKey: "skinList") ?? [String]()
+        let skins = gameConstants.getSkinList()
         
         if skins.count > skin {
             print("Changing skin??")

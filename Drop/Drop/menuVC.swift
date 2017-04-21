@@ -32,13 +32,11 @@ class menuVC: UIViewController{
     }
     
     func moveToSingleplayer() {
-        print("moveToSinglePlayer")
         let singleplayerMenuVC = self.storyboard?.instantiateViewController(withIdentifier: "singleplayerMenuVC") as! singleplayerMenuVC
         self.navigationController?.pushViewController(singleplayerMenuVC, animated: true)
     }
     
     func moveToOptions() {
-        print("MoveToOptions")
         let optionsVC = self.storyboard?.instantiateViewController(withIdentifier: "optionsVC") as! optionsVC
         self.navigationController?.pushViewController(optionsVC, animated: true)
     }

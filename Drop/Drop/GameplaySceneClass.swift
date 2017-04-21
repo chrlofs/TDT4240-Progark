@@ -169,11 +169,9 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     }
     
     func createObstacles(){
-        // obstacleController.createAllObstacles(self);
-
-        let map = gameConstants.getMapList()["Map1"]
-        for position in map! {
-            self.scene?.addChild(obstacleController.createObstacle(x: position[0], y: position[1]))
+        let map = gameConstants.getMapById(id: 1)
+        for peg in map.peg_points {
+            self.scene?.addChild(obstacleController.createObstacle(x: peg[0], y: peg[1]))
         }
     }
     
