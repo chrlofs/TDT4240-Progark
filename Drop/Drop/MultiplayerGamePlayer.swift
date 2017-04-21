@@ -23,6 +23,7 @@ class MultiplayerGamePlayer: SKSpriteNode {
         
         setScale(0.1)
         
+        
         physicsBody = SKPhysicsBody(circleOfRadius: size.height / 2);
         physicsBody?.affectedByGravity = false;
         physicsBody?.isDynamic = false;

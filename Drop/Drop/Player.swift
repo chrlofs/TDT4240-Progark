@@ -14,21 +14,19 @@ class Player: SKSpriteNode {
     init(skinImageName: String) {
         let texture = SKTexture(imageNamed: skinImageName)
         super.init(texture: texture, color: UIColor.clear, size: texture.size())
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    // Initializing a Player object
-    func InitializePlayer() {
-        name = "Player";
+        
+        name = "Player"
+        setScale(0.1)
         
         physicsBody = SKPhysicsBody(circleOfRadius: size.height / 2);
         physicsBody?.affectedByGravity = false;
         physicsBody?.isDynamic = false;
         physicsBody?.categoryBitMask = ColliderType.PLAYER;
         physicsBody?.contactTestBitMask = ColliderType.FRUIT_AND_BOMB;
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // Moving: Changing Player's x position

@@ -44,7 +44,6 @@ protocol MultiplayerManagerObserver {
 }
 
 class MultiplayerManager: NetworkServiceDelegate {
-    let defaults = UserDefaults.standard
     
     // SINGLETON LOGIC
     private static let sharedInstance: MultiplayerManager = MultiplayerManager()
@@ -59,9 +58,11 @@ class MultiplayerManager: NetworkServiceDelegate {
     final let LEADER_HELLO_TOPIC = "LEADER_HELLO"
     final let PEER_HELLO_TOPIC = "PEER_HELLO"
     
+    let gameSettings = GameSettings.getInstance()
+    
     private init() {
-        let userName = defaults.string(forKey: "userName") ?? "Name not set"
-        let userSkin = defaults.integer(forKey: "userSkin")
+        let userName = gameSettings.getUserName()
+        let userSkin = gameSettings.getUserSkin()
         
         selfPlayer = PlayerPeer(id: networkManager.myPeerId, name: userName, skin: userSkin, leaderScore: networkManager.leaderScore)
         

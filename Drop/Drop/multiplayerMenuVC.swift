@@ -15,8 +15,6 @@ class multiplayerMenuVC : UIViewController, UITableViewDataSource, UITableViewDe
     var id: String = "MULTIPLAYER_MENU_VC"
     let multiplayerManager = MultiplayerManager.getInstance()
     
-    let defaults = UserDefaults.standard
-
     @IBOutlet weak var playerTableView: UITableView!
 
     @IBAction func back(_ sender: UIButton) {
@@ -29,7 +27,6 @@ class multiplayerMenuVC : UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
-        
         
         multiplayerManager.registerObserver(observer: self)
         multiplayerManager.startBrowsing()

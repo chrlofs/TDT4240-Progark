@@ -10,15 +10,14 @@ import SpriteKit
 
 class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManagerObserver {
     
+    let constants = GameConstants.getInstance()
     let multiplayerManager = MultiplayerManager.getInstance()
-    let defaults = UserDefaults.standard
     
     var opponents = [MultiplayerGamePlayer]()
     
     lazy var selfPlayer: MultiplayerGamePlayer = {
-        let skins = self.defaults.stringArray(forKey: "skinList") ?? [String]()
         let selfPeer = self.multiplayerManager.selfPlayer
-        let selfSkinImage = skins[selfPeer.skin]
+        let selfSkinImage = self.constants.getSkinImage(skinIndex: selfPeer.skin)
         return MultiplayerGamePlayer(peer: selfPeer, skinImageName: selfSkinImage)
     }()
     
@@ -26,14 +25,6 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
     override func didMove(to view: SKView) {
         // OBSERVER LOGIC
         multiplayerManager.registerObserver(observer: self)
-
-        // GAME LOGIC
-        let skins = defaults.stringArray(forKey: "skinList") ?? [String]()
-
-        let selfPeer = multiplayerManager.selfPlayer
-        let selfSkinImage = skins[selfPeer.skin]
-        selfPlayer = MultiplayerGamePlayer(peer: selfPeer, skinImageName: selfSkinImage)
-        
         
         // If leader, set the game up
         if selfPlayer.peer.isLeader {
@@ -42,25 +33,23 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
     }
     
     
-    
     func setupGame() {
         // GAME LOGIC
-        let skins = defaults.stringArray(forKey: "skinList") ?? [String]()
         
         let opponentPeers = multiplayerManager.players.filter { $0.id != selfPlayer.peer.id }
         for opponentPeer in opponentPeers {
-            let opponentSkinImage = skins[opponentPeer.skin]
+            let opponentSkinImage = constants.getSkinImage(skinIndex: opponentPeer.skin)
             let opponent = MultiplayerGamePlayer(peer: opponentPeer, skinImageName: opponentSkinImage)
             opponents.append(opponent)
         }
         
         // Set positions
-        selfPlayer.position = CGPoint(x: -100, y: -400)
+        selfPlayer.position = CGPoint(x: -100, y: -250)
         selfPlayer.zPosition = 2
         addChild(selfPlayer)
         
         for (index, opponent) in opponents.enumerated() {
-            opponent.position = CGPoint(x: -100 + (index + 1) * 200, y: -400)
+            opponent.position = CGPoint(x: -100 + (index + 1) * 200, y: -250)
             opponent.zPosition = 1
             addChild(opponent)
         }
@@ -168,7 +157,6 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
     
     func handleGameInit(initMessage: [String: Any]) {
         print("Handling game init")
-        let skins = defaults.stringArray(forKey: "skinList") ?? [String]()
         let opponentPeers = multiplayerManager.players
 
         let players = initMessage["players"] as! [[String: Any]]
@@ -183,7 +171,7 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
                 selfPlayer.zPosition = 2
             } else {
                 if let opponentPeer = (opponentPeers.first { $0.leaderScore == playerLeaderScore }) {
-                    let opponentSkinImage = skins[opponentPeer.skin]
+                    let opponentSkinImage = constants.getSkinImage(skinIndex: opponentPeer.skin)
                     let opponent = MultiplayerGamePlayer(peer: opponentPeer, skinImageName: opponentSkinImage)
                     opponent.position = CGPoint(x: playerPosX, y: playerPosY)
                     opponent.zPosition = 1
@@ -200,10 +188,10 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
     
     func handleGamePlayerUpdate(fromPlayer player: MultiplayerGamePlayer, message: [String: Any]) {
         print(message)
-        let playerPosX = message["x"] as! CGFloat
-        let playerPosY = message["y"] as! CGFloat
+        // let playerPosX = message["x"] as! CGFloat
+        // let playerPosY = message["y"] as! CGFloat
         let playerDx = message["dx"] as! Int
-        player.position = CGPoint(x: playerPosX, y: playerPosY)
+        // player.position = CGPoint(x: playerPosX, y: playerPosY)
         player.dx = playerDx
     }
 }

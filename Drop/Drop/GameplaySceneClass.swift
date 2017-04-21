@@ -9,8 +9,6 @@
 import SpriteKit
 
 class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
-    
-    private var player: Player?;
 
     private var center = CGFloat();
     
@@ -27,10 +25,17 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
     private var obstacleController = ObstacleController();
     
     let gameConstants = GameConstants.getInstance()
+    let gameSettings = GameSettings.getInstance()
     
+    private lazy var player: Player = {
+        let skinIndex = self.gameSettings.getUserSkin()
+        let skinImage = self.gameConstants.getSkinImage(skinIndex: skinIndex)
+        return Player(skinImageName: skinImage)
+    }()
     
     override func didMove(to view: SKView) {
-        initializeGame();     }
+        initializeGame();
+    }
     
     override func update(_ currentTime: TimeInterval) {
         managePlayer();
@@ -101,9 +106,9 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
     private func initializeGame(){
         
         physicsWorld.contactDelegate = self;
-        
-        player = childNode(withName: "Player") as? Player!;
-        player?.InitializePlayer();
+        addChild(player)
+        player.zPosition = 2
+        player.position = CGPoint(x: 0, y: -250)
         
         scoreLabel = childNode(withName: "ScoreLabel") as? SKLabelNode!;
         scoreLabel?.text = "0";
@@ -152,7 +157,7 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate {
     
     private func managePlayer(){
         if canMove{
-            player?.move(left: moveLeft);
+            player.move(left: moveLeft);
         }
     }
     
