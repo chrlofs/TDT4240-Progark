@@ -11,7 +11,7 @@ import SpriteKit
 class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     
     private var player: Player?;
-    
+
     private var center = CGFloat();
     
     private var canMove = false, moveLeft = false;
@@ -25,6 +25,8 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     private var storedTouches = [UITouch: String]();
 
     private var obstacleController = ObstacleController();
+    
+    let gameConstants = GameConstants.getInstance()
     
     
     override func didMove(to view: SKView) {
@@ -141,13 +143,9 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     
     func createObstacles(){
         // obstacleController.createAllObstacles(self);
-        let positions = [
-            [-144, 200], [0, 200], [144, 200],
-            [-72, 90], [72, 90],
-            [-144, -20], [0, -20], [144, -20],
-            [-144, -200], [144, -200]
-        ];
-        for position in positions {
+
+        let map = gameConstants.getMapList()["Map1"]
+        for position in map! {
             self.scene?.addChild(obstacleController.createObstacle(x: position[0], y: position[1]))
         }
     }

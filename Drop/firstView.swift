@@ -15,21 +15,12 @@ class firstView: UIViewController{
     override func viewDidLoad() {
         self.navigationController?.isNavigationBarHidden = true
         
-        let defaults = UserDefaults.standard
-
-        let skinList: [String] = ["skin1", "skin2", "skin3", "kim", "trump", "putin"]
-        defaults.set(skinList, forKey: "skinList")
-        
         if gameSettings.isLoggedIn() {
             ToMenu()
         } else {
             ToLogin()
         }
-        
-        
     }
-        
-        
     
     func ToMenu(){
         let menuVC = self.storyboard?.instantiateViewController(withIdentifier: "menuVC") as! menuVC

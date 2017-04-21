@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 class singleplayerMenuVC: UIViewController{
     let gameSettings = GameSettings.getInstance()
+    let gameConstants = GameConstants.getInstance()
     
-    let defaults = UserDefaults.standard
     var userName = "No username"
     var userSkin = 0
     var userSkinImage = UIImage(named: "skin1")
@@ -26,7 +26,7 @@ class singleplayerMenuVC: UIViewController{
         userName = gameSettings.getUserName()
         userSkin = gameSettings.getUserSkin()
         
-        let skins = defaults.stringArray(forKey: "skinList") ?? [String]()
+        let skins = gameConstants.getSkinList()
         
         if skins.count > userSkin {
             userSkinImage = UIImage(named: skins[userSkin])

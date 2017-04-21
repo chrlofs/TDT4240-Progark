@@ -12,6 +12,8 @@ class GameSettings {
     private static let sharedInstance = GameSettings()
     private let defaults = UserDefaults.standard
     
+    let gameConstants = GameConstants.getInstance()
+    
     private var userName: String
     private var userSkin: Int
     private var loggedIn: Bool
