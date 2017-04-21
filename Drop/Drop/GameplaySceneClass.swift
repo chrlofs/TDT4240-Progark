@@ -94,13 +94,26 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
             // ScheduledTimer to restart game after x seconds.
             Timer.scheduledTimer(timeInterval: TimeInterval(0), target: self, selector: #selector(GameplaySceneClass.restartGame), userInfo: nil, repeats: false);
         }
+        
+       
+        
         if ((contact.bodyA.node?.name?.range(of: "Obstacle")) != nil) {
-            audioPlayer.playFx(fileName: "POP", fileType: "mp3")
+            audioPlayer.playFx(fileName: "bow", fileType: "mp3")
         }
-        if((contact.bodyA.node?.name?.range(of: "Player")) != nil) {
-            audioPlayer.playFx(fileName: "POP", fileType: "mp3")
+        
+        if((contact.bodyB.node?.name?.range(of: "Obstacle")) != nil) {
+            audioPlayer.playFx(fileName: "bow", fileType: "mp3")
             
         }
+        if((contact.bodyA.node?.name?.range(of: "Player")) != nil) {
+            audioPlayer.playFx(fileName: "ploop", fileType: "mp3")
+            
+        }
+        if((contact.bodyB.node?.name?.range(of: "Player")) != nil) {
+            audioPlayer.playFx(fileName: "ploop", fileType: "mp3")
+            
+        }
+        
         
         
         
