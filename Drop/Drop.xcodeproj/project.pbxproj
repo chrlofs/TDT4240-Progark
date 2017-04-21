@@ -34,6 +34,7 @@
 		F4469F761EA8C3360027C76D /* GameplayScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F4469F751EA8C3360027C76D /* GameplayScene.sks */; };
 		F4469F7B1EA92D710027C76D /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F7A1EA92D710027C76D /* GameSettings.swift */; };
 		F4469F7D1EA940970027C76D /* GameConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F7C1EA940970027C76D /* GameConstants.swift */; };
+		F4469F821EA9FDD70027C76D /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F811EA9FDD70027C76D /* Map.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,7 @@
 		F4469F751EA8C3360027C76D /* GameplayScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameplayScene.sks; sourceTree = "<group>"; };
 		F4469F7A1EA92D710027C76D /* GameSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSettings.swift; sourceTree = "<group>"; };
 		F4469F7C1EA940970027C76D /* GameConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameConstants.swift; sourceTree = "<group>"; };
+		F4469F811EA9FDD70027C76D /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 		9565C3A41E76D4F400C5BF83 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				F4469F801EA9FDC00027C76D /* Map Class */,
 				F4469F721EA8AD7C0027C76D /* Obstacle Class */,
 				95D2557C1E7ABC4E00DA813A /* Items Controller Classes */,
 				9565C3AF1E76F6B500C5BF83 /* Player Class */,
@@ -248,6 +251,14 @@
 				F4469F7C1EA940970027C76D /* GameConstants.swift */,
 			);
 			name = Singletons;
+			sourceTree = "<group>";
+		};
+		F4469F801EA9FDC00027C76D /* Map Class */ = {
+			isa = PBXGroup;
+			children = (
+				F4469F811EA9FDD70027C76D /* Map.swift */,
+			);
+			name = "Map Class";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -398,6 +409,7 @@
 				1BD728421E76DE5100CE0B2A /* menuVC.swift in Sources */,
 				1BD728481E76EF6D00CE0B2A /* multiplayerMenuVC.swift in Sources */,
 				1BA6AEF81EA7783400BCCA0A /* soundManager.swift in Sources */,
+				F4469F821EA9FDD70027C76D /* Map.swift in Sources */,
 				9582DB1A1E71A0A600335B2F /* GameViewController.swift in Sources */,
 				F4469F7B1EA92D710027C76D /* GameSettings.swift in Sources */,
 				9582DB121E71A0A600335B2F /* AppDelegate.swift in Sources */,
