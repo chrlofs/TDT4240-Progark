@@ -277,6 +277,7 @@
 		F4469F791EA92D560027C76D /* Singletons */ = {
 			isa = PBXGroup;
 			children = (
+				1BA6AEF71EA7783400BCCA0A /* soundManager.swift */,
 				F4469F7A1EA92D710027C76D /* GameSettings.swift */,
 				F4469F7C1EA940970027C76D /* GameConstants.swift */,
 			);
