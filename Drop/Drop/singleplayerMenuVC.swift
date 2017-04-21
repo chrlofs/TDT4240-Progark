@@ -15,16 +15,20 @@ class singleplayerMenuVC: UIViewController{
     var userName = "No username"
     var userSkin = 0
     var userSkinImage = UIImage(named: "skin1")
+    var highScore = 0
 
     
     @IBOutlet weak var playerSelfSkin: UIImageView!
     @IBOutlet weak var playerSelfLabel: UILabel!
+    @IBOutlet weak var highScoreLabel: UILabel!
     
     override func viewDidLoad() {
+        
         self.navigationController?.isNavigationBarHidden = true
         
         userName = gameSettings.getUserName()
         userSkin = gameSettings.getUserSkin()
+        highScore = gameSettings.getHighScore()
         
         let skins = gameConstants.getSkinList()
         
@@ -35,7 +39,8 @@ class singleplayerMenuVC: UIViewController{
         OperationQueue.main.addOperation {
             self.playerSelfSkin.image = self.userSkinImage
             self.playerSelfLabel.text = self.userName
-
+            self.highScoreLabel.textColor = self.gameConstants.darkGreen
+            self.highScoreLabel.text = String(self.highScore)
         }
     }
     
@@ -48,7 +53,6 @@ class singleplayerMenuVC: UIViewController{
     }
     
     func backToMenu(){
-        print("back from singleplayer")
         _ = navigationController?.popViewController(animated: true)
     }
     func startgame(){

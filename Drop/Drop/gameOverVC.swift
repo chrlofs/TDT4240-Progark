@@ -10,11 +10,12 @@ import Foundation
 import UIKit
 
 class gameOverVC: UIViewController {
-    let defaults = UserDefaults.standard;
+    let gameSettings = GameSettings.getInstance()
     var userScore = Int()
     
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var highscoreLabel: UILabel!
+    @IBOutlet weak var highScoreTextLabel: UILabel!
     
     @IBAction func gotoMain(_ sender: UIButton) {
         gotoMain();
@@ -39,8 +40,13 @@ class gameOverVC: UIViewController {
     }
     
     func setScore() {
+        let isHighScore = gameSettings.isHighScore(score: self.userScore)
+        if isHighScore {
+            self.highScoreTextLabel.text = "New Highscore!"
+        }
+        
         self.scoreLabel.text = String(self.userScore)
-        //highscoreLabel = defaults.integer(forKey: "bestScore");
+        self.highscoreLabel.text = String(gameSettings.getHighScore())
     }
     
 }

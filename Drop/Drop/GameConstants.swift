@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class GameConstants {
     private static let sharedInstance = GameConstants()
@@ -26,6 +27,12 @@ class GameConstants {
             [-144, -20], [0, -20], [144, -20],
             ], background: "background_standing3")
     ]
+    
+    public let darkGreen = UIColor(red: 0.27, green: 0.57, blue: 0.53, alpha: 1.0)
+    public let lightGreen = UIColor(red: 0.57, green: 0.89, blue: 0.65, alpha: 1.0)
+    public let lightBlue = UIColor(red: 0.37, green: 0.39, blue: 0.75, alpha: 1.0)
+    public let darkBlue = UIColor(red: 0.27, green: 0.19, blue: 0.39, alpha: 1.0)
+    
     
     private init() {
     }

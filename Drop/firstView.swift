@@ -24,11 +24,11 @@ class firstView: UIViewController{
     
     func ToMenu(){
         let menuVC = self.storyboard?.instantiateViewController(withIdentifier: "menuVC") as! menuVC
-        self.navigationController?.pushViewController(menuVC, animated: true)
+        self.navigationController?.pushViewController(menuVC, animated: false)
     }
     func ToLogin(){
         let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "loginVC") as! loginVC
-        self.navigationController?.pushViewController(loginVC, animated: true)
+        self.navigationController?.pushViewController(loginVC, animated: false)
     }
 
 
