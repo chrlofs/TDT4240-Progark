@@ -215,7 +215,6 @@
 				F4469F701EA7BA170027C76D /* selectSkinVC.swift */,
 				1BD7284F1E78017900CE0B2A /* optionsVC.swift */,
 				0883BE571E8CF48600945A6A /* MultiplayerServiceManager.swift */,
-				1BA6AEF71EA7783400BCCA0A /* soundManager.swift */,
 				1BFE0D301E800A56007E45F0 /* loginVC.swift */,
 				1B4EC5151EA9040C00A85328 /* firstView.swift */,
 			);
@@ -259,6 +258,7 @@
 		F4469F791EA92D560027C76D /* Singletons */ = {
 			isa = PBXGroup;
 			children = (
+				1BA6AEF71EA7783400BCCA0A /* soundManager.swift */,
 				F4469F7A1EA92D710027C76D /* GameSettings.swift */,
 				F4469F7C1EA940970027C76D /* GameConstants.swift */,
 			);
