@@ -9,7 +9,7 @@
 import Foundation
 import MultipeerConnectivity
 
-class MPlayer {
+class PlayerPeer {
     let id: MCPeerID
     let name: String
     let skin: Int
@@ -40,14 +40,17 @@ class MPlayer {
 protocol MultiplayerManagerObserver {
     var id : String { get }
     func notifyPlayersChange()
-    func notifyReceivedMessage(fromPlayer player: MPlayer, message: [String: Any])
+    func notifyReceivedMessage(fromPlayer player: PlayerPeer, message: [String: Any])
 }
 
 class MultiplayerManager: NetworkServiceDelegate {
     let defaults = UserDefaults.standard
     
     // SINGLETON LOGIC
-    static let sharedInstance: MultiplayerManager = MultiplayerManager()
+    private static let sharedInstance: MultiplayerManager = MultiplayerManager()
+    public static func getInstance() -> MultiplayerManager {
+        return sharedInstance
+    }
     
     private let networkManager = NetworkServiceManager()
     
@@ -60,7 +63,7 @@ class MultiplayerManager: NetworkServiceDelegate {
         let userName = defaults.string(forKey: "userName") ?? "Name not set"
         let userSkin = defaults.integer(forKey: "userSkin")
         
-        selfPlayer = MPlayer(id: networkManager.myPeerId, name: userName, skin: userSkin, leaderScore: networkManager.leaderScore)
+        selfPlayer = PlayerPeer(id: networkManager.myPeerId, name: userName, skin: userSkin, leaderScore: networkManager.leaderScore)
         
         players = [selfPlayer]
 
@@ -72,6 +75,7 @@ class MultiplayerManager: NetworkServiceDelegate {
     // The observers are notified with event messages such as playerJoined and playerLeft
     private var observers: [MultiplayerManagerObserver] = []
     func registerObserver(observer: MultiplayerManagerObserver) {
+        print("registered observer with id: \(observer.id)")
         observers.append(observer)
     }
     
@@ -97,7 +101,7 @@ class MultiplayerManager: NetworkServiceDelegate {
         }
     }
     
-    func notifyReceivedMessage(fromPlayer player: MPlayer, message: [String: Any]) {
+    func notifyReceivedMessage(fromPlayer player: PlayerPeer, message: [String: Any]) {
         for observer in observers {
             observer.notifyReceivedMessage(fromPlayer: player, message: message)
         }
@@ -135,23 +139,28 @@ class MultiplayerManager: NetworkServiceDelegate {
     }
     
     // INTERNAL LOGIC
-    var players: [MPlayer]
-    let selfPlayer: MPlayer
+    var players: [PlayerPeer]
+    let selfPlayer: PlayerPeer
     
     private func handleMessage(fromPeer peerID: MCPeerID, message: [String: Any]) {
         let topic = message["topic"] as! String
         switch topic {
         case LEADER_HELLO_TOPIC:
+            print("Handling leader-hello from peer \(peerID)")
             handleHello(fromPeer: peerID, message: message)
             sendPeerHello()
             break
         case PEER_HELLO_TOPIC:
+            print("Handling peer-hello from peer \(peerID)")
             handleHello(fromPeer: peerID, message: message)
             break
         default:
+            print("Handling other message topic: \(topic)")
             // Pass message on to observers
             if let player = players.first(where: { $0.id == peerID }) {
                 notifyReceivedMessage(fromPlayer: player, message: message)
+            } else {
+                print("Peer player not found??")
             }
         }
     }
@@ -171,13 +180,17 @@ class MultiplayerManager: NetworkServiceDelegate {
     }
     
     private func handleHello(fromPeer peerID: MCPeerID, message: [String: Any]) {
+        
+        print("Current peerIDs: \(players.map({ $0.id }))")
+        
         if !players.contains(where: { $0.id == peerID }) {
+            print("Peer not in array - adding peer")
             let playerInfo = message["playerInfo"] as! [String: Any]
             let playerName = playerInfo["name"] as! String
             let playerSkin = playerInfo["skin"] as! Int
             let playerLeaderScore = playerInfo["leaderScore"] as! Int
             
-            let newPlayer = MPlayer(id: peerID, name: playerName, skin: playerSkin, leaderScore: playerLeaderScore)
+            let newPlayer = PlayerPeer(id: peerID, name: playerName, skin: playerSkin, leaderScore: playerLeaderScore)
             players.append(newPlayer)
             electLeader()
             

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MPlayerTableCell: UITableViewCell {
+class PlayerPeerTableCell: UITableViewCell {
     
 
     @IBOutlet weak var nameLabel: UILabel!

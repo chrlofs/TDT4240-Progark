@@ -13,7 +13,7 @@ import MultipeerConnectivity
 class multiplayerMenuVC : UIViewController, UITableViewDataSource, UITableViewDelegate, MultiplayerManagerObserver {
     // ID must be unique among MultiplayerServiceObservers
     var id: String = "MULTIPLAYER_MENU_VC"
-    let multiplayerManager = MultiplayerManager.sharedInstance
+    let multiplayerManager = MultiplayerManager.getInstance()
     
     let defaults = UserDefaults.standard
 
@@ -59,11 +59,11 @@ class multiplayerMenuVC : UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
-    internal func notifyReceivedMessage(fromPlayer player: MPlayer, message: [String : Any]) {
+    internal func notifyReceivedMessage(fromPlayer player: PlayerPeer, message: [String : Any]) {
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1 // This was put in mainly for my own unit testing
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -71,7 +71,7 @@ class multiplayerMenuVC : UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerTableCell") as! MPlayerTableCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerTableCell") as! PlayerPeerTableCell
         
         print("Rendering at index: \(indexPath.item) of \(multiplayerManager.players.count)")
         let player = multiplayerManager.players[indexPath.item]
