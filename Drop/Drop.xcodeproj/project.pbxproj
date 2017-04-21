@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		086354E61EA9401F00242D57 /* MPlayerTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086354E51EA9401F00242D57 /* MPlayerTableCell.swift */; };
 		0883BE581E8CF48600945A6A /* NetworkServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0883BE571E8CF48600945A6A /* NetworkServiceManager.swift */; };
 		08A946901EA8E0F400F68C8E /* MultiplayerGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A9468F1EA8E0F400F68C8E /* MultiplayerGameViewController.swift */; };
 		08A946941EA8E2A900F68C8E /* MultiplayerGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A946931EA8E2A900F68C8E /* MultiplayerGameScene.swift */; };
 		08A946961EA8E2E900F68C8E /* MultiplayerGameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 08A946951EA8E2E900F68C8E /* MultiplayerGameScene.sks */; };
-		08A946981EA8F7B300F68C8E /* MultiplayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A946971EA8F7B300F68C8E /* MultiplayerManager.swift */; };
+		08A946991EA91F5400F68C8E /* MultiplayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A946971EA8F7B300F68C8E /* MultiplayerManager.swift */; };
 		1BA6AEF61EA773F800BCCA0A /* GameMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1BA6AEF51EA773F800BCCA0A /* GameMusic.mp3 */; };
 		1BA6AEF81EA7783400BCCA0A /* soundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA6AEF71EA7783400BCCA0A /* soundManager.swift */; };
 		1BD728421E76DE5100CE0B2A /* menuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD728411E76DE5100CE0B2A /* menuVC.swift */; };
@@ -55,6 +56,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		086354E51EA9401F00242D57 /* MPlayerTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MPlayerTableCell.swift; path = ../MPlayerTableCell.swift; sourceTree = "<group>"; };
 		0883BE571E8CF48600945A6A /* NetworkServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkServiceManager.swift; sourceTree = "<group>"; };
 		08A9468F1EA8E0F400F68C8E /* MultiplayerGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiplayerGameViewController.swift; path = ../MultiplayerGameViewController.swift; sourceTree = "<group>"; };
 		08A946931EA8E2A900F68C8E /* MultiplayerGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplayerGameScene.swift; sourceTree = "<group>"; };
@@ -198,11 +200,12 @@
 				9582DB191E71A0A600335B2F /* GameViewController.swift */,
 				08A9468F1EA8E0F400F68C8E /* MultiplayerGameViewController.swift */,
 				1BD728411E76DE5100CE0B2A /* menuVC.swift */,
-				1BD728471E76EF6D00CE0B2A /* multiplayerMenuVC.swift */,
 				1BD728491E76EF9500CE0B2A /* singleplayerMenuVC.swift */,
 				F4469F701EA7BA170027C76D /* selectSkinVC.swift */,
 				1BD7284F1E78017900CE0B2A /* optionsVC.swift */,
 				1BFE0D301E800A56007E45F0 /* loginVC.swift */,
+				086354E51EA9401F00242D57 /* MPlayerTableCell.swift */,
+				1BD728471E76EF6D00CE0B2A /* multiplayerMenuVC.swift */,
 				0883BE571E8CF48600945A6A /* NetworkServiceManager.swift */,
 				08A946971EA8F7B300F68C8E /* MultiplayerManager.swift */,
 				1BA6AEF71EA7783400BCCA0A /* soundManager.swift */,
@@ -391,7 +394,7 @@
 				1BD728501E78017900CE0B2A /* optionsVC.swift in Sources */,
 				1BFE0D311E800A56007E45F0 /* loginVC.swift in Sources */,
 				1BD7284A1E76EF9500CE0B2A /* singleplayerMenuVC.swift in Sources */,
-				08A946981EA8F7B300F68C8E /* MultiplayerManager.swift in Sources */,
+				08A946991EA91F5400F68C8E /* MultiplayerManager.swift in Sources */,
 				1BD728421E76DE5100CE0B2A /* menuVC.swift in Sources */,
 				08A946901EA8E0F400F68C8E /* MultiplayerGameViewController.swift in Sources */,
 				1BD728481E76EF6D00CE0B2A /* multiplayerMenuVC.swift in Sources */,
@@ -399,6 +402,7 @@
 				08A946941EA8E2A900F68C8E /* MultiplayerGameScene.swift in Sources */,
 				9582DB1A1E71A0A600335B2F /* GameViewController.swift in Sources */,
 				9582DB121E71A0A600335B2F /* AppDelegate.swift in Sources */,
+				086354E61EA9401F00242D57 /* MPlayerTableCell.swift in Sources */,
 				9565C3B11E76F6C400C5BF83 /* Player.swift in Sources */,
 				95D2557E1E7ABC6300DA813A /* ItemController.swift in Sources */,
 				9565C3AE1E76D76F00C5BF83 /* GameplaySceneClass.swift in Sources */,
@@ -558,7 +562,7 @@
 				INFOPLIST_FILE = Drop/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tfis.Drop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raymi.Drop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -572,7 +576,7 @@
 				INFOPLIST_FILE = Drop/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tfis.Drop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raymi.Drop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

@@ -12,6 +12,7 @@ import MultipeerConnectivity
 protocol NetworkServiceDelegate {
     func peerJoined(peerID: MCPeerID)
     func peerLeft(peerID: MCPeerID)
+    func joinedSession()
     func receiveData(data: Data, fromPeer peerID: MCPeerID)
 }
 
@@ -23,6 +24,7 @@ class NetworkServiceManager: NSObject {
     private let MultiplayerServiceType = "drop-mp-service"
     
     let myPeerId = MCPeerID(displayName: UIDevice.current.name)
+    let leaderScore = Int(arc4random_uniform(100000))
     
     private let serviceAdvertiser : MCNearbyServiceAdvertiser
     private let serviceBrowser : MCNearbyServiceBrowser
@@ -31,7 +33,7 @@ class NetworkServiceManager: NSObject {
     var delegate: NetworkServiceDelegate?
     
     override init() {
-        self.serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: nil, serviceType: MultiplayerServiceType)
+        self.serviceAdvertiser = MCNearbyServiceAdvertiser(peer: myPeerId, discoveryInfo: ["leaderScore": String(leaderScore)], serviceType: MultiplayerServiceType)
         self.serviceBrowser = MCNearbyServiceBrowser(peer: myPeerId, serviceType: MultiplayerServiceType)
         self.session = MCSession(peer: myPeerId, securityIdentity: nil, encryptionPreference: .required)
 
@@ -39,6 +41,7 @@ class NetworkServiceManager: NSObject {
         
         self.serviceAdvertiser.delegate = self
         self.serviceBrowser.delegate = self
+        self.session.delegate = self
     }
     
     func startBrowsing() {
@@ -75,7 +78,13 @@ extension NetworkServiceManager : MCNearbyServiceBrowserDelegate {
     
     // FOUND PEER
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
-        browser.invitePeer(peerID, to: session, withContext: nil, timeout: 10)
+        if
+            let peerLeaderScoreInfo = info?["leaderScore"],
+            let peerLeaderScore = Int(peerLeaderScoreInfo),
+            leaderScore > peerLeaderScore
+        {
+            browser.invitePeer(peerID, to: self.session, withContext: nil, timeout: 10)
+        }
     }
     
     // REST IS NOT IMPORTANT
@@ -93,7 +102,13 @@ extension NetworkServiceManager : MCNearbyServiceAdvertiserDelegate {
     
     // RECEIVED INVITATION
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser, didReceiveInvitationFromPeer peerID: MCPeerID, withContext context: Data?, invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-        invitationHandler(true, self.session)
+        if !self.session.connectedPeers.contains(peerID) {
+            invitationHandler(true, self.session)
+            self.delegate?.joinedSession()
+        } else {
+            invitationHandler(false, nil)
+        }
+        
     }
     
     // REST IS NOT IMPORTANT
@@ -110,10 +125,12 @@ extension NetworkServiceManager : MCSessionDelegate {
         switch state {
         case .notConnected:
             self.delegate?.peerLeft(peerID: peerID)
+            break
         case .connecting:
-            return
+            break
         case .connected:
             self.delegate?.peerJoined(peerID: peerID)
+            break
         }
     }
 

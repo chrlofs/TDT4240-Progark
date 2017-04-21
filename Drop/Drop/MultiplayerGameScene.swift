@@ -32,8 +32,4 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate {
         addChild(opponent1)
         addChild(selfPlayer)
     }
-    
-    func setOpponents(opponentPeers: [PlayerPeer]) {
-        
-    }
 }
