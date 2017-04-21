@@ -26,7 +26,8 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
     var id : String = "MULTIPLAYER_MENU_VC"
     let multiplayerService : MultiplayerServiceManager = MultiplayerServiceManager.instance
     
-    let defaults = UserDefaults.standard
+    let gameSettings = GameSettings.getInstance()
+    let gameConstants = GameConstants.getInstance()
     
     var players = [PlayerPeer]()
     var userName = "No username"
@@ -48,8 +49,7 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
     @IBAction func back(_ sender: UIButton) {
         multiplayerService.leaveSession()
         
-        let menuVC = self.storyboard?.instantiateViewController(withIdentifier: "menuVC") as! menuVC
-        self.navigationController?.pushViewController(menuVC, animated: true)
+        _ = navigationController?.popViewController(animated: true)
     }
     
     override func viewDidLoad() {
@@ -58,9 +58,9 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
         multiplayerService.registerObserver(observer: self)
         
         // Set own userName in playerSelfLabel text
-        userName = defaults.value(forKey: "userName") as? String ?? userName
-        userSkin = defaults.value(forKey: "userSkin") as? Int ?? 0
-        let skins = defaults.stringArray(forKey: "skinList") ?? [String]()
+        userName = gameSettings.getUserName()
+        userSkin = gameSettings.getUserSkin()
+        let skins = gameConstants.getSkinList()
         
         if skins.count > userSkin {
             userSkinImage = UIImage(named: skins[userSkin])
@@ -89,7 +89,7 @@ class multiplayerMenuVC : UIViewController, MultiplayerServiceObserver {
             
             player.masterScore = (message["userMasterScore"] as? Int)!
             
-            let skins = defaults.stringArray(forKey: "skinList") ?? [String]()
+            let skins = gameConstants.getSkinList()
             let skin = (message["userSkin"] as? Int)!
             if skins.count > skin {
                 player.skinImage = UIImage(named: skins[skin])

@@ -13,7 +13,7 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     let defaults = UserDefaults.standard;
     
     private var player: Player?;
-    
+
     private var center = CGFloat();
     
     private var canMove = false, moveLeft = false;
@@ -27,6 +27,9 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     private var storedTouches = [UITouch: String]();
 
     private var obstacleController = ObstacleController();
+    let audioPlayer = soundManager.sharedInstance
+    
+    let gameConstants = GameConstants.getInstance()
     
     
     override func didMove(to view: SKView) {
@@ -36,6 +39,14 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
         managePlayer();
         score += 1;
         scoreLabel?.text = String(score);
+        
+        let randomSample: Int = Int(arc4random_uniform(UInt32(25)))
+        if randomSample < 5 {
+            let randomInt: Int = Int(arc4random_uniform(UInt32(obstacleController.numberOfObstacles)))
+            obstacleController.animateObstacle(obstacleId: randomInt);
+        }
+        
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -66,6 +77,7 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
         }
     }
     
+    
     func didBegin(_ contact: SKPhysicsContact) {
         var firstBody = SKPhysicsBody();
         var secondBody = SKPhysicsBody();
@@ -91,9 +103,33 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
             Timer.scheduledTimer(timeInterval: TimeInterval(0), target: self, selector: #selector(GameplaySceneClass.restartGame), userInfo: nil, repeats: false);
         }
         
+       
+        
+        if ((contact.bodyA.node?.name?.range(of: "Obstacle")) != nil) {
+            audioPlayer.playFx(fileName: "bow", fileType: "mp3")
+        }
+        
+        if((contact.bodyB.node?.name?.range(of: "Obstacle")) != nil) {
+            audioPlayer.playFx(fileName: "bow", fileType: "mp3")
+            
+        }
+        if((contact.bodyA.node?.name?.range(of: "Player")) != nil) {
+            audioPlayer.playFx(fileName: "ploop", fileType: "mp3")
+            
+        }
+        if((contact.bodyB.node?.name?.range(of: "Player")) != nil) {
+            audioPlayer.playFx(fileName: "ploop", fileType: "mp3")
+            
+        }
+        
+        
+        
+        
     }
     
+    
     private func initializeGame(){
+        
         
         physicsWorld.contactDelegate = self;
         
@@ -107,6 +143,8 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
         createObstacles()
         
         center = self.frame.size.width / self.frame.size.height;
+        audioPlayer.stopMusic()
+        audioPlayer.playMusic(fileName: "ingame", fileType: "mp3")
         
         Timer.scheduledTimer(timeInterval: TimeInterval(itemController.randomBetweenNumbers(firstNum: 1, secondNum: 2)), target: self, selector: #selector(GameplaySceneClass.spawnItems), userInfo: nil, repeats: true);
         
@@ -137,15 +175,9 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     }
     
     func createObstacles(){
-        // obstacleController.createAllObstacles(self);
-        let positions = [
-            [-144, 200], [0, 200], [144, 200],
-            [-72, 90], [72, 90],
-            [-144, -20], [0, -20], [144, -20],
-            [-144, -200], [144, -200]
-        ];
-        for position in positions {
-            self.scene?.addChild(obstacleController.createObstacle(x: position[0], y: position[1]));
+        let map = gameConstants.getMapById(id: 1)
+        for peg in map.peg_points {
+            self.scene?.addChild(obstacleController.createObstacle(x: peg[0], y: peg[1]))
         }
     }
     

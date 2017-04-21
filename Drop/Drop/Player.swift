@@ -9,16 +9,17 @@
 import SpriteKit
 
 class Player: SKSpriteNode {
+    let gameSettings = GameSettings.getInstance()
+    let gameConstants = GameConstants.getInstance()
     
-    let defaults = UserDefaults.standard
     private var minX = CGFloat(-190), maxX = CGFloat(190);
     
     // Initializing a Player object
     func InitializePlayer() {
         name = "Player";
         
-        let skin = defaults.integer(forKey: "userSkin")
-        let skins = defaults.stringArray(forKey: "skinList") ?? [String]()
+        let skin = gameSettings.getUserSkin()
+        let skins = gameConstants.getSkinList()
         
         if skins.count > skin {
             print("Changing skin??")

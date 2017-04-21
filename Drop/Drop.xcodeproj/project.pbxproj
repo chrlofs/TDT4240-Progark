@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		0883BE581E8CF48600945A6A /* MultiplayerServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0883BE571E8CF48600945A6A /* MultiplayerServiceManager.swift */; };
+		1B4EC5161EA9040C00A85328 /* firstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4EC5151EA9040C00A85328 /* firstView.swift */; };
+		1B4EC5181EA9243700A85328 /* POP.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1B4EC5171EA9243700A85328 /* POP.mp3 */; };
+		1B4EC51A1EA92CC600A85328 /* ingame.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1B4EC5191EA92CC600A85328 /* ingame.mp3 */; };
+		1B4EC51D1EAA1A4800A85328 /* ploop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1B4EC51B1EAA1A4800A85328 /* ploop.mp3 */; };
+		1B4EC51E1EAA1A4800A85328 /* bow.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1B4EC51C1EAA1A4800A85328 /* bow.mp3 */; };
 		1BA6AEF61EA773F800BCCA0A /* GameMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1BA6AEF51EA773F800BCCA0A /* GameMusic.mp3 */; };
 		1BA6AEF81EA7783400BCCA0A /* soundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA6AEF71EA7783400BCCA0A /* soundManager.swift */; };
 		1BD728421E76DE5100CE0B2A /* menuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD728411E76DE5100CE0B2A /* menuVC.swift */; };
@@ -32,6 +37,9 @@
 		F4469F711EA7BA170027C76D /* selectSkinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F701EA7BA170027C76D /* selectSkinVC.swift */; };
 		F4469F741EA8AD8B0027C76D /* ObstacleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F731EA8AD8B0027C76D /* ObstacleController.swift */; };
 		F4469F761EA8C3360027C76D /* GameplayScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F4469F751EA8C3360027C76D /* GameplayScene.sks */; };
+		F4469F7B1EA92D710027C76D /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F7A1EA92D710027C76D /* GameSettings.swift */; };
+		F4469F7D1EA940970027C76D /* GameConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F7C1EA940970027C76D /* GameConstants.swift */; };
+		F4469F821EA9FDD70027C76D /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F811EA9FDD70027C76D /* Map.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +61,11 @@
 
 /* Begin PBXFileReference section */
 		0883BE571E8CF48600945A6A /* MultiplayerServiceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplayerServiceManager.swift; sourceTree = "<group>"; };
+		1B4EC5151EA9040C00A85328 /* firstView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = firstView.swift; path = ../firstView.swift; sourceTree = "<group>"; };
+		1B4EC5171EA9243700A85328 /* POP.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = POP.mp3; sourceTree = "<group>"; };
+		1B4EC5191EA92CC600A85328 /* ingame.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ingame.mp3; sourceTree = "<group>"; };
+		1B4EC51B1EAA1A4800A85328 /* ploop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ploop.mp3; sourceTree = "<group>"; };
+		1B4EC51C1EAA1A4800A85328 /* bow.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bow.mp3; sourceTree = "<group>"; };
 		1BA6AEF51EA773F800BCCA0A /* GameMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = GameMusic.mp3; sourceTree = "<group>"; };
 		1BA6AEF71EA7783400BCCA0A /* soundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = soundManager.swift; sourceTree = "<group>"; };
 		1BD728411E76DE5100CE0B2A /* menuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = menuVC.swift; sourceTree = "<group>"; };
@@ -83,6 +96,9 @@
 		F4469F701EA7BA170027C76D /* selectSkinVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = selectSkinVC.swift; sourceTree = "<group>"; };
 		F4469F731EA8AD8B0027C76D /* ObstacleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObstacleController.swift; sourceTree = "<group>"; };
 		F4469F751EA8C3360027C76D /* GameplayScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameplayScene.sks; sourceTree = "<group>"; };
+		F4469F7A1EA92D710027C76D /* GameSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSettings.swift; sourceTree = "<group>"; };
+		F4469F7C1EA940970027C76D /* GameConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameConstants.swift; sourceTree = "<group>"; };
+		F4469F811EA9FDD70027C76D /* Map.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Map.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +129,10 @@
 		1BCF1A371EA76C40006F81F2 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				1B4EC51B1EAA1A4800A85328 /* ploop.mp3 */,
+				1B4EC51C1EAA1A4800A85328 /* bow.mp3 */,
+				1B4EC5191EA92CC600A85328 /* ingame.mp3 */,
+				1B4EC5171EA9243700A85328 /* POP.mp3 */,
 				1BA6AEF51EA773F800BCCA0A /* GameMusic.mp3 */,
 			);
 			name = Sounds;
@@ -122,6 +142,7 @@
 		9565C3A41E76D4F400C5BF83 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				F4469F801EA9FDC00027C76D /* Map Class */,
 				F4469F721EA8AD7C0027C76D /* Obstacle Class */,
 				95D2557C1E7ABC4E00DA813A /* Items Controller Classes */,
 				9565C3AF1E76F6B500C5BF83 /* Player Class */,
@@ -183,6 +204,7 @@
 				9565C3A51E76D50000C5BF83 /* Scenes */,
 				9565C3A41E76D4F400C5BF83 /* Classes */,
 				9582DB111E71A0A600335B2F /* AppDelegate.swift */,
+				F4469F791EA92D560027C76D /* Singletons */,
 				9582DB151E71A0A600335B2F /* Actions.sks */,
 				9582DB191E71A0A600335B2F /* GameViewController.swift */,
 				9582DB1B1E71A0A600335B2F /* Main.storyboard */,
@@ -195,9 +217,10 @@
 				1BD728491E76EF9500CE0B2A /* singleplayerMenuVC.swift */,
 				F4469F701EA7BA170027C76D /* selectSkinVC.swift */,
 				1BD7284F1E78017900CE0B2A /* optionsVC.swift */,
-				1BFE0D301E800A56007E45F0 /* loginVC.swift */,
 				0883BE571E8CF48600945A6A /* MultiplayerServiceManager.swift */,
 				1BA6AEF71EA7783400BCCA0A /* soundManager.swift */,
+				1BFE0D301E800A56007E45F0 /* loginVC.swift */,
+				1B4EC5151EA9040C00A85328 /* firstView.swift */,
 			);
 			path = Drop;
 			sourceTree = "<group>";
@@ -234,6 +257,23 @@
 				F4469F731EA8AD8B0027C76D /* ObstacleController.swift */,
 			);
 			name = "Obstacle Class";
+			sourceTree = "<group>";
+		};
+		F4469F791EA92D560027C76D /* Singletons */ = {
+			isa = PBXGroup;
+			children = (
+				F4469F7A1EA92D710027C76D /* GameSettings.swift */,
+				F4469F7C1EA940970027C76D /* GameConstants.swift */,
+			);
+			name = Singletons;
+			sourceTree = "<group>";
+		};
+		F4469F801EA9FDC00027C76D /* Map Class */ = {
+			isa = PBXGroup;
+			children = (
+				F4469F811EA9FDD70027C76D /* Map.swift */,
+			);
+			name = "Map Class";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -344,10 +384,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B4EC51E1EAA1A4800A85328 /* bow.mp3 in Resources */,
+				1B4EC51A1EA92CC600A85328 /* ingame.mp3 in Resources */,
 				9582DB1D1E71A0A600335B2F /* Main.storyboard in Resources */,
 				9582DB1F1E71A0A600335B2F /* Assets.xcassets in Resources */,
 				9582DB221E71A0A600335B2F /* LaunchScreen.storyboard in Resources */,
 				9565C3A91E76D5A700C5BF83 /* MainMenu.sks in Resources */,
+				1B4EC51D1EAA1A4800A85328 /* ploop.mp3 in Resources */,
+				1B4EC5181EA9243700A85328 /* POP.mp3 in Resources */,
 				F4469F761EA8C3360027C76D /* GameplayScene.sks in Resources */,
 				1BA6AEF61EA773F800BCCA0A /* GameMusic.mp3 in Resources */,
 				9582DB161E71A0A600335B2F /* Actions.sks in Resources */,
@@ -384,13 +428,16 @@
 				1BD728421E76DE5100CE0B2A /* menuVC.swift in Sources */,
 				1BD728481E76EF6D00CE0B2A /* multiplayerMenuVC.swift in Sources */,
 				1BA6AEF81EA7783400BCCA0A /* soundManager.swift in Sources */,
+				F4469F821EA9FDD70027C76D /* Map.swift in Sources */,
 				9582DB1A1E71A0A600335B2F /* GameViewController.swift in Sources */,
 				CFDF11871EA8E4D9008890BF /* gameOverVC.swift in Sources */,
 				9582DB121E71A0A600335B2F /* AppDelegate.swift in Sources */,
 				9565C3B11E76F6C400C5BF83 /* Player.swift in Sources */,
 				95D2557E1E7ABC6300DA813A /* ItemController.swift in Sources */,
+				1B4EC5161EA9040C00A85328 /* firstView.swift in Sources */,
 				9565C3AE1E76D76F00C5BF83 /* GameplaySceneClass.swift in Sources */,
 				0883BE581E8CF48600945A6A /* MultiplayerServiceManager.swift in Sources */,
+				F4469F7D1EA940970027C76D /* GameConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
