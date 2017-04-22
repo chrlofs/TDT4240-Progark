@@ -23,13 +23,25 @@ class GameConstants {
                 [-72, 90], [72, 90],
                 [-144, -20], [0, -20], [144, -20],
                 [-144, -200], [144, -200]],
-            backgroundName: "background4",
-            dropName: "fireball",
+            backgroundName: "background2",
+            dropName: "bomb",
             pegName: "pin"
         ),
         Map(
             id: 1,
             name: "Gotham",
+            pegList: [
+                [-144, 200], [0, 200], [144, 200],
+                [-72, 90], [72, 90],
+                [-144, -20], [0, -20], [144, -20],
+                [-144, -200], [144, -200]],
+            backgroundName: "background4",
+            dropName: "fireball",
+            pegName: "pin"
+        ),
+        Map(
+            id: 2,
+            name: "Medellin",
             pegList: [
                 [-144, 200], [0, 200], [144, 200],
                 [-72, 90], [72, 90],
@@ -39,7 +51,7 @@ class GameConstants {
             pegName: "pin"
         ),
         Map(
-            id: 2,
+            id: 3,
             name: "Sin City",
             pegList: [
                 [-100, 200], [0, 200], [100, 200],

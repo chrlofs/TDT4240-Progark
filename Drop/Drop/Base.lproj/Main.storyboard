@@ -75,15 +75,15 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3H6-mg-nyd">
                                 <rect key="frame" x="44" y="165" width="287" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" backgroundImage="button_multiplayer"/>
+                                <state key="normal" backgroundImage="ButtonMultiPlayer"/>
                                 <connections>
                                     <action selector="pushToMultiplayer:" destination="e1F-Ln-BDf" eventType="touchUpInside" id="Aor-Si-il3"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8dm-5F-497">
-                                <rect key="frame" x="44" y="100" width="287" height="51"/>
+                                <rect key="frame" x="44" y="100" width="287" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" backgroundImage="button_singleplayer"/>
+                                <state key="normal" backgroundImage="ButtonSinglePlayer-1"/>
                                 <connections>
                                     <action selector="pushToSingleplayer:" destination="e1F-Ln-BDf" eventType="touchUpInside" id="egV-Lu-tXT"/>
                                 </connections>
@@ -96,20 +96,20 @@
                                     <action selector="pushToOptions:" destination="e1F-Ln-BDf" eventType="touchUpInside" id="3fh-Iz-BVd"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGF-7l-JGa">
-                                <rect key="frame" x="44" y="231" width="287" height="53"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7bn-3v-cRk">
+                                <rect key="frame" x="44" y="295" width="287" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" backgroundImage="button_select_skin"/>
-                                <connections>
-                                    <action selector="pushToSelectSkin:" destination="e1F-Ln-BDf" eventType="touchUpInside" id="mgR-DF-XN2"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7bn-3v-cRk">
-                                <rect key="frame" x="139" y="306" width="77" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Select Map"/>
+                                <state key="normal" backgroundImage="ButtonSelectMap"/>
                                 <connections>
                                     <action selector="pushToSelectMap:" destination="e1F-Ln-BDf" eventType="touchUpInside" id="zYj-Z8-DM1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGF-7l-JGa">
+                                <rect key="frame" x="44" y="230" width="287" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="ButtonSelectSkin"/>
+                                <connections>
+                                    <action selector="pushToSelectSkin:" destination="e1F-Ln-BDf" eventType="touchUpInside" id="mgR-DF-XN2"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -592,19 +592,20 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ButtonMultiPlayer" width="1022" height="196"/>
+        <image name="ButtonSelectMap" width="1022" height="196"/>
+        <image name="ButtonSelectSkin" width="1022" height="196"/>
+        <image name="ButtonSinglePlayer-1" width="1022" height="196"/>
         <image name="background1" width="1242" height="2208"/>
         <image name="background2" width="1242" height="2208"/>
         <image name="button_back" width="81" height="81"/>
         <image name="button_fx" width="108" height="108"/>
         <image name="button_left" width="135" height="81"/>
         <image name="button_login" width="327" height="80"/>
-        <image name="button_multiplayer" width="918" height="141"/>
         <image name="button_music" width="237" height="239"/>
         <image name="button_ok" width="327" height="113"/>
         <image name="button_right" width="135" height="81"/>
-        <image name="button_select_skin" width="577" height="90"/>
         <image name="button_settings" width="132" height="132"/>
-        <image name="button_singleplayer" width="853" height="131"/>
         <image name="button_start_game" width="261" height="81"/>
         <image name="drop_logo" width="1008" height="1003"/>
         <image name="game_box" width="558" height="435"/>
