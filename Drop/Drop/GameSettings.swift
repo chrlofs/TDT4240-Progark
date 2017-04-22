@@ -67,7 +67,7 @@ class GameSettings {
     }
     public func setUserMapID(userMapID: Int) {
         self.userMapID = userMapID
-        defaults.set(userMapID, forKey: "userSkin")
+        defaults.set(userMapID, forKey: "userMapID")
     }
     
     public func isHighScore(score: Int) -> Bool {

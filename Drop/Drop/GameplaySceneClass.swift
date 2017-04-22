@@ -107,15 +107,18 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     private func initializeGame(){
         physicsWorld.contactDelegate = self;
         addChild(player)
-        createBackground()
+        
+        let map = gameConstants.getMapById(id: gameSettings.getUserMapID())
+
+        createBackground(map: map)
+        createEdgeFrame()
+        createObstacles(map: map)
+        
         player.zPosition = 2
         player.position = CGPoint(x: 0, y: -size.height * 0.42)
         
         scoreLabel = childNode(withName: "ScoreLabel") as? SKLabelNode!;
         scoreLabel?.text = "0";
-        createEdgeFrame()
-
-        createObstacles()
         
         center = self.frame.size.width / self.frame.size.height;
         audioPlayer.stopMusic()
@@ -147,16 +150,14 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
         
     }
     
-    func createObstacles(){
-        let map = gameConstants.getMapById(id: gameSettings.getUserMapID())
-        for peg in map.peg_points {
+    func createObstacles(map: Map){
+        for peg in map.pegList {
             self.scene?.addChild(obstacleController.createObstacle(x: peg[0], y: peg[1]))
         }
     }
     
-    func createBackground() {
-        let map = gameConstants.getMapById(id: 1)
-        let background = SKSpriteNode(imageNamed: "background4")
+    func createBackground(map: Map) {
+        let background = SKSpriteNode(imageNamed: map.backgroundName)
         background.size = CGSize(width: frame.size.width, height: frame.size.height)
         background.position = CGPoint(x: 0  , y: 0)
         self.scene?.addChild(background)
@@ -170,7 +171,8 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     
     //Adding a child (falling objects) to the scene
     func spawnItems(){
-        self.scene?.addChild(itemController.spawnItems());
+        let map = gameConstants.getMapById(id: gameSettings.getUserMapID())
+        self.scene?.addChild(itemController.spawnItems(dropImage: map.dropName));
     }
     
     func restartGame(){
