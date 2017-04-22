@@ -81,7 +81,7 @@ class soundManager {
     
     //UNMUTE FXPLAYER
     func unmuteFX(){
-        if musicPlaying{
+        if fxPlaying{
             fxPlayer.volume = 1
             fxMuted = false
         }
