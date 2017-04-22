@@ -215,9 +215,6 @@
 		9582DB101E71A0A600335B2F /* Drop */ = {
 			isa = PBXGroup;
 			children = (
-				9582DB1B1E71A0A600335B2F /* Main.storyboard */,
-				9582DB201E71A0A600335B2F /* LaunchScreen.storyboard */,
-				9582DB1E1E71A0A600335B2F /* Assets.xcassets */,
 				1BCF1A371EA76C40006F81F2 /* Sounds */,
 				9565C3A51E76D50000C5BF83 /* Scenes */,
 				9565C3A41E76D4F400C5BF83 /* Classes */,
@@ -229,7 +226,6 @@
 				CFDF11861EA8E4D9008890BF /* gameOverVC.swift */,
 				9582DB1E1E71A0A600335B2F /* Assets.xcassets */,
 				9582DB201E71A0A600335B2F /* LaunchScreen.storyboard */,
-				9582DB231E71A0A600335B2F /* Info.plist */,
 				08A9468F1EA8E0F400F68C8E /* MultiplayerGameViewController.swift */,
 				1BD728411E76DE5100CE0B2A /* menuVC.swift */,
 				1BD728491E76EF9500CE0B2A /* singleplayerMenuVC.swift */,
@@ -239,7 +235,6 @@
 				1BD728471E76EF6D00CE0B2A /* multiplayerMenuVC.swift */,
 				0883BE571E8CF48600945A6A /* NetworkServiceManager.swift */,
 				08A946971EA8F7B300F68C8E /* MultiplayerManager.swift */,
-				1BA6AEF71EA7783400BCCA0A /* soundManager.swift */,
 				1BFE0D301E800A56007E45F0 /* loginVC.swift */,
 				1B4EC5151EA9040C00A85328 /* firstView.swift */,
 				9582DB231E71A0A600335B2F /* Info.plist */,
