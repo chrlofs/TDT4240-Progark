@@ -40,6 +40,7 @@
 		9582DB2D1E71A0A600335B2F /* DropTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9582DB2C1E71A0A600335B2F /* DropTests.swift */; };
 		9582DB381E71A0A600335B2F /* DropUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9582DB371E71A0A600335B2F /* DropUITests.swift */; };
 		95D2557E1E7ABC6300DA813A /* ItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D2557D1E7ABC6300DA813A /* ItemController.swift */; };
+		CFDF11871EA8E4D9008890BF /* gameOverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDF11861EA8E4D9008890BF /* gameOverVC.swift */; };
 		A116EECF8EDD79490EA1EFA5 /* Pods_Drop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DD99354F8F5A28183EF8CFF /* Pods_Drop.framework */; };
 		DC11953B8B28A513E527E4BD /* Pods_DropUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 375F615263F148F31DB4AED1 /* Pods_DropUITests.framework */; };
 		F4469F711EA7BA170027C76D /* selectSkinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F701EA7BA170027C76D /* selectSkinVC.swift */; };
@@ -110,6 +111,7 @@
 		9582DB371E71A0A600335B2F /* DropUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropUITests.swift; sourceTree = "<group>"; };
 		9582DB391E71A0A600335B2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95D2557D1E7ABC6300DA813A /* ItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemController.swift; sourceTree = "<group>"; };
+		CFDF11861EA8E4D9008890BF /* gameOverVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gameOverVC.swift; sourceTree = "<group>"; };
 		A73993C42104BF301938CDD5 /* Pods-DropUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DropUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DropUITests/Pods-DropUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B392BB88C6C6EB9F9BA2B29F /* Pods-DropUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DropUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DropUITests/Pods-DropUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B5AD2A0F09D7D29C93E76F58 /* Pods-DropTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DropTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DropTests/Pods-DropTests.release.xcconfig"; sourceTree = "<group>"; };
