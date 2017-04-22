@@ -108,7 +108,7 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
         physicsWorld.contactDelegate = self;
         addChild(player)
         player.zPosition = 2
-        player.position = CGPoint(x: 0, y: -250)
+        player.position = CGPoint(x: 0, y: -size.height * 0.42)
         
         scoreLabel = childNode(withName: "ScoreLabel") as? SKLabelNode!;
         scoreLabel?.text = "0";
