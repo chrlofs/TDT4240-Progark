@@ -17,6 +17,7 @@ class GameSettings {
     private var userName: String
     private var userSkin: Int
     private var loggedIn: Bool
+    private var highScore: Int
     
     private init(){
         if let userName = defaults.string(forKey: "userName") {
@@ -28,6 +29,7 @@ class GameSettings {
         }
         
         self.userSkin = defaults.integer(forKey: "userSkin")
+        self.highScore = defaults.integer(forKey: "highScore")
     }
     
     public static func getInstance() -> GameSettings {
@@ -42,6 +44,10 @@ class GameSettings {
         return self.userSkin
     }
     
+    public func getHighScore() -> Int {
+        return self.highScore
+    }
+    
     public func setUserName(userName: String) {
         self.userName = userName
         self.loggedIn = true
@@ -53,9 +59,20 @@ class GameSettings {
         defaults.set(userSkin, forKey: "userSkin")
     }
     
+    public func isHighScore(score: Int) -> Bool {
+        if score > self.highScore {
+            self.highScore = score
+            defaults.set(self.highScore, forKey: "highScore")
+            return true
+        }
+        return false
+    }
+    
     public func isLoggedIn() -> Bool{
         return self.loggedIn
     }
+    
+    
     
     
     

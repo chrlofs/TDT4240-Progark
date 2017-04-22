@@ -45,9 +45,9 @@
 		F4469F711EA7BA170027C76D /* selectSkinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F701EA7BA170027C76D /* selectSkinVC.swift */; };
 		F4469F741EA8AD8B0027C76D /* ObstacleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F731EA8AD8B0027C76D /* ObstacleController.swift */; };
 		F4469F761EA8C3360027C76D /* GameplayScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F4469F751EA8C3360027C76D /* GameplayScene.sks */; };
-		F4469F7B1EA92D710027C76D /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F7A1EA92D710027C76D /* GameSettings.swift */; };
 		F4469F7D1EA940970027C76D /* GameConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F7C1EA940970027C76D /* GameConstants.swift */; };
 		F4469F821EA9FDD70027C76D /* Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F811EA9FDD70027C76D /* Map.swift */; };
+		F4FA9FF81EAA36560088640F /* GameSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F7A1EA92D710027C76D /* GameSettings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -263,6 +263,11 @@
 				F4469F791EA92D560027C76D /* Singletons */,
 				9582DB151E71A0A600335B2F /* Actions.sks */,
 				9582DB191E71A0A600335B2F /* GameViewController.swift */,
+				9582DB1B1E71A0A600335B2F /* Main.storyboard */,
+				CFDF11861EA8E4D9008890BF /* gameOverVC.swift */,
+				9582DB1E1E71A0A600335B2F /* Assets.xcassets */,
+				9582DB201E71A0A600335B2F /* LaunchScreen.storyboard */,
+				9582DB231E71A0A600335B2F /* Info.plist */,
 				08A9468F1EA8E0F400F68C8E /* MultiplayerGameViewController.swift */,
 				1BD728411E76DE5100CE0B2A /* menuVC.swift */,
 				1BD728491E76EF9500CE0B2A /* singleplayerMenuVC.swift */,
@@ -624,6 +629,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08FC23801EAA2F53003B063A /* Player.swift in Sources */,
+				F4FA9FF81EAA36560088640F /* GameSettings.swift in Sources */,
 				9565C3A71E76D53300C5BF83 /* MainMenuScene.swift in Sources */,
 				F4469F711EA7BA170027C76D /* selectSkinVC.swift in Sources */,
 				F4469F741EA8AD8B0027C76D /* ObstacleController.swift in Sources */,
@@ -639,7 +645,7 @@
 				08A946941EA8E2A900F68C8E /* MultiplayerGameScene.swift in Sources */,
 				F4469F821EA9FDD70027C76D /* Map.swift in Sources */,
 				9582DB1A1E71A0A600335B2F /* GameViewController.swift in Sources */,
-				F4469F7B1EA92D710027C76D /* GameSettings.swift in Sources */,
+				CFDF11871EA8E4D9008890BF /* gameOverVC.swift in Sources */,
 				9582DB121E71A0A600335B2F /* AppDelegate.swift in Sources */,
 				086354E61EA9401F00242D57 /* PlayerPeerTableCell.swift in Sources */,
 				95D2557E1E7ABC6300DA813A /* ItemController.swift in Sources */,
