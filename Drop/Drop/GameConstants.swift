@@ -20,12 +20,12 @@ class GameConstants {
             [-72, 90], [72, 90],
             [-144, -20], [0, -20], [144, -20],
             [-144, -200], [144, -200]
-            ], background: "background_standing3"),
+            ], background: "background2"),
         Map(id: 2, peg_points: [
             [-144, 200], [0, 200], [144, 200],
             [-72, 90], [72, 90],
             [-144, -20], [0, -20], [144, -20],
-            ], background: "background_standing3")
+            ], background: "background3")
     ]
     
     public let darkGreen = UIColor(red: 0.27, green: 0.57, blue: 0.53, alpha: 1.0)
