@@ -15,16 +15,21 @@ class GameConstants {
     private let skinList: [String] = ["skin1", "skin2", "skin3", "kim", "trump", "putin"]
     
     private let mapList: [Map] = [
-        Map(id: 1, peg_points: [
+        Map(id: 0, peg_points: [
             [-144, 200], [0, 200], [144, 200],
             [-72, 90], [72, 90],
             [-144, -20], [0, -20], [144, -20],
             [-144, -200], [144, -200]
             ], background: "background_standing3"),
-        Map(id: 2, peg_points: [
+        Map(id: 1, peg_points: [
             [-144, 200], [0, 200], [144, 200],
             [-72, 90], [72, 90],
             [-144, -20], [0, -20], [144, -20],
+            ], background: "background_standing3"),
+        Map(id: 2, peg_points: [
+            [-80, 300], [-20, 200], [80, 300],
+            [-100, 90], [100, 90],
+            [-150, -20], [20, -20], [150, -20],
             ], background: "background_standing3")
     ]
     

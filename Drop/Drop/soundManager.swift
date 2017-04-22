@@ -73,10 +73,7 @@ class soundManager {
     
     //MUTE FXPLAYER
     func muteFX(){
-        if fxPlaying{
-        fxPlayer.volume = 0
         fxMuted = true
-        }
     }
     
     //UNMUTE FXPLAYER
@@ -87,7 +84,7 @@ class soundManager {
         }
     }
     
-    
+
     //STOP MUSICPLAYER
     func stopMusic(){
         musicPlaying = false
