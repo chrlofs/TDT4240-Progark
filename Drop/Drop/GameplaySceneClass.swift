@@ -149,14 +149,14 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     
     func createObstacles(){
         let map = gameConstants.getMapById(id: 1)
-        for peg in map.peg_points {
+        for peg in map.pegList {
             self.scene?.addChild(obstacleController.createObstacle(x: peg[0], y: peg[1]))
         }
     }
     
     func createBackground() {
         let map = gameConstants.getMapById(id: 1)
-        let background = SKSpriteNode(imageNamed: "background4")
+        let background = SKSpriteNode(imageNamed: map.backgroundName)
         background.size = CGSize(width: frame.size.width, height: frame.size.height)
         background.position = CGPoint(x: 0  , y: 0)
         self.scene?.addChild(background)
@@ -170,7 +170,8 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     
     //Adding a child (falling objects) to the scene
     func spawnItems(){
-        self.scene?.addChild(itemController.spawnItems());
+        let map = gameConstants.getMapById(id: 1)
+        self.scene?.addChild(itemController.spawnItems(dropImage: map.dropName));
     }
     
     func restartGame(){

@@ -10,13 +10,19 @@ import Foundation
 
 class Map {
     let id: Int
-    let peg_points: [[Int]]
-    let background: String
+    let name: String
+    let pegList: [[Int]]
+    let backgroundName: String
+    let dropName: String
+    let pegName: String
     
-    init(id: Int, peg_points: [[Int]], background: String) {
+    init(id: Int, name: String, pegList: [[Int]], backgroundName: String, dropName: String, pegName: String) {
         self.id = id
-        self.peg_points = peg_points
-        self.background = background
+        self.name = name
+        self.pegList = pegList
+        self.backgroundName = backgroundName
+        self.dropName = dropName
+        self.pegName = pegName
     }
     
     func toJSON() -> [String: Any]{
