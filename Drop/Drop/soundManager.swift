@@ -87,7 +87,7 @@ class soundManager {
         }
     }
     
-    
+
     //STOP MUSICPLAYER
     func stopMusic(){
         musicPlaying = false
