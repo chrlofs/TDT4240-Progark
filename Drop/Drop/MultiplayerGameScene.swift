@@ -137,7 +137,7 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
             }
         } else if selfPlayer.peer.isLeader {
             // No drops in queue, spawn a new one
-            let drop = itemController.spawnItems()
+            let drop = itemController.spawnItems(dropImage: "fireball")
             let dropSpawnTime = poissonPoll(mean: 1)
             pendingDrops.append((currentTime + dropSpawnTime, drop))
             sendDropSpawned(drop: drop, spawnTime: dropSpawnTime)

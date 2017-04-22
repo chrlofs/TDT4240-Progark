@@ -23,7 +23,7 @@ class ItemController {
     private var minX = CGFloat(-190), maxX = CGFloat(190);
     
     func spawnItems(dropImage: String) -> SKSpriteNode {
-        let item = SKSpriteNode(imageNamed: "Bomb");
+        let item = SKSpriteNode(imageNamed: dropImage);
         item.name = "Bomb";
         item.size = CGSize(width: 50, height: 50)
         item.physicsBody = SKPhysicsBody(circleOfRadius: item.size.height / 2);
