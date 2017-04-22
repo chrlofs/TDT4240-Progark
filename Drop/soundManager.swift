@@ -14,7 +14,7 @@ class soundManager {
     //AUDIOPLAYERS
     var fxPlayer: AVAudioPlayer = AVAudioPlayer()
     var musicPlayer: AVAudioPlayer = AVAudioPlayer()
-
+    
     //FLAGS
     var fxPlaying = false
     var musicPlaying = false
@@ -34,9 +34,9 @@ class soundManager {
                 fxPlayer = try AVAudioPlayer(contentsOf: url)
                 fxPlayer.prepareToPlay()
                 fxPlayer.play()
-                }
-        
-            catch  { // couldn't load file :( 
+            }
+                
+            catch  { // couldn't load file :(
             }
         }
     }
@@ -78,13 +78,10 @@ class soundManager {
     
     //UNMUTE FXPLAYER
     func unmuteFX(){
-        if fxPlaying{
-            fxPlayer.volume = 1
-            fxMuted = false
-        }
+        fxMuted = false
     }
     
-
+    
     //STOP MUSICPLAYER
     func stopMusic(){
         musicPlaying = false
@@ -102,8 +99,8 @@ class soundManager {
     //UNMUTE MUSICPLAYER
     func unmuteMusic(){
         if musicPlaying{
-        musicPlayer.volume = 1
-        musicMuted = false
+            musicPlayer.volume = 1
+            musicMuted = false
         }
     }
 }
