@@ -22,13 +22,21 @@ class singleplayerMenuVC: UIViewController{
     @IBOutlet weak var playerSelfLabel: UILabel!
     @IBOutlet weak var highScoreLabel: UILabel!
     
+    override func viewWillAppear(_ animated: Bool) {
+        // Placed in "viewWillAppear" to make sure highScore is updated when
+        // "popToViewController" is used. Because viewDidLoad wont reload.
+        highScore = gameSettings.getHighScore()
+        OperationQueue.main.addOperation {
+            self.highScoreLabel.text = String(self.highScore)
+        }
+    }
+    
     override func viewDidLoad() {
         
         self.navigationController?.isNavigationBarHidden = true
         
         userName = gameSettings.getUserName()
         userSkin = gameSettings.getUserSkin()
-        highScore = gameSettings.getHighScore()
         
         let skins = gameConstants.getSkinList()
         
@@ -40,7 +48,6 @@ class singleplayerMenuVC: UIViewController{
             self.playerSelfSkin.image = self.userSkinImage
             self.playerSelfLabel.text = self.userName
             self.highScoreLabel.textColor = self.gameConstants.darkGreen
-            self.highScoreLabel.text = String(self.highScore)
         }
     }
     
