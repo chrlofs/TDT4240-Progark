@@ -37,6 +37,17 @@ class GameConstants {
             backgroundName: "background3",
             dropName: "fireball",
             pegName: "pin"
+        ),
+        Map(
+            id: 2,
+            name: "Sin City",
+            pegList: [
+                [-100, 200], [0, 200], [100, 200],
+                [-72, 90], [72, 90],
+                [-144, -20], [0, -20], [144, -20],],
+            backgroundName: "background5",
+            dropName: "bomb",
+            pegName: "pin"
         )
     ]
     
