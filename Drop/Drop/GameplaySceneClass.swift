@@ -107,6 +107,7 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     private func initializeGame(){
         physicsWorld.contactDelegate = self;
         addChild(player)
+        createBackground()
         player.zPosition = 2
         player.position = CGPoint(x: 0, y: -size.height * 0.42)
         
@@ -151,6 +152,14 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
         for peg in map.peg_points {
             self.scene?.addChild(obstacleController.createObstacle(x: peg[0], y: peg[1]))
         }
+    }
+    
+    func createBackground() {
+        let map = gameConstants.getMapById(id: 1)
+        let background = SKSpriteNode(imageNamed: "background4")
+        background.size = CGSize(width: frame.size.width, height: frame.size.height)
+        background.position = CGPoint(x: 0  , y: 0)
+        self.scene?.addChild(background)
     }
     
     private func managePlayer(){
