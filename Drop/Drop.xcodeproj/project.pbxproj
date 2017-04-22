@@ -238,7 +238,6 @@
 				1BD728471E76EF6D00CE0B2A /* multiplayerMenuVC.swift */,
 				0883BE571E8CF48600945A6A /* NetworkServiceManager.swift */,
 				08A946971EA8F7B300F68C8E /* MultiplayerManager.swift */,
-				1BA6AEF71EA7783400BCCA0A /* soundManager.swift */,
 				1BFE0D301E800A56007E45F0 /* loginVC.swift */,
 				1B4EC5151EA9040C00A85328 /* firstView.swift */,
 				9582DB231E71A0A600335B2F /* Info.plist */,
