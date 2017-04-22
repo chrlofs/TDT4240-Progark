@@ -23,31 +23,46 @@ class ItemController {
     private var minX = CGFloat(-190), maxX = CGFloat(190);
     
     func spawnItems(dropImage: String) -> SKSpriteNode {
-        
-        let item: SKSpriteNode?;
-
-        item = SKSpriteNode(imageNamed: dropImage);
-        item!.name = "Bomb";
-        item!.size = CGSize(width: 50, height: 50)
-        //item!.setScale(0.6);
-        item!.physicsBody = SKPhysicsBody(circleOfRadius: item!.size.height / 2);
-            
-        
+        let item = SKSpriteNode(imageNamed: "Bomb");
+        item.name = "Bomb";
+        item.size = CGSize(width: 50, height: 50)
+        item.physicsBody = SKPhysicsBody(circleOfRadius: item.size.height / 2);
         
         // Sets the collision bitmask to FRUIT_AND_BOMB (1)
-        item!.physicsBody?.categoryBitMask = ColliderType.FRUIT_AND_BOMB;
-        item!.physicsBody?.restitution = 1;
-        item!.physicsBody?.mass = 1;
-        item!.physicsBody?.collisionBitMask = ColliderType.ACTIVE_OBSTACLE | ColliderType.FRUIT_AND_BOMB
+        item.physicsBody?.categoryBitMask = ColliderType.FRUIT_AND_BOMB;
+        item.physicsBody?.restitution = 1;
+        item.physicsBody?.mass = 1;
+        item.physicsBody?.collisionBitMask = ColliderType.ACTIVE_OBSTACLE | ColliderType.FRUIT_AND_BOMB
         
-        item!.zPosition = 3;
-        item!.anchorPoint = CGPoint(x: 0.5, y: 0.5);
+        item.zPosition = 3;
+        item.anchorPoint = CGPoint(x: 0.5, y: 0.5);
         
         // Spawn the item at a random x value inside the screen
-        item!.position.x = randomBetweenNumbers(firstNum: minX, secondNum: maxX);
-        item!.position.y = 500; 
+        item.position.x = randomBetweenNumbers(firstNum: minX, secondNum: maxX);
+        item.position.y = 500;
         
-        return item!;
+        return item;
+    }
+    
+    func spawnItemAt(position: CGPoint) -> SKSpriteNode {
+        let item = SKSpriteNode(imageNamed: "Bomb")
+
+        item.setScale(0.6)
+        item.physicsBody = getNewPhysicsBody(for: item)
+        item.zPosition = 3
+        item.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        item.position = position
+        
+        return item
+    }
+    
+    private func getNewPhysicsBody(for item: SKSpriteNode) -> SKPhysicsBody {
+        let physicsBody = SKPhysicsBody(circleOfRadius: item.size.height / 2)
+        physicsBody.categoryBitMask = ColliderType.FRUIT_AND_BOMB
+        physicsBody.collisionBitMask = ColliderType.ACTIVE_OBSTACLE | ColliderType.FRUIT_AND_BOMB
+        physicsBody.restitution = 1
+        physicsBody.mass = 1
+        return physicsBody
     }
     
     // Returns random numbers between to parameters.

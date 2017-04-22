@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 class gameOverVC: UIViewController {
+    let musicPlayer = soundManager.sharedInstance
     let gameSettings = GameSettings.getInstance()
     var userScore = Int()
     
@@ -26,6 +27,8 @@ class gameOverVC: UIViewController {
         let controllers = self.navigationController?.viewControllers
         for vc in controllers! {
             if vc is singleplayerMenuVC {
+                musicPlayer.stopMusic()
+                musicPlayer.playMusic(fileName: "GameMusic", fileType: "mp3")
                 _ = self.navigationController?.popToViewController(vc as! singleplayerMenuVC, animated: true)
             }
         }
