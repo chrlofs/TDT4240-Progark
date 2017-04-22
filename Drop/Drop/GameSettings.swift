@@ -19,7 +19,6 @@ class GameSettings {
     private var loggedIn: Bool
     private var highScore: Int
     
-    
     private init(){
         if let userName = defaults.string(forKey: "userName") {
             self.userName = userName

@@ -45,6 +45,14 @@ class GameConstants {
         return self.skinList
     }
     
+    public func getSkinImage(skinIndex: Int) -> String {
+        if skinList.count > skinIndex {
+            return skinList[skinIndex]
+        } else {
+            return skinList[0]
+        }
+    }
+    
     public func getMapList() -> [Map] {
         return self.mapList
     }

@@ -12,8 +12,6 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     let gameConstants = GameConstants.getInstance()
     let audioPlayer = soundManager.sharedInstance
     var gameManager: GameManager?
-    
-    private var player: Player?;
     private var center = CGFloat();
     private var canMove = false, moveLeft = false;
     private var itemController = ItemController();
@@ -22,8 +20,16 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     private var storedTouches = [UITouch: String]();
     private var obstacleController = ObstacleController();
     
+    let gameSettings = GameSettings.getInstance()
+    
+    private lazy var player: Player = {
+        let skinIndex = self.gameSettings.getUserSkin()
+        let skinImage = self.gameConstants.getSkinImage(skinIndex: skinIndex)
+        return Player(skinImageName: skinImage)
+    }()
+    
     override func didMove(to view: SKView) {
-        initializeGame()
+        initializeGame();
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -100,9 +106,9 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     
     private func initializeGame(){
         physicsWorld.contactDelegate = self;
-        
-        player = childNode(withName: "Player") as? Player!;
-        player?.InitializePlayer();
+        addChild(player)
+        player.zPosition = 2
+        player.position = CGPoint(x: 0, y: -250)
         
         scoreLabel = childNode(withName: "ScoreLabel") as? SKLabelNode!;
         scoreLabel?.text = "0";
@@ -149,7 +155,7 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     
     private func managePlayer(){
         if canMove{
-            player?.move(left: moveLeft);
+            player.move(left: moveLeft);
         }
     }
     
