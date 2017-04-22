@@ -16,7 +16,7 @@ class GameConstants {
 
     private let mapList: [Map] = [
         Map(
-            id: 1,
+            id: 0,
             name: "Metropolis",
             pegList: [
                 [-144, 200], [0, 200], [144, 200],
@@ -28,7 +28,7 @@ class GameConstants {
             pegName: "pin"
         ),
         Map(
-            id: 2,
+            id: 1,
             name: "Gotham",
             pegList: [
                 [-144, 200], [0, 200], [144, 200],

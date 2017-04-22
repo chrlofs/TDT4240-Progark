@@ -12,10 +12,8 @@ class selectMapVC: UIViewController{
     let gameSettings = GameSettings.getInstance()
     let gameConstants = GameConstants.getInstance()
     
-    
-    @IBOutlet weak var textField: UITextField!
-    
-    
+    @IBOutlet weak var mapNameLabel: UILabel!
+    @IBOutlet weak var mapBackgroundImage: UIImageView!
     
     @IBAction func Back(_ sender: UIButton) {
         backToMenu()
@@ -28,7 +26,8 @@ class selectMapVC: UIViewController{
         if (newMapIndex < 0) {
             newMapIndex = newMapIndex + maps.count
         }
-        textField.text = String(gameConstants.getMapById(id: newMapIndex).id)
+        mapNameLabel.text = String(gameConstants.getMapById(id: newMapIndex).name)
+        mapBackgroundImage.image = UIImage(named: String(gameConstants.getMapById(id: newMapIndex).backgroundName))
         gameSettings.setUserMapID(userMapID: newMapIndex)
         
         
@@ -37,15 +36,19 @@ class selectMapVC: UIViewController{
     @IBAction func mapRight(_ sender: UIButton) {
         let maps = gameConstants.getMapList()
         let newMapIndex = (gameSettings.getUserMapID() + 1) % maps.count
-        textField.text = String(gameConstants.getMapById(id: newMapIndex).id)
+        mapNameLabel.text = String(gameConstants.getMapById(id: newMapIndex).name)
+        mapBackgroundImage.image = UIImage(named: String(gameConstants.getMapById(id: newMapIndex).backgroundName))
         gameSettings.setUserMapID(userMapID: newMapIndex)
+        
         
         
     }
     
     override func viewDidLoad() {
         self.navigationController?.isNavigationBarHidden = true
-        textField.text = String(gameConstants.getMapById(id: gameSettings.getUserMapID()).id)
+        mapNameLabel.textColor = gameConstants.darkGreen
+        mapNameLabel.text = String(gameConstants.getMapById(id: gameSettings.getUserMapID()).name)
+        mapBackgroundImage.image = UIImage(named: String(gameConstants.getMapById(id: gameSettings.getUserMapID()).backgroundName))
         
     }
     func backToMenu(){
