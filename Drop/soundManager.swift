@@ -11,6 +11,8 @@ import AVFoundation
 
 class soundManager {
     
+    private let defaults = UserDefaults.standard
+    
     //AUDIOPLAYERS
     var fxPlayer: AVAudioPlayer = AVAudioPlayer()
     var musicPlayer: AVAudioPlayer = AVAudioPlayer()
@@ -24,6 +26,12 @@ class soundManager {
     //SINGLETON
     static let sharedInstance = soundManager()
     
+    init() {
+        musicMuted = defaults.bool(forKey: "musicMuted")
+        fxMuted = defaults.bool(forKey: "fxMuted")
+        print(fxMuted)
+        print(musicMuted)
+    }
     
     
     //USE FXPLAYER
@@ -74,11 +82,13 @@ class soundManager {
     //MUTE FXPLAYER
     func muteFX(){
         fxMuted = true
+        defaults.set(true, forKey: "fxMuted")
     }
     
     //UNMUTE FXPLAYER
     func unmuteFX(){
         fxMuted = false
+        defaults.set(false, forKey: "fxMuted")
     }
     
     
@@ -93,6 +103,7 @@ class soundManager {
         if musicPlaying{
             musicPlayer.volume = 0
             musicMuted = true
+            defaults.set(true, forKey: "musicMuted")
         }
     }
     
@@ -101,6 +112,7 @@ class soundManager {
         if musicPlaying{
             musicPlayer.volume = 1
             musicMuted = false
+            defaults.set(false, forKey: "musicMuted")
         }
     }
 }
