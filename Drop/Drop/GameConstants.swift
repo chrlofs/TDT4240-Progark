@@ -25,7 +25,8 @@ class GameConstants {
                 [-144, -200], [144, -200]],
             backgroundName: "background2",
             dropName: "fireball",
-            pegName: "pin"
+            pegName: "peg1",
+            pegInactiveName: "pegInactive1"
         ),
         Map(
             id: 1,
@@ -37,7 +38,8 @@ class GameConstants {
                 [-144, -200], [144, -200]],
             backgroundName: "background4",
             dropName: "blackWhite",
-            pegName: "pin"
+            pegName: "peg2",
+            pegInactiveName: "pegInactive2"
         ),
         Map(
             id: 2,
@@ -48,7 +50,8 @@ class GameConstants {
                 [-144, -20], [0, -20], [144, -20],],
             backgroundName: "background3",
             dropName: "fireball",
-            pegName: "pin"
+            pegName: "peg4",
+            pegInactiveName: "pegInactive4"
         ),
         Map(
             id: 3,
@@ -59,7 +62,8 @@ class GameConstants {
                 [-144, -20], [0, -20], [144, -20],],
             backgroundName: "background5",
             dropName: "whiteBlack",
-            pegName: "pin"
+            pegName: "peg3",
+            pegInactiveName: "pegInactive3"
         )
     ]
     
@@ -98,6 +102,6 @@ class GameConstants {
                 return map
             }
         }
-        return Map(id: 0, name: "Default", pegList: [[-72, 90], [72, 90]], backgroundName: "background2", dropName: "blackWhite", pegName: "pin")
+        return Map(id: 0, name: "Default", pegList: [[-72, 90], [72, 90]], backgroundName: "background2", dropName: "blackWhite", pegName: "peg1", pegInactiveName: "pegInactive1")
     }
 }

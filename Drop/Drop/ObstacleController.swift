@@ -14,12 +14,17 @@ class ObstacleController{
     var obstacleStatusDict = [Int: Bool]();
     var activeObstacleSet = Set<Int>();
     var inactiveObstacleSet = Set<Int>();
+    var pegName = ""
+    var pegInactiveName = ""
         
     // Initializing a Obstacle object
-    func createObstacle(x: Int, y: Int) -> SKSpriteNode {
+    func createObstacle(x: Int, y: Int, map: Map) -> SKSpriteNode {
+        pegName = map.pegName
+        pegInactiveName = map.pegInactiveName
+        
         let obstacle: SKSpriteNode;
-        obstacle = SKSpriteNode(imageNamed: "pin");
-        obstacle.setScale(0.5);
+        obstacle = SKSpriteNode(imageNamed: pegName);
+        obstacle.setScale(0.4);
         obstacle.name = "Obstacle\(self.numberOfObstacles)";
         
         
@@ -67,7 +72,7 @@ class ObstacleController{
     
     func deactivateObstacle(obstacleId: Int) {
         let obstacle = self.obstacleDict[obstacleId];
-        obstacle!.texture = SKTexture(imageNamed: "pin_blurred");
+        obstacle!.texture = SKTexture(imageNamed: pegInactiveName);
         obstacle!.physicsBody?.categoryBitMask = ColliderType.INACTIVE_OBSTACLE;
         obstacle!.physicsBody?.contactTestBitMask = 0;
         obstacle!.zPosition = 1;
@@ -77,7 +82,7 @@ class ObstacleController{
     
     func activateObstacle(obstacleId: Int) {
         let obstacle = self.obstacleDict[obstacleId];
-        obstacle!.texture = SKTexture(imageNamed: "pin");
+        obstacle!.texture = SKTexture(imageNamed: pegName);
         obstacle!.physicsBody?.categoryBitMask = ColliderType.ACTIVE_OBSTACLE;
         obstacle!.physicsBody?.contactTestBitMask = ColliderType.FRUIT_AND_BOMB;
         obstacle!.zPosition = 3;
