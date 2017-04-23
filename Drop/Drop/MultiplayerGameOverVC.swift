@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class MultiplayerGameOverViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+class MultiplayerGameOverVC: UIViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
 
     @IBOutlet weak var winnerSkinImage: UIImageView!
     @IBOutlet weak var winnerNameLabel: UILabel!
@@ -48,7 +48,6 @@ class MultiplayerGameOverViewController: UIViewController, UICollectionViewDeleg
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let numSections = Int(ceil(Double(losers.count) / 2))
-        print("numSections: \(numSections), index: \(section)")
         let isLastRow = (section == numSections - 1)
         let cellCount = CGFloat(isLastRow ? 1 : 2)
         
@@ -73,16 +72,15 @@ class MultiplayerGameOverViewController: UIViewController, UICollectionViewDeleg
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         let numSections = Int(ceil(Double(losers.count) / 2))
-        let isLastRow = (section == numSections - 1)
-        return isLastRow ? 1 : 2
+        return (section < numSections - 1) ? 2 : (losers.count % 2 == 0 ? 2 : 1)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = playerCollectionView.dequeueReusableCell(withReuseIdentifier: "MultiplayerGameOverPlayerCollectionCell", for: indexPath) as! PlayerCollectionCell
         
-        let loserIndex = indexPath.row * losersPerSection + indexPath.item
-        
+        let loserIndex = indexPath.section * losersPerSection + indexPath.item
+        print("loserIndex: \(loserIndex) of \(losers.count)")
         if losers.count > loserIndex {
             let loser = losers[loserIndex]
             cell.userName.text = loser.name

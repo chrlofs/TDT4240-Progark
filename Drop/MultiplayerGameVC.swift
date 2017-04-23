@@ -14,7 +14,7 @@ protocol MultiplayerGameManager {
     func gameOver(winner: PlayerPeer?, losers: [PlayerPeer])
 }
 
-class MultiplayerGameViewController: UIViewController, MultiplayerGameManager {
+class MultiplayerGameVC: UIViewController, MultiplayerGameManager {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +42,7 @@ class MultiplayerGameViewController: UIViewController, MultiplayerGameManager {
             view.presentScene(nil)
         }
         
-        let gameOverController = self.storyboard?.instantiateViewController(withIdentifier: "MultiplayerGameOverViewController") as! MultiplayerGameOverViewController
+        let gameOverController = self.storyboard?.instantiateViewController(withIdentifier: "MultiplayerGameOverVC") as! MultiplayerGameOverVC
         gameOverController.initialize(winner: winner, losers: losers)
         self.navigationController?.pushViewController(gameOverController, animated: true)
     }

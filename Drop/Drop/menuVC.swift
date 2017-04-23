@@ -45,8 +45,8 @@ class menuVC: UIViewController{
         self.navigationController?.pushViewController(optionsVC, animated: true)
     }
     func moveToMultiplayer() {
-        let multiplayerMenuVC = self.storyboard?.instantiateViewController(withIdentifier: "multiplayerMenuVC") as! multiplayerMenuVC
-        self.navigationController?.pushViewController(multiplayerMenuVC, animated: true)
+        let multiplayerLobbyVC = self.storyboard?.instantiateViewController(withIdentifier: "MultiplayerLobbyVC") as! MultiplayerLobbyVC
+        self.navigationController?.pushViewController(multiplayerLobbyVC, animated: true)
     }
     func moveToSelectSkin() {
         let selectSkinVC = self.storyboard?.instantiateViewController(withIdentifier: "selectSkinVC") as! selectSkinVC
