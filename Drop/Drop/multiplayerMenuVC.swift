@@ -13,6 +13,8 @@ import MultipeerConnectivity
 class multiplayerMenuVC : UIViewController, UITableViewDataSource, UITableViewDelegate, MultiplayerManagerObserver {
     // ID must be unique among MultiplayerServiceObservers
     var id: String = "MULTIPLAYER_MENU_VC"
+    
+    let constants = GameConstants.getInstance()
     let multiplayerManager = MultiplayerManager.getInstance()
     
     @IBOutlet weak var playerTableView: UITableView!
@@ -48,7 +50,7 @@ class multiplayerMenuVC : UIViewController, UITableViewDataSource, UITableViewDe
         OperationQueue.main.addOperation {
             self.playerTableView.reloadData()
             
-            if (self.multiplayerManager.players.count == 2) {
+            if (self.multiplayerManager.players.count == self.constants.maxPlayersInMultiplayerGame) {
                 print("Let's go to game")
                 self.goToGame()
             }

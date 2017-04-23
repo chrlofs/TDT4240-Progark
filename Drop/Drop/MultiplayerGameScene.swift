@@ -8,116 +8,148 @@
 
 import Foundation
 import SpriteKit
+import GameKit
 import TrueTime
 
-extension Date {
-    var millisecondsSince1970:Int {
-        return Int((self.timeIntervalSince1970 * 1000.0).rounded())
-    }
-    
-    init(milliseconds:Int) {
-        self = Date(timeIntervalSince1970: TimeInterval(milliseconds / 1000))
-    }
-}
-
 class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManagerObserver {
+    // MARK: - VARIABLES
+    // Services
+    private let constants = GameConstants.getInstance()
+    private let multiplayerManager = MultiplayerManager.getInstance()
+    private let realtime = RealTime.getInstance()
     
-    let constants = GameConstants.getInstance()
-    let multiplayerManager = MultiplayerManager.getInstance()
-    let truetime = TrueTimeClient.sharedInstance
+    // Controllers
+    private let itemController = ItemController();
+    private let obstacleController = ObstacleController()
+    private var random = RandomGenerator()
     
-    private var itemController = ItemController();
+    // Input management
+    private var storedTouches = [UITouch: String]()
     
+    // Game objects
     var opponents = [MultiplayerGamePlayer]()
-    
     lazy var selfPlayer: MultiplayerGamePlayer = {
         let selfPeer = self.multiplayerManager.selfPlayer
         let selfSkinImage = self.constants.getSkinImage(skinIndex: selfPeer.skin)
         return MultiplayerGamePlayer(peer: selfPeer, skinImageName: selfSkinImage)
     }()
     
+    // Timing
+    var startTime: Int?
+    var lastUpdate: CFTimeInterval = 0
+    var nextDrop: Int?
+    var nextPegToggle: Int?
     
+    // MARK: - INITIALIZATION
     override func didMove(to view: SKView) {
-        truetime.start()
-        
-        // OBSERVER LOGIC
+        // Register to multiplayer events
         multiplayerManager.registerObserver(observer: self)
-        
         
         // If leader, set the game up
         if selfPlayer.peer.isLeader {
             setupGame()
+            realtime.getNow(then: { now in
+                self.startTime = now
+                self.sendInit(startTime: now)
+            })
         }
     }
     
-    
+    // Leader Setup Game
     func setupGame() {
-        // GAME LOGIC
-        let opponentPeers = multiplayerManager.players.filter { $0.id != selfPlayer.peer.id }
-        for opponentPeer in opponentPeers {
-            let opponentSkinImage = constants.getSkinImage(skinIndex: opponentPeer.skin)
-            let opponent = MultiplayerGamePlayer(peer: opponentPeer, skinImageName: opponentSkinImage)
-            opponents.append(opponent)
-        }
-        
-        // Set positions
-        selfPlayer.position = CGPoint(x: -100, y: -250)
+        // Setup self
+        selfPlayer.position = CGPoint(x: -100, y: -350)
         selfPlayer.zPosition = 2
         addChild(selfPlayer)
         
-        for (index, opponent) in opponents.enumerated() {
-            opponent.position = CGPoint(x: -100 + (index + 1) * 200, y: -250)
+        // Setup opponents
+        let opponentPeers = multiplayerManager.players.filter { $0.id != selfPlayer.peer.id }
+        for (index, opponentPeer) in opponentPeers.enumerated() {
+            let opponentSkinImage = constants.getSkinImage(skinIndex: opponentPeer.skin)
+            let opponent = MultiplayerGamePlayer(peer: opponentPeer, skinImageName: opponentSkinImage)
+            opponent.position = CGPoint(x: -100 + (index + 1) * 200, y: -350)
             opponent.zPosition = 1
+            opponents.append(opponent)
             addChild(opponent)
         }
         
-        center = self.frame.size.width / self.frame.size.height;
+        // Setup pegs
+        createObstacles()
         
-        sendGameInit()
+        // Setup edges
+        createEdgeFrame()
     }
     
-    // MARK: - GAME LOGIC
-    private var center = CGFloat()
-    private var storedTouches = [UITouch: String]()
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches {
-            let location = touch.location(in: self);
-            
-            if location.x > center {
-                selfPlayer.dx = 1
-                storedTouches[touch] = "right";
+    // Peer Setup Game
+    func setupGame(startTime: Int, seeds: (dropSpawnTimeSeed: Int, dropSpawnPositionSeed: Int, pegIndexSeed: Int, pegToggleTimeSeed: Int), players: [(x: CGFloat, y: CGFloat, leaderScore: Int)]) {
+        // Setup time
+        self.startTime = startTime
+        
+        // Setup random generator
+        random = RandomGenerator(
+            dropSpawnTimeSeed: seeds.dropSpawnTimeSeed,
+            dropSpawnPositionSeed: seeds.dropSpawnPositionSeed,
+            pegIndexSeed: seeds.pegIndexSeed,
+            pegToggleTimeSeed: seeds.pegToggleTimeSeed
+        )
+        
+        // Setup players
+        let opponentPeers = multiplayerManager.players
+        for player in players {
+            if selfPlayer.peer.leaderScore == player.leaderScore {
+                // Setup self
+                selfPlayer.position = CGPoint(x: player.x, y: player.y)
+                selfPlayer.zPosition = 2
+                addChild(selfPlayer)
+            } else {
+                // Setup opponent
+                if let opponentPeer = (opponentPeers.first { $0.leaderScore == player.leaderScore }) {
+                    let opponentSkinImage = constants.getSkinImage(skinIndex: opponentPeer.skin)
+                    let opponent = MultiplayerGamePlayer(peer: opponentPeer, skinImageName: opponentSkinImage)
+                    opponent.position = CGPoint(x: player.x, y: player.y)
+                    opponent.zPosition = 1
+                    opponents.append(opponent)
+                    addChild(opponent)
+                }
             }
-            else {
-                selfPlayer.dx = -1
-                storedTouches[touch] = "left";
-            }
-            sendGamePlayerUpdate()
-        }
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for touch in touches{
-            storedTouches[touch] = nil;
         }
         
-        if storedTouches.isEmpty {
-            selfPlayer.dx = 0
-            sendGamePlayerUpdate()
+        // Setup pegs
+        createObstacles()
+        
+        // Setup edges
+        createEdgeFrame()
+    }
+    
+    
+    func createObstacles(){
+        let map = constants.getMapById(id: 1)
+        for peg in map.peg_points {
+            addChild(obstacleController.createObstacle(x: peg[0], y: peg[1]))
         }
     }
-    
-    func poissonPoll(mean: Double) -> Double {
-        let random = Double(arc4random_uniform(UInt32.max)) / Double(UInt32.max)
-        let nextEvent = -mean * log(random)
-        return nextEvent
-    }
-    
-    var syncDelay = 0.0
-    var pendingDrops = [(spawnTime: CFTimeInterval, drop: SKSpriteNode)]()
-    var lastUpdate: CFTimeInterval = 0
-    var lastSync: CFTimeInterval = 0
 
+    func createEdgeFrame() {
+        var splinePointsLeft = [CGPoint(x:-225, y: 400), CGPoint(x:-225, y: -400)]
+        let leftEdge = SKShapeNode(splinePoints: &splinePointsLeft, count: splinePointsLeft.count)
+        leftEdge.lineWidth = 0
+        leftEdge.physicsBody = SKPhysicsBody(edgeChainFrom: leftEdge.path!)
+        leftEdge.physicsBody?.restitution = 0.75
+        leftEdge.physicsBody?.isDynamic = false;
+        
+        var splinePointsRight = [CGPoint(x:225, y: 400), CGPoint(x:225, y: -400)]
+        let rightEdge = SKShapeNode(splinePoints: &splinePointsRight, count: splinePointsRight.count)
+        rightEdge.lineWidth = 0
+        rightEdge.physicsBody = SKPhysicsBody(edgeChainFrom: rightEdge.path!)
+        rightEdge.physicsBody?.restitution = 0.75
+        rightEdge.physicsBody?.isDynamic = false;
+        
+        self.scene?.addChild(leftEdge)
+        self.scene?.addChild(rightEdge)
+    }
+
+    
+    // MARK: - GAME LOOP
     override func update(_ currentTime: TimeInterval) {
         let deltaSeconds = currentTime - lastUpdate
         
@@ -126,53 +158,67 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
         for opponent in opponents {
             opponent.update(delta: deltaSeconds)
         }
-        
-        // Update falling objects
-        let syncedNow = currentTime - syncDelay
-        if pendingDrops.count > 0 {
-            let nextDrop = pendingDrops[0]
-            if syncedNow > nextDrop.spawnTime {
-                addChild(nextDrop.drop)
-                pendingDrops.remove(at: 0)
-            }
-        } else if selfPlayer.peer.isLeader {
-            // No drops in queue, spawn a new one
-            let drop = itemController.spawnItems()
-            let dropSpawnTime = poissonPoll(mean: 1)
-            pendingDrops.append((currentTime + dropSpawnTime, drop))
-            sendDropSpawned(drop: drop, spawnTime: dropSpawnTime)
-        }
-        
-        // Send leader's clock for sync every 1s
-        if selfPlayer.peer.isLeader {
-            let timeSinceLastSync = currentTime - lastSync
-            if timeSinceLastSync >= 1 {
-                sendSync()
-                lastSync = currentTime
-            }
-        }
-        
+
         lastUpdate = currentTime
+        
+        // Run real-time critical objects using NTP server-time
+        if
+            let now = realtime.getNow(),
+            let start = startTime
+        {
+            updateRealTime(currentTime: now, startTime: start)
+        }
+        
     }
     
-    // MARK: - OBSERVER LOGIC
-    var id = "MULTIPLAYER_GAME_SCENE"
+    func updateRealTime(currentTime: Int, startTime: Int) {
+        // Update drops
+        if let nextDropTime = nextDrop {
+            if currentTime > nextDropTime {
+                let drop = itemController.spawnItemAt(position: random.pollDropSpawnPosition())
+                addChild(drop)
+                nextDrop = nextDropTime + random.pollDropSpawnTime()
+            }
+        } else {
+            nextDrop = startTime + random.pollDropSpawnTime()
+        }
+        
+        // Update pegs
+        if let nextPegToggleTime = nextPegToggle {
+            if currentTime > nextPegToggleTime {
+                let pegIndex = random.pollPegIndex(pegCount: obstacleController.numberOfObstacles)
+                obstacleController.animateObstacle(obstacleId: pegIndex)
+                nextPegToggle = nextPegToggleTime + random.pollPegToggleTime()
+            }
+        } else {
+            nextPegToggle = startTime + random.pollPegToggleTime()
+        }
+    }
+
+    
+    // MARK: - NETWORK COMMUNICATION
+    var id = "MULTIPLAYER_GAME_SCENE" // Required for observer protocol
     
     let GAME_INIT_TOPIC = "GAME_INIT"
     let GAME_PLAYER_UPDATE_TOPIC = "GAME_PLAYER_UPDATE"
-    let GAME_DROP_SPAWNED_TOPIC = "GAME_DROP_SPAWNED"
-    let GAME_SYNC_TOPIC = "GAME_SYNC"
     
-    func sendGameInit() {
+    func sendInit(startTime: Int) {
         let players = [selfPlayer] + opponents
+        let seeds = random.getSeeds()
+        
         let message = [
             "topic": GAME_INIT_TOPIC,
+            "startTime": startTime,
+            "dropSpawnTimeSeed": seeds.dropSpawnTimeSeed,
+            "dropSpawnPositionSeed": seeds.dropSpawnPositionSeed,
+            "pegIndexSeed": seeds.pegIndexSeed,
+            "pegToggleTimeSeed": seeds.pegToggleTimeSeed,
             "players": players.map({ $0.toJSON() })
-        ] as [String: Any]
+            ] as [String: Any]
         multiplayerManager.send(message: message)
     }
     
-    func sendGamePlayerUpdate() {
+    func sendPlayerUpdate() {
         let message = [
             "topic": GAME_PLAYER_UPDATE_TOPIC,
             "x": selfPlayer.position.x,
@@ -180,28 +226,6 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
             "dx": selfPlayer.dx
         ] as [String: Any]
         multiplayerManager.send(message: message)
-    }
-    
-    func sendDropSpawned(drop: SKSpriteNode, spawnTime: CFTimeInterval) {
-        let message = [
-            "topic": GAME_DROP_SPAWNED_TOPIC,
-            "spawnTime": Double(spawnTime),
-            "x": drop.position.x,
-            "y": drop.position.y
-        ] as [String: Any]
-        multiplayerManager.send(message: message)
-    }
-    
-    func sendSync() {
-        if let referenceTime = truetime.referenceTime {
-            let now = referenceTime.now().millisecondsSince1970
-            
-            let message = [
-                "topic": GAME_SYNC_TOPIC,
-                "time": now
-            ] as [String: Any]
-            multiplayerManager.send(message: message)
-        }
     }
     
     func notifyPlayersChange() {
@@ -218,44 +242,34 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
                 handleGamePlayerUpdate(fromPlayer: opponent, message: message)
             }
             break
-        case GAME_DROP_SPAWNED_TOPIC:
-            handleDropSpawned(message: message)
-            break
-        case GAME_SYNC_TOPIC:
-            handleGameSync(message: message)
-            break
         default:
             return
         }
     }
     
     func handleGameInit(initMessage: [String: Any]) {
-        let opponentPeers = multiplayerManager.players
-
-        let players = initMessage["players"] as! [[String: Any]]
-        for player in players {
-            let playerLeaderScore = player["leaderScore"] as! Int
-            let playerPosX = player["x"] as! CGFloat
-            let playerPosY = player["y"] as! CGFloat
-            
-            if selfPlayer.peer.leaderScore == playerLeaderScore {
-                selfPlayer.position = CGPoint(x: playerPosX, y: playerPosY)
-                selfPlayer.zPosition = 2
-            } else {
-                if let opponentPeer = (opponentPeers.first { $0.leaderScore == playerLeaderScore }) {
-                    let opponentSkinImage = constants.getSkinImage(skinIndex: opponentPeer.skin)
-                    let opponent = MultiplayerGamePlayer(peer: opponentPeer, skinImageName: opponentSkinImage)
-                    opponent.position = CGPoint(x: playerPosX, y: playerPosY)
-                    opponent.zPosition = 1
-                    opponents.append(opponent)
-                }
-            }
+        // Extract startTime
+        let startTime = initMessage["startTime"] as! Int
+        
+        // Extract seeds
+        let seeds = (
+            dropSpawnTimeSeed: initMessage["dropSpawnTimeSeed"] as! Int,
+            dropSpawnPositionSeed: initMessage["dropSpawnPositionSeed"] as! Int,
+            pegIndexSeed: initMessage["pegIndexSeed"] as! Int,
+            pegToggleTimeSeed: initMessage["pegToggleTimeSeed"] as! Int
+        )
+        
+        // Extract players
+        let playersJSON = initMessage["players"] as! [[String: Any]]
+        let players = playersJSON.map { player in
+            return (
+                x: player["x"] as! CGFloat,
+                y: player["y"] as! CGFloat,
+                leaderScore: player["leaderScore"] as! Int
+            )
         }
         
-        addChild(selfPlayer)
-        for opponent in opponents {
-            addChild(opponent)
-        }
+        setupGame(startTime: startTime, seeds: seeds, players: players)
     }
     
     func handleGamePlayerUpdate(fromPlayer player: MultiplayerGamePlayer, message: [String: Any]) {
@@ -266,21 +280,31 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
         player.dx = playerDx
     }
     
-    func handleDropSpawned(message: [String: Any] ) {
-        let dropPosX = message["x"] as! CGFloat
-        let dropPosY = message["y"] as! CGFloat
-        let dropSpawnTime = message["spawnTime"] as! Double
-        
-        let drop = itemController.spawnItemAt(position: CGPoint(x: dropPosX, y: dropPosY))
-        pendingDrops.append((lastUpdate + dropSpawnTime, drop))
+    // MARK: - GAME INPUT
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches {
+            let location = touch.location(in: self);
+            
+            if location.x > 0 {
+                selfPlayer.dx = 1
+                storedTouches[touch] = "right";
+            }
+            else {
+                selfPlayer.dx = -1
+                storedTouches[touch] = "left";
+            }
+            sendPlayerUpdate()
+        }
     }
     
-    func handleGameSync(message: [String: Any]) {
-        if let referenceTime = truetime.referenceTime {
-            let now = referenceTime.now().millisecondsSince1970
-            let leaderTime = message["time"] as! Int
-            let delay = Double(now - leaderTime) / 1000
-            print("Peer clock is \(now) - \(leaderTime) = \(delay) seconds behind leader clock")
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        for touch in touches{
+            storedTouches[touch] = nil;
+        }
+        
+        if storedTouches.isEmpty {
+            selfPlayer.dx = 0
+            sendPlayerUpdate()
         }
     }
 }

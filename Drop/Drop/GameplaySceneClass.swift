@@ -143,7 +143,6 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
         
         self.scene?.addChild(leftEdge)
         self.scene?.addChild(rightEdge)
-        
     }
     
     func createObstacles(){

@@ -14,6 +14,8 @@
 		08A946941EA8E2A900F68C8E /* MultiplayerGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A946931EA8E2A900F68C8E /* MultiplayerGameScene.swift */; };
 		08A946961EA8E2E900F68C8E /* MultiplayerGameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 08A946951EA8E2E900F68C8E /* MultiplayerGameScene.sks */; };
 		08A946991EA91F5400F68C8E /* MultiplayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A946971EA8F7B300F68C8E /* MultiplayerManager.swift */; };
+		08EA29021EAC154F0073095D /* RandomGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA29011EAC154F0073095D /* RandomGenerator.swift */; };
+		08EA29061EAC2FBB0073095D /* RealTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA29051EAC2FBB0073095D /* RealTime.swift */; };
 		08FC23801EAA2F53003B063A /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9565C3B01E76F6C400C5BF83 /* Player.swift */; };
 		1B4EC5161EA9040C00A85328 /* firstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4EC5151EA9040C00A85328 /* firstView.swift */; };
 		1B4EC5181EA9243700A85328 /* POP.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1B4EC5171EA9243700A85328 /* POP.mp3 */; };
@@ -40,8 +42,8 @@
 		9582DB2D1E71A0A600335B2F /* DropTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9582DB2C1E71A0A600335B2F /* DropTests.swift */; };
 		9582DB381E71A0A600335B2F /* DropUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9582DB371E71A0A600335B2F /* DropUITests.swift */; };
 		95D2557E1E7ABC6300DA813A /* ItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D2557D1E7ABC6300DA813A /* ItemController.swift */; };
-		CFDF11871EA8E4D9008890BF /* gameOverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDF11861EA8E4D9008890BF /* gameOverVC.swift */; };
 		A116EECF8EDD79490EA1EFA5 /* Pods_Drop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DD99354F8F5A28183EF8CFF /* Pods_Drop.framework */; };
+		CFDF11871EA8E4D9008890BF /* gameOverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFDF11861EA8E4D9008890BF /* gameOverVC.swift */; };
 		DC11953B8B28A513E527E4BD /* Pods_DropUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 375F615263F148F31DB4AED1 /* Pods_DropUITests.framework */; };
 		F4469F711EA7BA170027C76D /* selectSkinVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F701EA7BA170027C76D /* selectSkinVC.swift */; };
 		F4469F741EA8AD8B0027C76D /* ObstacleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4469F731EA8AD8B0027C76D /* ObstacleController.swift */; };
@@ -76,6 +78,8 @@
 		08A946931EA8E2A900F68C8E /* MultiplayerGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplayerGameScene.swift; sourceTree = "<group>"; };
 		08A946951EA8E2E900F68C8E /* MultiplayerGameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MultiplayerGameScene.sks; sourceTree = "<group>"; };
 		08A946971EA8F7B300F68C8E /* MultiplayerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplayerManager.swift; sourceTree = "<group>"; };
+		08EA29011EAC154F0073095D /* RandomGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RandomGenerator.swift; sourceTree = "<group>"; };
+		08EA29051EAC2FBB0073095D /* RealTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealTime.swift; sourceTree = "<group>"; };
 		1B4EC5151EA9040C00A85328 /* firstView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = firstView.swift; path = ../firstView.swift; sourceTree = "<group>"; };
 		1B4EC5171EA9243700A85328 /* POP.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = POP.mp3; sourceTree = "<group>"; };
 		1B4EC5191EA92CC600A85328 /* ingame.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ingame.mp3; sourceTree = "<group>"; };
@@ -111,10 +115,10 @@
 		9582DB371E71A0A600335B2F /* DropUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropUITests.swift; sourceTree = "<group>"; };
 		9582DB391E71A0A600335B2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95D2557D1E7ABC6300DA813A /* ItemController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemController.swift; sourceTree = "<group>"; };
-		CFDF11861EA8E4D9008890BF /* gameOverVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gameOverVC.swift; sourceTree = "<group>"; };
 		A73993C42104BF301938CDD5 /* Pods-DropUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DropUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DropUITests/Pods-DropUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B392BB88C6C6EB9F9BA2B29F /* Pods-DropUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DropUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DropUITests/Pods-DropUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B5AD2A0F09D7D29C93E76F58 /* Pods-DropTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DropTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DropTests/Pods-DropTests.release.xcconfig"; sourceTree = "<group>"; };
+		CFDF11861EA8E4D9008890BF /* gameOverVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gameOverVC.swift; sourceTree = "<group>"; };
 		D7BF6C0ABC2372B8A1F5EEB0 /* Pods-Drop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Drop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Drop/Pods-Drop.debug.xcconfig"; sourceTree = "<group>"; };
 		E67F0169640779252D3A635F /* Pods-DropTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DropTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DropTests/Pods-DropTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F4469F701EA7BA170027C76D /* selectSkinVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = selectSkinVC.swift; sourceTree = "<group>"; };
@@ -153,6 +157,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08EA29041EAC19750073095D /* Random Generator */ = {
+			isa = PBXGroup;
+			children = (
+				08EA29011EAC154F0073095D /* RandomGenerator.swift */,
+			);
+			name = "Random Generator";
+			sourceTree = "<group>";
+		};
 		1BCF1A371EA76C40006F81F2 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,6 +204,7 @@
 		9565C3A41E76D4F400C5BF83 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				08EA29041EAC19750073095D /* Random Generator */,
 				F4469F801EA9FDC00027C76D /* Map Class */,
 				F4469F721EA8AD7C0027C76D /* Obstacle Class */,
 				95D2557C1E7ABC4E00DA813A /* Items Controller Classes */,
@@ -255,9 +268,6 @@
 		9582DB101E71A0A600335B2F /* Drop */ = {
 			isa = PBXGroup;
 			children = (
-				9582DB1B1E71A0A600335B2F /* Main.storyboard */,
-				9582DB201E71A0A600335B2F /* LaunchScreen.storyboard */,
-				9582DB1E1E71A0A600335B2F /* Assets.xcassets */,
 				1BCF1A371EA76C40006F81F2 /* Sounds */,
 				9565C3A51E76D50000C5BF83 /* Scenes */,
 				9565C3A41E76D4F400C5BF83 /* Classes */,
@@ -269,7 +279,6 @@
 				CFDF11861EA8E4D9008890BF /* gameOverVC.swift */,
 				9582DB1E1E71A0A600335B2F /* Assets.xcassets */,
 				9582DB201E71A0A600335B2F /* LaunchScreen.storyboard */,
-				9582DB231E71A0A600335B2F /* Info.plist */,
 				08A9468F1EA8E0F400F68C8E /* MultiplayerGameViewController.swift */,
 				1BD728411E76DE5100CE0B2A /* menuVC.swift */,
 				1BD728491E76EF9500CE0B2A /* singleplayerMenuVC.swift */,
@@ -324,9 +333,9 @@
 		F4469F791EA92D560027C76D /* Singletons */ = {
 			isa = PBXGroup;
 			children = (
-				1BA6AEF71EA7783400BCCA0A /* soundManager.swift */,
 				F4469F7A1EA92D710027C76D /* GameSettings.swift */,
 				F4469F7C1EA940970027C76D /* GameConstants.swift */,
+				08EA29051EAC2FBB0073095D /* RealTime.swift */,
 			);
 			name = Singletons;
 			sourceTree = "<group>";
@@ -642,6 +651,7 @@
 				1BD728421E76DE5100CE0B2A /* menuVC.swift in Sources */,
 				08A946901EA8E0F400F68C8E /* MultiplayerGameViewController.swift in Sources */,
 				086354E81EA9F1DA00242D57 /* MultiplayerGamePlayer.swift in Sources */,
+				08EA29021EAC154F0073095D /* RandomGenerator.swift in Sources */,
 				1BD728481E76EF6D00CE0B2A /* multiplayerMenuVC.swift in Sources */,
 				1BA6AEF81EA7783400BCCA0A /* soundManager.swift in Sources */,
 				08A946941EA8E2A900F68C8E /* MultiplayerGameScene.swift in Sources */,
@@ -652,6 +662,7 @@
 				086354E61EA9401F00242D57 /* PlayerPeerTableCell.swift in Sources */,
 				95D2557E1E7ABC6300DA813A /* ItemController.swift in Sources */,
 				1B4EC5161EA9040C00A85328 /* firstView.swift in Sources */,
+				08EA29061EAC2FBB0073095D /* RealTime.swift in Sources */,
 				9565C3AE1E76D76F00C5BF83 /* GameplaySceneClass.swift in Sources */,
 				F4469F7D1EA940970027C76D /* GameConstants.swift in Sources */,
 				0883BE581E8CF48600945A6A /* NetworkServiceManager.swift in Sources */,

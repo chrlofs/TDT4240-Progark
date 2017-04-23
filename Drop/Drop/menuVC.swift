@@ -8,13 +8,17 @@
 
 import Foundation
 import UIKit
+
 class menuVC: UIViewController{
     let musicPlayer = soundManager.sharedInstance
+    
+    // Initialize RealTime (should be done early on in the App's lifecycle)
+    let realtime = RealTime.getInstance()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
         musicPlayer.playMusic(fileName: "GameMusic", fileType: "mp3")
-       
     }
 
     @IBAction func pushToOptions(_ sender: UIButton) {
