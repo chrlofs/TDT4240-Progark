@@ -40,12 +40,17 @@ class GameViewController: UIViewController, GameManager {
     func gameOver(score: Int) {
         // Tears down the SKView
         if let view = self.view as! SKView? {
+            if let scene = view.scene {
+                scene.isPaused = true
+            }
             view.presentScene(nil)
         }
         
+        print("game over")
+        
         let gameOverVC = self.storyboard?.instantiateViewController(withIdentifier: "gameOverVC") as! gameOverVC
         gameOverVC.userScore = score // Passes the score to the gameOverVC
-        self.navigationController?.pushViewController(gameOverVC, animated: false)
+        self.navigationController?.pushViewController(gameOverVC, animated: true)
     }
 
     override var shouldAutorotate: Bool {

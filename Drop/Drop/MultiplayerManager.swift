@@ -11,9 +11,10 @@ import MultipeerConnectivity
 
 class PlayerPeer {
     let id: MCPeerID
-    let name: String
-    let skin: Int
+    var name: String
+    var skin: Int
     var isLeader = true
+    var isGameReady = false
     var leaderScore: Int
     
     init(id: MCPeerID, name: String, skin: Int, leaderScore: Int) {
@@ -57,6 +58,7 @@ class MultiplayerManager: NetworkServiceDelegate {
     final let FULL_SESSION_SIZE = 3 // Including self
     final let LEADER_HELLO_TOPIC = "LEADER_HELLO"
     final let PEER_HELLO_TOPIC = "PEER_HELLO"
+    final let GAME_READY_TOPIC = "GAME_READY"
     
     let gameSettings = GameSettings.getInstance()
     
@@ -137,6 +139,8 @@ class MultiplayerManager: NetworkServiceDelegate {
             }
         }
         leader.isLeader = true
+        let leaders = players.filter({ $0.isLeader })
+        print("num of leaders: \(leaders.count)")
     }
     
     // INTERNAL LOGIC
@@ -154,6 +158,9 @@ class MultiplayerManager: NetworkServiceDelegate {
         case PEER_HELLO_TOPIC:
             print("Handling peer-hello from peer \(peerID)")
             handleHello(fromPeer: peerID, message: message)
+            break
+        case GAME_READY_TOPIC:
+            handleGameReady(fromPeer: peerID)
             break
         default:
             print("Handling other message topic: \(topic)")
@@ -180,6 +187,12 @@ class MultiplayerManager: NetworkServiceDelegate {
         ])
     }
     
+    public func sendGameReady() {
+        send(message: [
+            "topic": GAME_READY_TOPIC
+        ])
+    }
+    
     private func handleHello(fromPeer peerID: MCPeerID, message: [String: Any]) {
         
         print("Current peerIDs: \(players.map({ $0.id }))")
@@ -199,6 +212,12 @@ class MultiplayerManager: NetworkServiceDelegate {
         }
     }
     
+    private func handleGameReady(fromPeer peerID: MCPeerID) {
+        if let peer = players.first(where: { $0.id == peerID }) {
+            peer.isGameReady = true
+            notifyPeersChange()
+        }
+    }
     
     // PUBLICLY EXPOSED METHODS
     func send(message: [String: Any]) {
@@ -209,6 +228,14 @@ class MultiplayerManager: NetworkServiceDelegate {
         catch let error {
             NSLog("%@", "Error parsing as JSON: \(error)")
         }
+    }
+    
+    func reloadUserSettings() {
+        let userName = gameSettings.getUserName()
+        let userSkin = gameSettings.getUserSkin()
+        
+        selfPlayer.name = userName
+        selfPlayer.skin = userSkin
     }
     
     func startBrowsing() {

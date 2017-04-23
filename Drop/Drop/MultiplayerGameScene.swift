@@ -15,6 +15,7 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
     // MARK: - VARIABLES
     // Services
     private let constants = GameConstants.getInstance()
+    private let settings = GameSettings.getInstance()
     private let multiplayerManager = MultiplayerManager.getInstance()
     private let realtime = RealTime.getInstance()
     private let audioPlayer = soundManager.sharedInstance
@@ -35,6 +36,7 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
         let selfSkinImage = self.constants.getSkinImage(skinIndex: selfPeer.skin)
         return MultiplayerGamePlayer(peer: selfPeer, skinImageName: selfSkinImage)
     }()
+    var map: Map?
     
     // Timing
     var startTime: Int?
@@ -50,8 +52,25 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
         // Set physicsworld contactDelegate to self
         physicsWorld.contactDelegate = self;
         
-        // If leader, set the game up
+        selfPlayer.peer.isGameReady = true
         if selfPlayer.peer.isLeader {
+            // If leader, attempt to init
+            print("first try")
+            attemptLeaderInit()
+        }
+        else {
+            // If not leader, send a ready-message
+            multiplayerManager.sendGameReady()
+        }
+    }
+    
+    func attemptLeaderInit() {
+        let peersExceptSelf = multiplayerManager.players.filter({ $0.id != selfPlayer.peer.id })
+        if peersExceptSelf.count == 0 {
+            return
+        }
+        if peersExceptSelf.filter({ !$0.isGameReady }).count == 0 {
+            print("All peers are ready? \(peersExceptSelf.count)")
             setupGame()
             realtime.getNow(then: { now in
                 self.startTime = now
@@ -70,24 +89,26 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
         
         // Setup opponents
         let opponentPeers = multiplayerManager.players.filter { $0.id != selfPlayer.peer.id }
+        print("Opponent peerscount: \(opponentPeers.count)")
+        let playerSpacing = Int(200.0 / Double(opponentPeers.count))
         for (index, opponentPeer) in opponentPeers.enumerated() {
             let opponentSkinImage = constants.getSkinImage(skinIndex: opponentPeer.skin)
             let opponent = MultiplayerGamePlayer(peer: opponentPeer, skinImageName: opponentSkinImage)
-            opponent.position = CGPoint(x: -100 + (index + 1) * 200, y: -350)
+            opponent.position = CGPoint(x: -100 + (index + 1) * playerSpacing, y: -350)
             opponent.zPosition = 1
             opponents.append(opponent)
             addChild(opponent)
         }
         
-        // Setup pegs
-        createObstacles()
-        
-        // Setup edges
+        // Setup map
+        map = constants.getMapById(id: settings.getUserMapID())
+        createBackground(map: map!)
+        createObstacles(map: map!)
         createEdgeFrame()
     }
     
     // Peer Setup Game
-    func setupGame(startTime: Int, seeds: (dropSpawnTimeSeed: Int, dropSpawnPositionSeed: Int, pegIndexSeed: Int, pegToggleTimeSeed: Int), players: [(x: CGFloat, y: CGFloat, leaderScore: Int)]) {
+    func setupGame(startTime: Int, map: Map, seeds: (dropSpawnTimeSeed: Int, dropSpawnPositionSeed: Int, pegIndexSeed: Int, pegToggleTimeSeed: Int), players: [(x: CGFloat, y: CGFloat, leaderScore: Int)]) {
         // Setup time
         self.startTime = startTime
         
@@ -121,19 +142,24 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
             }
         }
         
-        // Setup pegs
-        createObstacles()
-        
-        // Setup edges
+        // Setup map
+        self.map = map
+        createBackground(map: map)
+        createObstacles(map: map)
         createEdgeFrame()
     }
     
-    
-    func createObstacles(){
-        let map = constants.getMapById(id: 1)
-        for peg in map.peg_points {
+    func createObstacles(map: Map){
+        for peg in map.pegList {
             addChild(obstacleController.createObstacle(x: peg[0], y: peg[1]))
         }
+    }
+    
+    func createBackground(map: Map) {
+        let background = SKSpriteNode(imageNamed: map.backgroundName)
+        background.size = CGSize(width: frame.size.width, height: frame.size.height)
+        background.position = CGPoint(x: 0, y: 0)
+        addChild(background)
     }
 
     func createEdgeFrame() {
@@ -179,9 +205,12 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
     
     func updateRealTime(currentTime: Int, startTime: Int) {
         // Update drops
-        if let nextDropTime = nextDrop {
+        if let nextDropTime = nextDrop, let dropName = map?.dropName {
             if currentTime > nextDropTime {
-                let drop = itemController.spawnItemAt(position: random.pollDropSpawnPosition())
+                let drop = itemController.spawnItem(
+                    dropImage: dropName,
+                    at: random.pollDropSpawnPosition()
+                )
                 addChild(drop)
                 nextDrop = nextDropTime + random.pollDropSpawnTime()
             }
@@ -219,13 +248,16 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
     let GAME_PLAYER_UPDATE_TOPIC = "GAME_PLAYER_UPDATE"
     let GAME_SELF_DIED_TOPIC = "GAME_SELF_DIED"
     
+    
     func sendInit(startTime: Int) {
         let players = [selfPlayer] + opponents
         let seeds = random.getSeeds()
+        let mapID = settings.getUserMapID()
         
         let message = [
             "topic": GAME_INIT_TOPIC,
             "startTime": startTime,
+            "mapID": mapID,
             "dropSpawnTimeSeed": seeds.dropSpawnTimeSeed,
             "dropSpawnPositionSeed": seeds.dropSpawnPositionSeed,
             "pegIndexSeed": seeds.pegIndexSeed,
@@ -251,6 +283,42 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
     }
     
     func notifyPlayersChange() {
+        print("players changed???")
+        let peers = multiplayerManager.players
+
+        // Remove peers that have left
+        let toRemove = opponents.filter({ opponent in
+            return !peers.contains(where: { $0.id == opponent.peer.id })
+        })
+        for node in toRemove {
+            opponents.remove(at: opponents.index(of: node)!)
+        }
+        removeChildren(in: toRemove)
+        
+        
+        // Add new peers (except self)
+        if startTime != nil {
+            let peersExceptSelf = peers.filter({ $0.id != selfPlayer.peer.id })
+            for peer in peersExceptSelf {
+                if !peer.isGameReady {
+                    break
+                }
+                if !opponents.contains(where: { $0.peer.id == peer.id }) {
+                    let opponentSkinImage = constants.getSkinImage(skinIndex: peer.skin)
+                    let opponent = MultiplayerGamePlayer(peer: peer, skinImageName: opponentSkinImage)
+                    opponent.position = CGPoint(x: 0, y: -350)
+                    opponent.zPosition = 1
+                    opponents.append(opponent)
+                    addChild(opponent)
+                }
+            }
+        }
+        
+        // If leader, and game not started, attempt a leader init
+        if selfPlayer.peer.isLeader && startTime == nil {
+            print("nth try?")
+            attemptLeaderInit()
+        }
     }
     
     func notifyReceivedMessage(fromPlayer player: PlayerPeer, message: [String: Any]) {
@@ -274,9 +342,14 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
         }
     }
     
+    
     func handleGameInit(initMessage: [String: Any]) {
         // Extract startTime
         let startTime = initMessage["startTime"] as! Int
+        
+        // Extract map
+        let mapID = initMessage["mapID"] as! Int
+        let map = constants.getMapById(id: mapID)
         
         // Extract seeds
         let seeds = (
@@ -296,7 +369,7 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
             )
         }
         
-        setupGame(startTime: startTime, seeds: seeds, players: players)
+        setupGame(startTime: startTime, map: map, seeds: seeds, players: players)
     }
     
     func handleGamePlayerUpdate(fromPlayer player: MultiplayerGamePlayer, message: [String: Any]) {

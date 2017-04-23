@@ -174,13 +174,6 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
         self.scene?.addChild(itemController.spawnItems(dropImage: map.dropName));
     }
     
-    func restartGame(){
-        if let scene = GameplaySceneClass(fileNamed: "GameplayScene"){
-            scene.scaleMode = .aspectFill
-            view?.presentScene(scene);
-        }
-    }
-    
     func removeItems(){
         for child in children{
             if child.name == "Fruit" || child.name == "Bomb" {

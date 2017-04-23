@@ -47,6 +47,7 @@ class MultiplayerGameOverVC: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        let numLosers = losers.count
         let numSections = Int(ceil(Double(losers.count) / 2))
         let isLastRow = (section == numSections - 1)
         let cellCount = CGFloat(isLastRow ? 1 : 2)
@@ -59,7 +60,8 @@ class MultiplayerGameOverVC: UIViewController, UICollectionViewDelegate, UIColle
             
             if (totalCellWidth < contentWidth) {
                 let padding = (contentWidth - totalCellWidth) / 2.0
-                return UIEdgeInsetsMake(0, padding, 0, padding)
+                let paddingTop = CGFloat(numLosers == 1 ? 50 : 0)
+                return UIEdgeInsetsMake(paddingTop, padding, 0, padding)
             }
         }
         

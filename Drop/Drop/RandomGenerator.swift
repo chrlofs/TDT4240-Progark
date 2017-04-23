@@ -61,10 +61,10 @@ class RandomGenerator {
     
     func getSeeds() -> (dropSpawnTimeSeed: Int, dropSpawnPositionSeed: Int, pegIndexSeed: Int, pegToggleTimeSeed: Int) {
         return (
-            Int(dropSpawnTimeSeed),
-            Int(dropSpawnPositionSeed),
-            Int(pegIndexSeed),
-            Int(pegToggleTimeSeed)
+            dropSpawnTimeSeed: Int(dropSpawnTimeSeed),
+            dropSpawnPositionSeed: Int(dropSpawnPositionSeed),
+            pegIndexSeed: Int(pegIndexSeed),
+            pegToggleTimeSeed: Int(pegToggleTimeSeed)
         )
     }
 }

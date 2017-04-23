@@ -35,6 +35,7 @@ class MultiplayerLobbyVC : UIViewController, UICollectionViewDelegate, UICollect
         self.navigationController?.isNavigationBarHidden = true
         
         multiplayerManager.registerObserver(observer: self)
+        multiplayerManager.reloadUserSettings()
         multiplayerManager.startBrowsing()
         
         let selfPlayer = multiplayerManager.selfPlayer
@@ -46,27 +47,51 @@ class MultiplayerLobbyVC : UIViewController, UICollectionViewDelegate, UICollect
     func goToGame() {
         multiplayerManager.stopBrowsing()
         multiplayerManager.unregisterObserver(observer: self)
-        let multiplayerGameVC = self.storyboard?.instantiateViewController(withIdentifier: "MultiplayerGameVC") as! MultiplayerGameVC
-        self.navigationController?.pushViewController(multiplayerGameVC, animated: true)
+        
+        OperationQueue.main.addOperation {
+            let multiplayerGameVC = self.storyboard?.instantiateViewController(withIdentifier: "MultiplayerGameVC") as! MultiplayerGameVC
+            self.navigationController?.pushViewController(multiplayerGameVC, animated: true)
+        }
     }
     
     
     internal func notifyPlayersChange() {
         OperationQueue.main.addOperation {
             self.playerCollectionView.reloadData()
-            
-            if (self.multiplayerManager.players.count == self.constants.maxPlayersInMultiplayerGame) {
-                print("Let's go to game")
-                self.goToGame()
+        }
+        
+        if (multiplayerManager.selfPlayer.isLeader) {
+            let players = multiplayerManager.players
+            if
+                players.filter({ !$0.isReady() }).count == 0 &&
+                players.count == constants.maxPlayersInMultiplayerGame
+            {
+                sendGotoGame()
+                goToGame()
             }
         }
     }
     
+    let LOBBY_GOTO_GAME_TOPIC = "LOBBY_GOTO_GAME"
+    
     internal func notifyReceivedMessage(fromPlayer player: PlayerPeer, message: [String : Any]) {
+        let topic = message["topic"] as! String
+        switch topic {
+        case LOBBY_GOTO_GAME_TOPIC:
+            self.goToGame()
+            break
+        default:
+            return
+        }
+    }
+    
+    func sendGotoGame() {
+        let message = ["topic": LOBBY_GOTO_GAME_TOPIC]
+        multiplayerManager.send(message: message)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        /*
+
         let numPeers = multiplayerManager.players.count - 1
         let numSections = Int(ceil(Double(numPeers) / 2))
         let isLastRow = (section == numSections - 1)
@@ -81,11 +106,9 @@ class MultiplayerLobbyVC : UIViewController, UICollectionViewDelegate, UICollect
             if (totalCellWidth < contentWidth) {
                 let padding = (contentWidth - totalCellWidth) / 2.0
                 let paddingTop = CGFloat(numPeers == 1 ? 50 : 0)
-                print("padding top: \(paddingTop)")
                 return UIEdgeInsetsMake(paddingTop, padding, 0, padding)
             }
         }
-         */
         
         return UIEdgeInsets.zero
     }
@@ -117,4 +140,3 @@ class MultiplayerLobbyVC : UIViewController, UICollectionViewDelegate, UICollect
         return cell
     }    
 }
-

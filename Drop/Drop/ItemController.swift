@@ -45,10 +45,10 @@ class ItemController {
         return item;
     }
     
-    func spawnItemAt(position: CGPoint) -> SKSpriteNode {
-        let item = SKSpriteNode(imageNamed: "Bomb")
+    func spawnItem(dropImage: String, at position: CGPoint) -> SKSpriteNode {
+        let item = SKSpriteNode(imageNamed: dropImage)
 
-        item.setScale(0.6)
+        item.size = CGSize(width: 50, height: 50)
         item.physicsBody = getNewPhysicsBody(for: item)
         item.zPosition = 3
         item.anchorPoint = CGPoint(x: 0.5, y: 0.5)
