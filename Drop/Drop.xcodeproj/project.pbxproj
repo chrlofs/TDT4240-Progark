@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		08144DC21EAC808500797B92 /* soundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4A0EE61EABCA6C0066DEE7 /* soundManager.swift */; };
+		08144DC21EAC808500797B92 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF4A0EE61EABCA6C0066DEE7 /* SoundManager.swift */; };
 		086354E61EA9401F00242D57 /* PlayerPeerTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086354E51EA9401F00242D57 /* PlayerPeerTableCell.swift */; };
 		086354E81EA9F1DA00242D57 /* MultiplayerGamePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086354E71EA9F1DA00242D57 /* MultiplayerGamePlayer.swift */; };
 		0883BE581E8CF48600945A6A /* NetworkServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0883BE571E8CF48600945A6A /* NetworkServiceManager.swift */; };
@@ -123,7 +123,7 @@
 		A73993C42104BF301938CDD5 /* Pods-DropUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DropUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DropUITests/Pods-DropUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B392BB88C6C6EB9F9BA2B29F /* Pods-DropUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DropUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DropUITests/Pods-DropUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		B5AD2A0F09D7D29C93E76F58 /* Pods-DropTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DropTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DropTests/Pods-DropTests.release.xcconfig"; sourceTree = "<group>"; };
-		CF4A0EE61EABCA6C0066DEE7 /* soundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = soundManager.swift; path = ../soundManager.swift; sourceTree = "<group>"; };
+		CF4A0EE61EABCA6C0066DEE7 /* SoundManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SoundManager.swift; path = ../SoundManager.swift; sourceTree = "<group>"; };
 		CFDF11861EA8E4D9008890BF /* gameOverVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gameOverVC.swift; sourceTree = "<group>"; };
 		D7BF6C0ABC2372B8A1F5EEB0 /* Pods-Drop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Drop.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Drop/Pods-Drop.debug.xcconfig"; sourceTree = "<group>"; };
 		E67F0169640779252D3A635F /* Pods-DropTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DropTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DropTests/Pods-DropTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -341,7 +341,7 @@
 		F4469F791EA92D560027C76D /* Singletons */ = {
 			isa = PBXGroup;
 			children = (
-				CF4A0EE61EABCA6C0066DEE7 /* soundManager.swift */,
+				CF4A0EE61EABCA6C0066DEE7 /* SoundManager.swift */,
 				F4469F7A1EA92D710027C76D /* GameSettings.swift */,
 				F4469F7C1EA940970027C76D /* GameConstants.swift */,
 				08EA29051EAC2FBB0073095D /* RealTime.swift */,
@@ -648,7 +648,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08144DC21EAC808500797B92 /* soundManager.swift in Sources */,
+				08144DC21EAC808500797B92 /* SoundManager.swift in Sources */,
 				08FC23801EAA2F53003B063A /* Player.swift in Sources */,
 				F4FA9FF81EAA36560088640F /* GameSettings.swift in Sources */,
 				9565C3A71E76D53300C5BF83 /* MainMenuScene.swift in Sources */,
@@ -834,9 +834,9 @@
 				"DEBUG_ACTIVITY_MODE[arch=*]" = disable;
 				DEVELOPMENT_TEAM = ZLYR8KH355;
 				INFOPLIST_FILE = Drop/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.raymi.Drop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raymitoro.Drop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -850,9 +850,9 @@
 				DEBUG_ACTIVITY_MODE = "";
 				DEVELOPMENT_TEAM = ZLYR8KH355;
 				INFOPLIST_FILE = Drop/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.raymi.Drop;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raymitoro.Drop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -893,6 +893,8 @@
 			baseConfigurationReference = B392BB88C6C6EB9F9BA2B29F /* Pods-DropUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = DropUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.team15.DropUITests;
@@ -907,6 +909,8 @@
 			baseConfigurationReference = A73993C42104BF301938CDD5 /* Pods-DropUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = DropUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.team15.DropUITests;

@@ -9,7 +9,7 @@
 import Foundation
 import AVFoundation
 
-class soundManager {
+class SoundManager {
     
     //AUDIOPLAYERS
     var fxPlayer: AVAudioPlayer = AVAudioPlayer()
@@ -22,9 +22,15 @@ class soundManager {
     var fxMuted = false
     
     //SINGLETON
-    static let sharedInstance = soundManager()
+    private static let sharedInstance = SoundManager()
     
+    private init() {
+        
+    }
     
+    public static func getInstance() -> SoundManager {
+        return sharedInstance
+    }
     
     //USE FXPLAYER
     func playFx(fileName: String, fileType: String){

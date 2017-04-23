@@ -17,6 +17,8 @@ class MultiplayerGameOverVC: UIViewController, UICollectionViewDelegate, UIColle
     
     let multiplayerManager = MultiplayerManager.getInstance()
     let constants = GameConstants.getInstance()
+    let audioPlayer = SoundManager.getInstance()
+
     var winner: PlayerPeer?
     var losers = [PlayerPeer]()
     let losersPerSection = 2
@@ -33,6 +35,9 @@ class MultiplayerGameOverVC: UIViewController, UICollectionViewDelegate, UIColle
     
     @IBAction func back(_ sender: UIButton) {
         multiplayerManager.leaveSession()
+        audioPlayer.stopMusic()
+        audioPlayer.playMusic(fileName: "GameMusic", fileType: "mp3")
+
         let controllers = self.navigationController?.viewControllers
         for vc in controllers! {
             if vc is menuVC {

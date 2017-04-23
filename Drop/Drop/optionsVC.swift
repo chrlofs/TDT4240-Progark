@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 class optionsVC: UIViewController{
-    let audioManager = soundManager.sharedInstance
+    let audioManager = SoundManager.getInstance()
     @IBOutlet weak var fxButton: UIButton!
     @IBOutlet weak var musicButton: UIButton!
     @IBOutlet weak var usernameField: UITextField!
