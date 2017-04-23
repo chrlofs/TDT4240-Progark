@@ -10,7 +10,7 @@ import SpriteKit
 
 class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     let gameConstants = GameConstants.getInstance()
-    let audioPlayer = soundManager.sharedInstance
+    let audioPlayer = SoundManager.getInstance()
     var gameManager: GameManager?
     private var center = CGFloat();
     private var canMove = false, moveLeft = false;

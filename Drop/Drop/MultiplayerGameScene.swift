@@ -18,7 +18,7 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
     private let settings = GameSettings.getInstance()
     private let multiplayerManager = MultiplayerManager.getInstance()
     private let realtime = RealTime.getInstance()
-    private let audioPlayer = soundManager.sharedInstance
+    private let audioPlayer = SoundManager.getInstance()
     
     // Controllers
     private let itemController = ItemController();
@@ -51,6 +51,10 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
         
         // Set physicsworld contactDelegate to self
         physicsWorld.contactDelegate = self;
+        
+        // Start game-music
+        audioPlayer.stopMusic()
+        audioPlayer.playMusic(fileName: "ingame", fileType: "mp3")
         
         selfPlayer.peer.isGameReady = true
         if selfPlayer.peer.isLeader {
@@ -151,7 +155,7 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
     
     func createObstacles(map: Map){
         for peg in map.pegList {
-            addChild(obstacleController.createObstacle(x: peg[0], y: peg[1]))
+            addChild(obstacleController.createObstacle(x: peg[0], y: peg[1], map: map))
         }
     }
     

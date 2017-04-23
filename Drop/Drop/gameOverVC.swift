@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class gameOverVC: UIViewController {
-    let musicPlayer = soundManager.sharedInstance
+    let musicPlayer = SoundManager.getInstance()
     let gameSettings = GameSettings.getInstance()
     var userScore = Int()
     

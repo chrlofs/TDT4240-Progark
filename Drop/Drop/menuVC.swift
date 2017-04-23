@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class menuVC: UIViewController{
-    let musicPlayer = soundManager.sharedInstance
+    let musicPlayer = SoundManager.getInstance()
     
     // Initialize RealTime (should be done early on in the App's lifecycle)
     let realtime = RealTime.getInstance()
