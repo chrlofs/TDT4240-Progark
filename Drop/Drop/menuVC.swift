@@ -35,6 +35,10 @@ class menuVC: UIViewController{
         moveToSelectSkin()
     }
     
+    @IBAction func pushToSelectMap(_ sender: UIButton) {
+        moveToSelectMap()
+    }
+    
     func moveToSingleplayer() {
         let singleplayerMenuVC = self.storyboard?.instantiateViewController(withIdentifier: "singleplayerMenuVC") as! singleplayerMenuVC
         self.navigationController?.pushViewController(singleplayerMenuVC, animated: true)
@@ -51,5 +55,9 @@ class menuVC: UIViewController{
     func moveToSelectSkin() {
         let selectSkinVC = self.storyboard?.instantiateViewController(withIdentifier: "selectSkinVC") as! selectSkinVC
         self.navigationController?.pushViewController(selectSkinVC, animated: true)
+    }
+    func moveToSelectMap() {
+        let selectMapVC = self.storyboard?.instantiateViewController(withIdentifier: "selectMapVC") as! selectMapVC
+        self.navigationController?.pushViewController(selectMapVC, animated: true)
     }
 }

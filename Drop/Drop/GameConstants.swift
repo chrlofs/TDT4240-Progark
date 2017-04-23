@@ -13,19 +13,54 @@ class GameConstants {
     private static let sharedInstance = GameConstants()
     
     private let skinList: [String] = ["skin1", "skin2", "skin3", "kim", "trump", "putin"]
-    
+
     private let mapList: [Map] = [
-        Map(id: 1, peg_points: [
-            [-144, 200], [0, 200], [144, 200],
-            [-72, 90], [72, 90],
-            [-144, -20], [0, -20], [144, -20],
-            [-144, -200], [144, -200]
-            ], background: "background_standing3"),
-        Map(id: 2, peg_points: [
-            [-144, 200], [0, 200], [144, 200],
-            [-72, 90], [72, 90],
-            [-144, -20], [0, -20], [144, -20],
-            ], background: "background_standing3")
+        Map(
+            id: 0,
+            name: "Metropolis",
+            pegList: [
+                [-144, 200], [0, 200], [144, 200],
+                [-72, 90], [72, 90],
+                [-144, -20], [0, -20], [144, -20],
+                [-144, -200], [144, -200]],
+            backgroundName: "background2",
+            dropName: "fireball",
+            pegName: "pin"
+        ),
+        Map(
+            id: 1,
+            name: "Gotham",
+            pegList: [
+                [-144, 200], [0, 200], [144, 200],
+                [-72, 90], [72, 90],
+                [-144, -20], [0, -20], [144, -20],
+                [-144, -200], [144, -200]],
+            backgroundName: "background4",
+            dropName: "blackWhite",
+            pegName: "pin"
+        ),
+        Map(
+            id: 2,
+            name: "Medellin",
+            pegList: [
+                [-144, 200], [0, 200], [144, 200],
+                [-72, 90], [72, 90],
+                [-144, -20], [0, -20], [144, -20],],
+            backgroundName: "background3",
+            dropName: "fireball",
+            pegName: "pin"
+        ),
+        Map(
+            id: 3,
+            name: "Sin City",
+            pegList: [
+                [-100, 200], [0, 200], [100, 200],
+                [-72, 90], [72, 90],
+                [-144, -20], [0, -20], [144, -20],],
+            backgroundName: "background5",
+            dropName: "whiteBlack",
+            pegName: "pin"
+        )
     ]
     
     public let darkGreen = UIColor(red: 0.27, green: 0.57, blue: 0.53, alpha: 1.0)
@@ -64,6 +99,6 @@ class GameConstants {
                 return map
             }
         }
-        return Map(id: 0, peg_points: [[-72, 90], [72, 90]], background: "background_standing3")
+        return Map(id: 0, name: "Default", pegList: [[-72, 90], [72, 90]], backgroundName: "background2", dropName: "blackWhite", pegName: "pin")
     }
 }

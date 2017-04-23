@@ -23,14 +23,11 @@ class ItemController {
     private var minX = CGFloat(-190), maxX = CGFloat(190);
     private var positionDistribution = GKRandomDistribution(randomSource: GKLinearCongruentialRandomSource(seed: 123456), lowestValue: -190, highestValue: 190)
     
-    func spawnItems() -> SKSpriteNode {
-        
-        let item = SKSpriteNode(imageNamed: "Bomb");
+    func spawnItems(dropImage: String) -> SKSpriteNode {
+        let item = SKSpriteNode(imageNamed: dropImage);
         item.name = "Bomb";
-        item.setScale(0.6);
+        item.size = CGSize(width: 50, height: 50)
         item.physicsBody = SKPhysicsBody(circleOfRadius: item.size.height / 2);
-            
-        
         
         // Sets the collision bitmask to FRUIT_AND_BOMB (1)
         item.physicsBody?.categoryBitMask = ColliderType.FRUIT_AND_BOMB;
