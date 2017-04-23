@@ -15,14 +15,16 @@ class Map {
     let backgroundName: String
     let dropName: String
     let pegName: String
+    let pegInactiveName: String
     
-    init(id: Int, name: String, pegList: [[Int]], backgroundName: String, dropName: String, pegName: String) {
+    init(id: Int, name: String, pegList: [[Int]], backgroundName: String, dropName: String, pegName: String, pegInactiveName: String) {
         self.id = id
         self.name = name
         self.pegList = pegList
         self.backgroundName = backgroundName
         self.dropName = dropName
         self.pegName = pegName
+        self.pegInactiveName = pegInactiveName
     }
     
     func toJSON() -> [String: Any]{
