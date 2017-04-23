@@ -13,6 +13,7 @@ class MultiplayerGamePlayer: SKSpriteNode {
     
     let VELOCITY: Double = 500
     var dx = 0
+    var isAlive = true
     private var minX = CGFloat(-190), maxX = CGFloat(190);
     
     init(peer: PlayerPeer, skinImageName: String) {

@@ -10,7 +10,11 @@ import Foundation
 import SpriteKit
 import GameplayKit
 
-class MultiplayerGameViewController: UIViewController {
+protocol MultiplayerGameManager {
+    func gameOver(winner: PlayerPeer?, losers: [PlayerPeer])
+}
+
+class MultiplayerGameViewController: UIViewController, MultiplayerGameManager {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +22,8 @@ class MultiplayerGameViewController: UIViewController {
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             if let scene = MultiplayerGameScene(fileNamed: "MultiplayerGameScene") {
+                scene.gameManager = self
+                
                 // Set the scale mode to scale to fit the window
                 scene.scaleMode = .aspectFill
                 
@@ -29,6 +35,16 @@ class MultiplayerGameViewController: UIViewController {
             view.showsFPS = true
             view.showsNodeCount = true
         }
+    }
+    
+    func gameOver(winner: PlayerPeer?, losers: [PlayerPeer]) {
+        if let view = self.view as! SKView? {
+            view.presentScene(nil)
+        }
+        
+        let gameOverController = self.storyboard?.instantiateViewController(withIdentifier: "MultiplayerGameOverViewController") as! MultiplayerGameOverViewController
+        gameOverController.initialize(winner: winner, losers: losers)
+        self.navigationController?.pushViewController(gameOverController, animated: true)
     }
     
     override var shouldAutorotate: Bool {

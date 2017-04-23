@@ -17,11 +17,13 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
     private let constants = GameConstants.getInstance()
     private let multiplayerManager = MultiplayerManager.getInstance()
     private let realtime = RealTime.getInstance()
+    private let audioPlayer = soundManager.sharedInstance
     
     // Controllers
     private let itemController = ItemController();
     private let obstacleController = ObstacleController()
     private var random = RandomGenerator()
+    var gameManager: MultiplayerGameManager?
     
     // Input management
     private var storedTouches = [UITouch: String]()
@@ -45,6 +47,9 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
         // Register to multiplayer events
         multiplayerManager.registerObserver(observer: self)
         
+        // Set physicsworld contactDelegate to self
+        physicsWorld.contactDelegate = self;
+        
         // If leader, set the game up
         if selfPlayer.peer.isLeader {
             setupGame()
@@ -60,6 +65,7 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
         // Setup self
         selfPlayer.position = CGPoint(x: -100, y: -350)
         selfPlayer.zPosition = 2
+        selfPlayer.name = "selfPlayer"
         addChild(selfPlayer)
         
         // Setup opponents
@@ -100,6 +106,7 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
                 // Setup self
                 selfPlayer.position = CGPoint(x: player.x, y: player.y)
                 selfPlayer.zPosition = 2
+                selfPlayer.name = "selfPlayer"
                 addChild(selfPlayer)
             } else {
                 // Setup opponent
@@ -154,9 +161,9 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
         let deltaSeconds = currentTime - lastUpdate
         
         // Update player positions
-        selfPlayer.update(delta: deltaSeconds)
-        for opponent in opponents {
-            opponent.update(delta: deltaSeconds)
+        let players = [selfPlayer] + opponents
+        for player in players {
+            player.update(delta: deltaSeconds)
         }
 
         lastUpdate = currentTime
@@ -168,7 +175,6 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
         {
             updateRealTime(currentTime: now, startTime: start)
         }
-        
     }
     
     func updateRealTime(currentTime: Int, startTime: Int) {
@@ -194,6 +200,16 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
             nextPegToggle = startTime + random.pollPegToggleTime()
         }
     }
+    
+    func checkIfGameIsOver() {
+        let players = [selfPlayer] + opponents
+        if players.filter({ $0.isAlive }).count <= 1 {
+            let winner = players.first { $0.isAlive }?.peer
+            let losers = players.filter({ !$0.isAlive }).map({ $0.peer })
+            multiplayerManager.unregisterObserver(observer: self)
+            gameManager?.gameOver(winner: winner, losers: losers)
+        }
+    }
 
     
     // MARK: - NETWORK COMMUNICATION
@@ -201,6 +217,7 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
     
     let GAME_INIT_TOPIC = "GAME_INIT"
     let GAME_PLAYER_UPDATE_TOPIC = "GAME_PLAYER_UPDATE"
+    let GAME_SELF_DIED_TOPIC = "GAME_SELF_DIED"
     
     func sendInit(startTime: Int) {
         let players = [selfPlayer] + opponents
@@ -228,6 +245,11 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
         multiplayerManager.send(message: message)
     }
     
+    func sendSelfDied() {
+        let message = ["topic": GAME_SELF_DIED_TOPIC]
+        multiplayerManager.send(message: message)
+    }
+    
     func notifyPlayersChange() {
     }
     
@@ -240,6 +262,11 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
         case GAME_PLAYER_UPDATE_TOPIC:
             if let opponent = (opponents.first { $0.peer.id == player.id }) {
                 handleGamePlayerUpdate(fromPlayer: opponent, message: message)
+            }
+            break
+        case GAME_SELF_DIED_TOPIC:
+            if let opponent = (opponents.first { $0.peer.id == player.id }) {
+                handleGamePlayerDied(fromPlayer: opponent)
             }
             break
         default:
@@ -280,6 +307,14 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
         player.dx = playerDx
     }
     
+    func handleGamePlayerDied(fromPlayer player: MultiplayerGamePlayer) {
+        player.isAlive = false
+        OperationQueue.main.addOperation {
+            self.removeChildren(in: [player])
+            self.checkIfGameIsOver()
+        }
+    }
+    
     // MARK: - GAME INPUT
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
@@ -306,5 +341,30 @@ class MultiplayerGameScene: SKScene, SKPhysicsContactDelegate, MultiplayerManage
             selfPlayer.dx = 0
             sendPlayerUpdate()
         }
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        if
+            contact.bodyA.node?.name == "selfPlayer" ||
+            contact.bodyB.node?.name == "selfPlayer"
+        {
+            handlePlayerCollision()
+        }
+        
+        
+        if
+            ((contact.bodyA.node?.name?.range(of: "Obstacle")) != nil) ||
+            ((contact.bodyB.node?.name?.range(of: "Obstacle")) != nil)
+        {
+            audioPlayer.playFx(fileName: "bow", fileType: "mp3")
+        }
+    }
+    
+    func handlePlayerCollision() {
+        audioPlayer.playFx(fileName: "ploop", fileType: "mp3")
+        selfPlayer.isAlive = false
+        removeChildren(in: [selfPlayer])
+        sendSelfDied()
+        checkIfGameIsOver()
     }
 }
