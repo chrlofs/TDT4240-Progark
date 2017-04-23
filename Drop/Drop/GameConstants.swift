@@ -72,6 +72,7 @@ class GameConstants {
     public let lightBlue = UIColor(red: 0.37, green: 0.39, blue: 0.75, alpha: 1.0)
     public let darkBlue = UIColor(red: 0.27, green: 0.19, blue: 0.39, alpha: 1.0)
     
+    public let maxPlayersInMultiplayerGame = 2
     
     private init() {
     }

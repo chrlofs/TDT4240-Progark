@@ -7,6 +7,7 @@
 //
 
 import SpriteKit
+import GameKit
 
 struct ColliderType {
     static let PLAYER: UInt32 = 0;
@@ -14,13 +15,13 @@ struct ColliderType {
     static let ACTIVE_OBSTACLE: UInt32 = 2;
     static let INACTIVE_OBSTACLE: UInt32 = 4;
     static let WALL: UInt32 = 8
-    
 }
 
 class ItemController {
     
     // Sets the x values where the sprites can spawn between.
     private var minX = CGFloat(-190), maxX = CGFloat(190);
+    private var positionDistribution = GKRandomDistribution(randomSource: GKLinearCongruentialRandomSource(seed: 123456), lowestValue: -190, highestValue: 190)
     
     func spawnItems(dropImage: String) -> SKSpriteNode {
         let item = SKSpriteNode(imageNamed: dropImage);
@@ -38,16 +39,16 @@ class ItemController {
         item.anchorPoint = CGPoint(x: 0.5, y: 0.5);
         
         // Spawn the item at a random x value inside the screen
-        item.position.x = randomBetweenNumbers(firstNum: minX, secondNum: maxX);
+        item.position.x = CGFloat(positionDistribution.nextInt())
         item.position.y = 500;
         
         return item;
     }
     
-    func spawnItemAt(position: CGPoint) -> SKSpriteNode {
-        let item = SKSpriteNode(imageNamed: "Bomb")
+    func spawnItem(dropImage: String, at position: CGPoint) -> SKSpriteNode {
+        let item = SKSpriteNode(imageNamed: dropImage)
 
-        item.setScale(0.6)
+        item.size = CGSize(width: 50, height: 50)
         item.physicsBody = getNewPhysicsBody(for: item)
         item.zPosition = 3
         item.anchorPoint = CGPoint(x: 0.5, y: 0.5)

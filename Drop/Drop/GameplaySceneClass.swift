@@ -147,7 +147,6 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
         
         self.scene?.addChild(leftEdge)
         self.scene?.addChild(rightEdge)
-        
     }
     
     func createObstacles(map: Map){
@@ -173,13 +172,6 @@ class GameplaySceneClass: SKScene, SKPhysicsContactDelegate{
     func spawnItems(){
         let map = gameConstants.getMapById(id: gameSettings.getUserMapID())
         self.scene?.addChild(itemController.spawnItems(dropImage: map.dropName));
-    }
-    
-    func restartGame(){
-        if let scene = GameplaySceneClass(fileNamed: "GameplayScene"){
-            scene.scaleMode = .aspectFill
-            view?.presentScene(scene);
-        }
     }
     
     func removeItems(){

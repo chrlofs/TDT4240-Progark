@@ -23,7 +23,6 @@ class gameOverVC: UIViewController {
     }
     
     func gotoMain() {
-        
         let controllers = self.navigationController?.viewControllers
         for vc in controllers! {
             if vc is singleplayerMenuVC {
@@ -35,6 +34,7 @@ class gameOverVC: UIViewController {
     }
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
 
         OperationQueue.main.addOperation {

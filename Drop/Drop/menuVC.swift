@@ -8,13 +8,17 @@
 
 import Foundation
 import UIKit
+
 class menuVC: UIViewController{
     let musicPlayer = soundManager.sharedInstance
+    
+    // Initialize RealTime (should be done early on in the App's lifecycle)
+    let realtime = RealTime.getInstance()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
         musicPlayer.playMusic(fileName: "GameMusic", fileType: "mp3")
-       
     }
 
     @IBAction func pushToOptions(_ sender: UIButton) {
@@ -45,8 +49,8 @@ class menuVC: UIViewController{
         self.navigationController?.pushViewController(optionsVC, animated: true)
     }
     func moveToMultiplayer() {
-        let multiplayerMenuVC = self.storyboard?.instantiateViewController(withIdentifier: "multiplayerMenuVC") as! multiplayerMenuVC
-        self.navigationController?.pushViewController(multiplayerMenuVC, animated: true)
+        let multiplayerLobbyVC = self.storyboard?.instantiateViewController(withIdentifier: "MultiplayerLobbyVC") as! MultiplayerLobbyVC
+        self.navigationController?.pushViewController(multiplayerLobbyVC, animated: true)
     }
     func moveToSelectSkin() {
         let selectSkinVC = self.storyboard?.instantiateViewController(withIdentifier: "selectSkinVC") as! selectSkinVC
